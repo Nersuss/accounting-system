@@ -1,0 +1,20 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Main</title>
+</head>
+<body>
+<h1>Здравствуйте, уважаемый абитуриент! <span th:text="${applicant.email}"></span></h1>
+<br/>
+
+<a href="/applicant/lk/edit">Редактировать профиль</a>
+</br>
+<a href="/applicant/lk/edit/docs">Подать документы</a>
+
+
+</body>
+</html>
