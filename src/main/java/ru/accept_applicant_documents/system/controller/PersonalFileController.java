@@ -57,7 +57,7 @@ public class PersonalFileController { ///deprecated**
     @PostMapping("/applicant/{id}/addPersonalFile")
     public String addPersonalFile(@ModelAttribute("personalFile") @Valid CreatePersonalFileDto createPersonalFileDto, Model model, @PathVariable Long id) {
 
-        personalFileService.createNewPersonalFile(new PersonalFile(null, "123", createPersonalFileDto.getAdditionalPoints(), applicantService.findById(id).get()));
+        personalFileService.createNewPersonalFile(new PersonalFile(null, 123l, createPersonalFileDto.getAdditionalPoints(), applicantService.findById(id).get()));
 
         return "main";
     }

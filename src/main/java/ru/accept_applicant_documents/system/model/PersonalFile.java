@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Table
 @Getter
@@ -20,7 +22,8 @@ public class PersonalFile {
 
     @Column(unique = true)
     @NotNull
-    private String registrationNumber;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long registrationNumber;
 
     @NotNull
     private int additionalPoints;

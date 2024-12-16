@@ -12,7 +12,7 @@ import ru.accept_applicant_documents.system.service.ApplicantService;
 import java.time.LocalDate;
 
 @SpringBootApplication
-public class SystemApplication implements CommandLineRunner {
+public class 	SystemApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SystemApplication.class, args);
