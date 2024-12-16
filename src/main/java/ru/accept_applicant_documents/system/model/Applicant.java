@@ -48,38 +48,41 @@ SITE/ информация и работе сайта и тд.
 SITE/register
 SITE/login
 
-SITE/applicant/lk
-SITE/applicant/lk/edit
-SITE/applicant/lk/edit/docs
+SITE/applicant/lk - личный кабинет, инф об абитуриенте
+SITE/applicant/lk/edit - редактирование инф об абит
+SITE/applicant/lk/edit/docs - загрузка документов абитуриента,статус документов
 
-SITE/applicant/lk/lists
-SITE/applicant/lk/list/{id}
-SITE/applicant/lk/groups
+SITE/applicant/lk/lists - все списки зачисления
+SITE/applicant/lk/list/{id} - посмотреть конкретный список
+
+SITE/applicant/lk/groups - конкурсная группа
 SITE/applicant/lk/group/{id}
-SITE/applicant/lk/group/{id}/order
+SITE/applicant/lk/group/{id}/order - выбор приоритетной конкурсной группы
 
+SITE/admin/lk/applicants/unverified тута все абики, которые еще не прошли проверку
+SITE/admin/lk/applicants/unverified/{id}
+SITE/admin/lk/applicants/incorrect тута все абики, у которых ошибками в отправленных доках
+SITE/admin/lk/applicants/incorrect/{id}
+SITE/admin/lk/applicants/verified доки подтверждены
+SITE/admin/lk/applicants/verified/{id}
+SITE/admin/lk/applicant/{id} - инф об конкретном абитуриенте
+SITE/admin/lk/applicant/{id}/docs - документы конкретного абитуриента
+SITE/admin/lk/applicant/{id}/exams - все экзамены абитуриента
+SITE/admin/lk/applicant/{id}/orders - просмотр выбранной конкурсной группы
+SITE/admin/lk/applicant/{id}/edit - заполнение данных абитуриента
+SITE/admin/lk/applicant/{id}/edit/docs - внесение данных документов в текстовый вид
+SITE/admin/lk/applicant/{id}/edit/exams - заполнение данных об экзаменах
 
+SITE/admin/lk/personalFiles - просмотр личных дел
+SITE/admin/lk/personalFiles/{id} - конкретное дело
+SITE/admin/lk/personalFiles/{id}/edit - редактирование личного дела
+SITE/admin/lk/personalFiles/{id}/edit/docs - внесение данных документов в текстовый вид
+SITE/admin/lk/personalFiles/{id}/edit/scores - внесение доплнительных баллов
 
-SITE/admin/lk/applicants/unverified     тута все абики, которые еще не прошли проверку
-SITE/admin/lk/applicants/incorrect      тута все абики, у которых ошибками в отправленных доках
-SITE/admin/lk/applicants/verified       доки подтверждены
-SITE/admin/lk/applicant/{id}
-SITE/admin/lk/applicant/{id}/docs
-SITE/admin/lk/applicant/{id}/exams
-SITE/admin/lk/applicant/{id}/orders
-SITE/admin/lk/applicant/{id}/edit
-SITE/admin/lk/applicant/{id}/edit/docs
-SITE/admin/lk/applicant/{id}/edit/exams
-
-SITE/admin/lk/personalFiles
-SITE/admin/lk/personalFiles/{id}
-SITE/admin/lk/personalFiles/{id}/edit
-SITE/admin/lk/personalFiles/{id}/edit/docs
-SITE/admin/lk/personalFiles/{id}/edit/scores
-
-SITE/admin/lk/lists
-SITE/admin/lk/groups
-
+SITE/admin/lk/lists - списки зачисления
+SITE/admin/lk/lists/{id} - конкретный список зачисления
+SITE/admin/lk/groups - конкурсные группы
+SITE/admin/lk/groups/{id} - конкретный конкурсная группа
 
 Логика
 
@@ -100,5 +103,27 @@ SITE/admin/lk/groups
 
 Если все успешно, то открывается доступ к спискам и тд.
 Создается личное дело в БД.
+
+Непроверено
+Подлинно
+Неправильно - при новой подаче переходит в Непроверено
+
+// Тригеры, процедуры, функции SQL
+
+    1. При подаче заявки на поступление, список автоматически обновляется и добавляет этого абитуриента.
+
+    2. Автоматическое создание личного дела при (создании applicant / установлении подлинности документов)
+
+    3. Ограничение от 0 до 100 для результатов экзаменов.
+
+    4. Ограничение на количество заявок (5)
+
+    5. Ограничение на 1 приоритетное направление
+
+    6. Ограничение на просроченные результаты экзаменов (4 года)
+
+    7. Если удаляется applicant, то также удаляются все связанные с ним данные:
+
+    8. Функция сортировки списков
 
 */
