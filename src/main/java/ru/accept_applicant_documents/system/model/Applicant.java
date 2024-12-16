@@ -39,6 +39,9 @@ public class Applicant {
     @NotNull
     private String phone;
 
+    @NotNull
+    private String docStatus;
+
 }
 
 /* API

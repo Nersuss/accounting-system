@@ -27,7 +27,7 @@ public class ApplicantService {
     public Applicant registerNewApplicantAccount(RegisterApplicantDto applicant) {
 
         return applicantRepo.save(new Applicant(null, applicant.getEmail(), applicant.getPassword(), null,
-                null, null, null, null, applicant.getPhone()));
+                null, null, null, null, applicant.getPhone(), null));
     }
 
     public boolean ApplicantAccountAlreadyExist(String email) {

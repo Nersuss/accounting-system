@@ -28,7 +28,7 @@ public class SystemApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		//examResultRepo.save(new ExamResult(null, 99, LocalDate.now(), AllSubjects.RUSSIAN_LANGUAGE, applicantService.findById(1L).get()));
-		System.out.println(applicantService.findExamsApplicantByApplicant(applicantService.findById(1L).get()).toString());
+		//System.out.println(applicantService.findExamsApplicantByApplicant(applicantService.findById(1L).get()).toString());
 
 	}
 }
