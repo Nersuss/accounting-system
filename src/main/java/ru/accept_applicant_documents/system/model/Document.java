@@ -45,8 +45,4 @@ public class Document {
     @NotNull
     private Applicant applicant;
 
-    @ManyToOne
-    private PersonalFile personalFile;
-
-
 }

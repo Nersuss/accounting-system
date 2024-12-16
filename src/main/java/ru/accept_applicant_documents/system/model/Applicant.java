@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
 
 import java.time.LocalDate;
 
@@ -40,7 +41,8 @@ public class Applicant {
     private String phone;
 
     @NotNull
-    private String docStatus;
+    @Enumerated(EnumType.STRING)
+    private StatusesOfDocuments docStatus;
 
 }
 
