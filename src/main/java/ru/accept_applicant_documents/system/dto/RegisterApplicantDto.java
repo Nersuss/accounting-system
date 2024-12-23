@@ -17,7 +17,7 @@ public class RegisterApplicantDto {
     @Email(message = "Email should be valid")
     private String email;
 
-    @NotEmpty(message = "Phone cannot be empty")
-    @Size(min = 8, max=20, message = "Phone should be valid")
+    //@NotEmpty(message = "Phone cannot be empty")
+    @Size(min = 1, max=120, message = "Phone should be valid")
     private String phone;
 }
