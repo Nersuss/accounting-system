@@ -53,9 +53,7 @@ public class ApplicantController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
 
-
         String fileName = file.getOriginalFilename();
-
 
         String resourcePath = new File("src/main/resources/applicants/" + applicant.getId()).getAbsolutePath();
         File applicantDir = new File(resourcePath);
