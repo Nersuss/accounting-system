@@ -39,7 +39,7 @@ public class ApplicantController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
-        return "applicant-lk";
+        return "redirect:/applicant-lk";
     }
     @GetMapping("/applicant/lk/edit/docs")
     public String getApplicantEditDocs(Model model) {
@@ -65,16 +65,16 @@ public class ApplicantController {
         * Отправка сотрудникам приемной комисси
         * */
 
-        return "applicant-lk";
+        return "redirect:/applicant-lk";
     }
 
     //deprecated**
-    @PostMapping("/applicant/{id}/addDocument")
-    public String addApplicantDocument(@ModelAttribute("examDocument") @Valid DocumentApplicantDto documentApplicantDto, Model model, @PathVariable Long id) {
-
-        System.out.println(applicantService.addApplicantDocument(new Document(null, documentApplicantDto.getTitle(), documentApplicantDto.getDocNumber(),
-                null,null,null,null,null,null,null)));
-        return "main";
-    }
+//    @PostMapping("/applicant/{id}/addDocument")
+//    public String addApplicantDocument(@ModelAttribute("examDocument") @Valid DocumentApplicantDto documentApplicantDto, Model model, @PathVariable Long id) {
+//
+//        System.out.println(applicantService.addApplicantDocument(new Document(null, documentApplicantDto.getTitle(), documentApplicantDto.getDocNumber(),
+//                null,null,null,null,null,null,null)));
+//        return "main";
+//    }
 
 }

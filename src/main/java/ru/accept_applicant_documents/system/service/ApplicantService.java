@@ -59,4 +59,6 @@ public class ApplicantService {
     public Optional<Applicant> findById(Long id) {
         return applicantRepo.findById(id);
     }
+
+
 }

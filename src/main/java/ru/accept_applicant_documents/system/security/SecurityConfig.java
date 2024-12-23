@@ -46,8 +46,7 @@ public class SecurityConfig {
                     auth.anyRequest().permitAll();
                 })
                 .formLogin(form -> form
-                        //.loginPage("/login") // Specify your login page
-                        .defaultSuccessUrl("/applicant/lk", true) // Redirect to this URL after successful login
+                        .defaultSuccessUrl("/applicant/lk", true)
                         .permitAll()
                 )
 
