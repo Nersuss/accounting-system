@@ -56,18 +56,19 @@ public class ApplicantController {
         String fileName = file.getOriginalFilename();
 
         String resourcePath = new File("src/main/resources/applicants/" + applicant.getId()).getAbsolutePath();
-        File applicantDir = new File(resourcePath);
-        File docsDir = new File(applicantDir, "docs");
 
+        File applicantDir = new File(resourcePath);
+//        //File docsDir = new File(applicantDir, "docs");
+//
         // Создаем директории, если они не существуют
         if (!applicantDir.exists()) {
             applicantDir.mkdirs();
         }
-        if (!docsDir.exists()) {
-            docsDir.mkdirs();
-        }
-
-        file.transferTo(new File(resourcePath + applicant.getId() + "/" + fileName));
+//        if (!docsDir.exists()) {
+//            docsDir.mkdirs();
+//        }
+//
+//        file.transferTo(new File(resourcePath + applicant.getId() + "/" + fileName));
 
         /*
         * Сохранение фоток
