@@ -115,7 +115,7 @@
 <a href="javascript:history.back()" class="back-button">Выход</a>
 
 <div class="profile">
-    <img src="resources/templates/profile-icon.png" alt="Profile Icon">
+    <img src="/images/profile-icon.png" alt="Profile Icon">
     <span>taycher23@mail.ru</span>
 </div>
 
@@ -152,10 +152,9 @@
     <h2>Загрузка документов</h2>
     <form method="POST" enctype="multipart/form-data" action="/applicant/lk/edit/docs">
         <div class="file-actions">
-            <input name="file" type="file" id="fileInput" multiple>
-            <button type="submit" class="save-files-button">Сохранить файлы</button>
+            <input type="file" id="fileInput" multiple>
+            <button type="button" class="save-files-button">Сохранить файлы</button>
         </div>
-    </form>
         <table class="file-list-table" id="fileList">
             <thead>
             <tr>
@@ -167,7 +166,7 @@
             <!-- Файлы будут добавлены сюда динамически -->
             </tbody>
         </table>
-
+    </form>
 </div>
 
 <div id="competition" class="tab-content">
