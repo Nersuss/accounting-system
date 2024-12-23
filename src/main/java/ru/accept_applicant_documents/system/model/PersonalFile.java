@@ -20,9 +20,8 @@ public class PersonalFile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, updatable = false)
     @NotNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long registrationNumber;
 
     @NotNull

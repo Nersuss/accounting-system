@@ -27,7 +27,6 @@ public class Subject {
     @Enumerated(EnumType.STRING)
     private AllSubjects subject;
 
-    // Связь ManyToOne
     @ManyToOne
     @NotNull
     private Department department;

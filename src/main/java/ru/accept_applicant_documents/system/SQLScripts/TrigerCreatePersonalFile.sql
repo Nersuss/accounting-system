@@ -6,7 +6,7 @@ BEGIN
     IF NEW.doc_status = 'VERIFIED' AND OLD.doc_status IS DISTINCT FROM NEW.doc_status THEN
         -- Создаем запись в таблице PersonalFile
         INSERT INTO public.personal_file (additional_points, applicant_id)
-        VALUES ( 0, NEW.id);
+        VALUES (0, NEW.id);
     END IF;
     RETURN NEW;
 END;
