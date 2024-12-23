@@ -10,10 +10,41 @@
             margin: 0;
             padding: 0;
         }
+        .back-button {
+            padding: 10px;
+            text-align: left;
+            cursor: pointer;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            margin: 10px;
+            display: inline-block;
+            text-decoration: none;
+            color: black;
+        }
+        .back-button:hover {
+            background-color: #e0e0e0;
+        }
+        .profile {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .profile span {
+            margin-right: 20px;
+        }
         .tabs {
             display: flex;
             background-color: #f1f1f1;
             border-bottom: 2px solid #ccc;
+            margin-top: 20px;
         }
         .tab {
             flex: 1;
@@ -48,26 +79,45 @@
         table th {
             background-color: #f9f9f9;
         }
-        .file-list {
+        .file-list-table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
         }
-        .file-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
+        .file-list-table th, .file-list-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
         }
-        .file-item button {
-            background-color: #ff4d4d;
-            border: none;
-            color: white;
+        .file-list-table th {
+            background-color: #f9f9f9;
+        }
+        .file-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .save-files-button {
             padding: 5px 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
             cursor: pointer;
             border-radius: 3px;
+        }
+        .save-files-button:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
+
+<a href="javascript:history.back()" class="back-button">Выход</a>
+
+<div class="profile">
+    <img src="profile-icon.png" alt="Profile Icon">
+    <span>taycher23@mail.ru</span>
+</div>
 
 <div class="tabs">
     <div class="tab active" onclick="showTab('list')">Список</div>
@@ -100,8 +150,23 @@
 
 <div id="documents" class="tab-content">
     <h2>Загрузка документов</h2>
-    <input type="file" id="fileInput" multiple>
-    <div class="file-list" id="fileList"></div>
+    <form method="POST" enctype="multipart/form-data" action="/applicant/lk/edit/docs">
+        <div class="file-actions">
+            <input type="file" id="fileInput" multiple>
+            <button type="button" class="save-files-button">Сохранить файлы</button>
+        </div>
+        <table class="file-list-table" id="fileList">
+            <thead>
+            <tr>
+                <th>Название файла</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Файлы будут добавлены сюда динамически -->
+            </tbody>
+        </table>
+    </form>
 </div>
 
 <div id="competition" class="tab-content">
@@ -140,31 +205,45 @@
     }
 
     const fileInput = document.getElementById('fileInput');
-    const fileList = document.getElementById('fileList');
+    const fileList = document.getElementById('fileList').querySelector('tbody');
+    let allFiles = [];
 
     fileInput.addEventListener('change', () => {
-        const files = Array.from(fileInput.files);
+        allFiles = allFiles.concat(Array.from(fileInput.files));
+        fileInput.value = '';
+        updateFileList();
+    });
+
+    function updateFileList() {
         fileList.innerHTML = '';
 
-        files.forEach((file, index) => {
-            const fileItem = document.createElement('div');
-            fileItem.className = 'file-item';
+        allFiles.forEach((file, index) => {
+            const row = document.createElement('tr');
 
-            const fileName = document.createElement('span');
-            fileName.textContent = file.name;
+            const fileNameCell = document.createElement('td');
+            fileNameCell.textContent = file.name;
 
+            const actionsCell = document.createElement('td');
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Удалить';
+            deleteButton.style.backgroundColor = '#ff4d4d';
+            deleteButton.style.color = 'white';
+            deleteButton.style.border = 'none';
+            deleteButton.style.padding = '5px 10px';
+            deleteButton.style.cursor = 'pointer';
+            deleteButton.style.borderRadius = '3px';
+
             deleteButton.onclick = () => {
-                files.splice(index, 1);
-                fileItem.remove();
+                allFiles.splice(index, 1);
+                updateFileList();
             };
 
-            fileItem.appendChild(fileName);
-            fileItem.appendChild(deleteButton);
-            fileList.appendChild(fileItem);
+            actionsCell.appendChild(deleteButton);
+            row.appendChild(fileNameCell);
+            row.appendChild(actionsCell);
+            fileList.appendChild(row);
         });
-    });
+    }
 </script>
 
 </body>
