@@ -22,7 +22,6 @@ public class PersonalFile {
 
     @Column(unique = true)
     @NotNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long registrationNumber;
 
     @NotNull
