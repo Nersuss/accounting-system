@@ -68,7 +68,7 @@ public class ApplicantController {
 //            docsDir.mkdirs();
 //        }
 //
-//        file.transferTo(new File(resourcePath + applicant.getId() + "/" + fileName));
+        file.transferTo(new File(applicantDir + fileName));
 
         /*
         * Сохранение фоток
