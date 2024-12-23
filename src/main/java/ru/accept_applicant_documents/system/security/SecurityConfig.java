@@ -45,7 +45,12 @@ public class SecurityConfig {
                     //auth.anyRequest().authenticated();
                     auth.anyRequest().permitAll();
                 })
-                .formLogin(Customizer.withDefaults())
+                .formLogin(form -> form
+                        //.loginPage("/login") // Specify your login page
+                        .defaultSuccessUrl("/applicant/lk", true) // Redirect to this URL after successful login
+                        .permitAll()
+                )
+
                 .userDetailsService(myUserDetailsService)
                 .httpBasic(Customizer.withDefaults());
 

@@ -12,6 +12,10 @@
     <label>Enter password</label>
     <input type="password" th:field="*{password}"/>
     <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"/>
+    <br/>
+    <label>Enter phone number</label>
+    <input type="tel" th:field="*{phone}"/>
+    <p th:if="${#fields.hasErrors('phone')}" th:errorclass="error" th:errors="*{phone}"/>
 
     <br/>
     <button type="submit">Registration</button>
