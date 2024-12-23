@@ -52,10 +52,24 @@ public class ApplicantController {
     public String postApplicantEditDocs(@RequestParam("file") MultipartFile file ) throws IOException {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
-        String fileName = file.getOriginalFilename();
-        new File("/applicants/" + applicant.getId()).mkdirs();
 
-        file.transferTo(new File("applicants/" + applicant.getId() + "/" + fileName));
+
+        String fileName = file.getOriginalFilename();
+
+
+        String resourcePath = new File("src/main/resources/applicants/" + applicant.getId()).getAbsolutePath();
+        File applicantDir = new File(resourcePath);
+        File docsDir = new File(applicantDir, "docs");
+
+        // Создаем директории, если они не существуют
+        if (!applicantDir.exists()) {
+            applicantDir.mkdirs();
+        }
+        if (!docsDir.exists()) {
+            docsDir.mkdirs();
+        }
+
+        file.transferTo(new File(resourcePath + applicant.getId() + "/" + fileName));
 
         /*
         * Сохранение фоток
@@ -65,7 +79,7 @@ public class ApplicantController {
         * Отправка сотрудникам приемной комисси
         * */
 
-        return "redirect:/applicant-lk";
+        return "redirect:/applicant/lk";
     }
 
     //deprecated**
