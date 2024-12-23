@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Spring Webpage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .tabs {
+            display: flex;
+            background-color: #f1f1f1;
+            border-bottom: 2px solid #ccc;
+        }
+        .tab {
+            flex: 1;
+            padding: 10px 20px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-bottom: none;
+        }
+        .tab.active {
+            background-color: #ffffff;
+            border-top: 2px solid #007BFF;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f9f9f9;
+        }
+        .file-list {
+            margin-top: 20px;
+        }
+        .file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .file-item button {
+            background-color: #ff4d4d;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="tabs">
+    <div class="tab active" onclick="showTab('list')">Список</div>
+    <div class="tab" onclick="showTab('documents')">Документы</div>
+    <div class="tab" onclick="showTab('competition')">Конкурсная группа</div>
+</div>
+
+<div id="list" class="tab-content active">
+    <h2>Список абитуриентов</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Баллы</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Здесь данные будут загружаться из базы данных -->
+        <tr>
+            <td>Иван Иванов</td>
+            <td>95</td>
+        </tr>
+        <tr>
+            <td>Анна Смирнова</td>
+            <td>89</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="documents" class="tab-content">
+    <h2>Загрузка документов</h2>
+    <input type="file" id="fileInput" multiple>
+    <div class="file-list" id="fileList"></div>
+</div>
+
+<div id="competition" class="tab-content">
+    <h2>Конкурсная группа</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Баллы</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Здесь данные будут загружаться из базы данных -->
+        <tr>
+            <td>Екатерина Петрова</td>
+            <td>91</td>
+        </tr>
+        <tr>
+            <td>Алексей Сидоров</td>
+            <td>88</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function showTab(tabId) {
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => tab.classList.remove('active'));
+        contents.forEach(content => content.classList.remove('active'));
+
+        document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+    }
+
+    const fileInput = document.getElementById('fileInput');
+    const fileList = document.getElementById('fileList');
+
+    fileInput.addEventListener('change', () => {
+        const files = Array.from(fileInput.files);
+        fileList.innerHTML = '';
+
+        files.forEach((file, index) => {
+            const fileItem = document.createElement('div');
+            fileItem.className = 'file-item';
+
+            const fileName = document.createElement('span');
+            fileName.textContent = file.name;
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Удалить';
+            deleteButton.onclick = () => {
+                files.splice(index, 1);
+                fileItem.remove();
+            };
+
+            fileItem.appendChild(fileName);
+            fileItem.appendChild(deleteButton);
+            fileList.appendChild(fileItem);
+        });
+    });
+</script>
+
+</body>
+</html>
