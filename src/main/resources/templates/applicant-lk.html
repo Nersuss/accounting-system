@@ -27,6 +27,10 @@
             margin-bottom: 0.5rem;
         }
 
+        .btn-outline-secondary {
+            color: black; /* Текст кнопки чёрный */
+        }
+
         /* Ключевая анимация для плавного появления */
         @keyframes fadeIn {
             0% {
@@ -44,7 +48,7 @@
     <div class="d-flex justify-content-end align-items-center">
         <img src="/images/profile-icon.png" alt="Profile Icon" class="rounded-circle me-2" style="width: 40px; height: 40px;">
         <span th:text="${applicant.email}" class="me-2"></span>
-        <a href="javascript:history.back()" class="btn btn-outline-secondary">Выход</a>
+        <a href="/logout" class="btn btn-outline-secondary">Выход</a>
     </div>
 
     <ul class="nav nav-tabs justify-content-center mt-3">
