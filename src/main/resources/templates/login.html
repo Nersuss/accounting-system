@@ -128,32 +128,32 @@
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
-        // Check credentials
+        // Проверка учетных данных
         if (username === 'ava' && password === '12345') {
             const book = document.getElementById('book');
             const pages = document.getElementById('bookPages');
             const form = document.querySelector('.login-form');
 
-            // Open the book
+            // Открыть книгу
             book.classList.add('book-open');
 
-            // Show pages
+            // Показать страницы
             setTimeout(() => {
                 pages.style.opacity = '1';
             }, 500);
 
-            // Simulate camera zoom slightly left of the center
+            // Смоделировать увеличение камеры, по центру
             document.body.style.transform = 'scale(6.5) translate(0%, 0%)';
 
-            // Hide the form
+            // Скрыть форму
             form.classList.add('hidden');
 
-            // Redirect to the URL after animation
+            // Перенаправить на новый URL после завершения анимации
             setTimeout(() => {
                 window.location.href = 'applicant-lk.html';
-            }, 2500); // Delay the redirect to allow animations to complete
+            }, 2500); // Задержка перенаправления, чтобы анимация завершилась
         } else {
-            alert('Invalid credentials. Please try again.');
+            alert('Неверные учетные данные. Попробуйте снова.');
         }
     });
 </script>
