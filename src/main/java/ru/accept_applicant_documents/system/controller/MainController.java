@@ -18,14 +18,14 @@ public class MainController {
     ApplicantService applicantService;
 
     @GetMapping("/")
-    public String getMain(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public String getMain() {
+        //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        Applicant applicant = applicantService.findByEmail(authentication.getName()).get();
+        //Applicant applicant = applicantService.findByEmail(authentication.getName()).get();
 
-        model.addAttribute("email", applicant.getEmail());
+        //model.addAttribute("email", applicant.getEmail());
 
-        return "main";
+        return "landing";
     }
 
     @PostMapping("/upload")
