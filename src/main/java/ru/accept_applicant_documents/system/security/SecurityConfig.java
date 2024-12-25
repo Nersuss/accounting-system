@@ -41,15 +41,13 @@ public class SecurityConfig {
                 })
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests(auth -> {
-                    //auth.requestMatchers("/login", "/register", "/main", "/applicant/*", "/*" ).permitAll();
-                    //auth.anyRequest().authenticated();
-                    auth.anyRequest().permitAll();
+                    auth.requestMatchers("/login", "/register", "/").permitAll();
+                    auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> form
                         .defaultSuccessUrl("/applicant/lk", true)
                         .permitAll()
                 )
-
                 .userDetailsService(myUserDetailsService)
                 .httpBasic(Customizer.withDefaults());
 
