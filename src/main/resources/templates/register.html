@@ -1,26 +1,26 @@
 <html xmlns:th="http://www.thymeleaf.org"></html>
 <body>
-<h1>Registration</h1>
+<h1>регайся тут</h1>
 <form th:action="@{/register}" th:object="${user}" method="POST" enctype="utf8">
 
-    <label>Enter email</label>
+    <label>мыло</label>
     <input type="email" th:field="*{email}"/>
     <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}"/>
     <br/>
     <span th:text="${account}"></span>
     <br/>
-    <label>Enter password</label>
+    <label>вводи пароль</label>
     <input type="password" th:field="*{password}"/>
     <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"/>
     <br/>
-    <label>Enter phone number</label>
+    <label>вводи номер</label>
     <input type="tel" th:field="*{phone}"/>
     <p th:if="${#fields.hasErrors('phone')}" th:errorclass="error" th:errors="*{phone}"/>
 
     <br/>
-    <button type="submit">Registration</button>
+    <button type="submit">Регистрация</button>
 </form>
 
-<a th:href="@{/login}">login</a>
+<a th:href="@{/login}">Вход</a>
 </body>
 </html>
