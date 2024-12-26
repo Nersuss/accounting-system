@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import ru.accept_applicant_documents.system.enums.Roles;
 
 @Configuration
 @EnableWebSecurity
@@ -42,7 +43,9 @@ public class SecurityConfig {
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/login", "/register", "/").permitAll();
-                    auth.anyRequest().authenticated();
+                    auth.requestMatchers("/admin/**").hasAuthority(Roles.ADMIN.name());
+                    auth.requestMatchers("/applicant/**").hasAuthority(Roles.APPLICANT.name());
+                    //auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> form
                         .defaultSuccessUrl("/applicant/lk", true)

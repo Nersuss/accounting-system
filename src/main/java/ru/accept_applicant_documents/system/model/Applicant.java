@@ -6,9 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.accept_applicant_documents.system.enums.Roles;
 import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -43,6 +46,8 @@ public class Applicant {
     @NotNull
     @Enumerated(EnumType.STRING)
     private StatusesOfDocuments docStatus;
+
+    private Set<Roles> roles = new HashSet<>();
 
 }
 
