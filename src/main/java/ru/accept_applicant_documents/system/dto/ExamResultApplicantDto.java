@@ -15,6 +15,5 @@ public class ExamResultApplicantDto {
     private int score;
 
     //@NotBlank(message = "Email cannot be empty")
-
     private String subject;
 }

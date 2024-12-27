@@ -18,14 +18,10 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-
         Optional<Applicant> userOpt = applicantRepo.findByEmail(username);
-
         if (userOpt.isPresent()) {
             return new MyUserDetails(userOpt.get());
         }
-
-        throw new UsernameNotFoundException("User with that email not found");
+        throw new UsernameNotFoundException("Пользователя с такой почтой не существует");
     }
 }

@@ -22,20 +22,6 @@ public class SecurityConfig {
     MyUserDetailsService myUserDetailsService;
 
     @Bean
-    public UserDetailsService users() {
-        UserDetails user = User.builder()
-                .username("1")
-                .password(bCryptPasswordEncoder().encode("1"))
-                .roles("USER")
-                .build();
-        UserDetails admin = User.builder()
-                .username("2")
-                .password(bCryptPasswordEncoder().encode("2"))
-                .roles("USER", "ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user, admin);
-    }
-    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> {csrf.disable();
@@ -45,7 +31,7 @@ public class SecurityConfig {
                     auth.requestMatchers("/login", "/register", "/").permitAll();
                     auth.requestMatchers("/admin/**").hasAuthority(Roles.ADMIN.name());
                     auth.requestMatchers("/applicant/**").hasAuthority(Roles.APPLICANT.name());
-                    //auth.anyRequest().authenticated();
+                    auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> form
                         .defaultSuccessUrl("/applicant/lk", true)
@@ -57,6 +43,20 @@ public class SecurityConfig {
         return http.build();
     }
 
+//    @Bean
+//    public UserDetailsService users() {
+//        UserDetails user = User.builder()
+//                .username("1")
+//                .password(bCryptPasswordEncoder().encode("1"))
+//                .roles("APPLICANT")
+//                .build();
+//        UserDetails admin = User.builder()
+//                .username("2")
+//                .password(bCryptPasswordEncoder().encode("2"))
+//                .roles("ADMIN")
+//                .build();
+//        return new InMemoryUserDetailsManager(user, admin);
+//    }
 
     @Bean
     BCryptPasswordEncoder bCryptPasswordEncoder() {

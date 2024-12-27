@@ -8,16 +8,16 @@ import lombok.Setter;
 @Setter
 public class RegisterApplicantDto {
 
-    @NotEmpty(message = "Password cannot be empty")
-    @Size(min = 8, max=50, message = "Password should be greater then 8")
+    @NotEmpty(message = "Пароль не может быть пустым")
+    @Size(min = 8, max=50, message = "Пароль должен содержать от 8 символов")
     private String password;
 
-    @NotBlank(message = "Email cannot be empty")
-    @Size(max=200, message = "Email should be less than 200")
-    @Email(message = "Email should be valid")
+    @NotBlank(message = "Почта не может быть пустой")
+    @Size(max=200, message = "Почта должна быть короче 200 символов")
+    @Email(message = "Почта должна быть правильной")
     private String email;
 
-    //@NotEmpty(message = "Phone cannot be empty")
-    @Size(min = 1, max=120, message = "Phone should be valid")
+    @NotEmpty(message = "Номер телефона не может быть пустым")
+    @Size(min = 7, max=20, message = "Неправильно введен номер телефона")
     private String phone;
 }

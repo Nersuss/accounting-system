@@ -47,7 +47,9 @@ public class Applicant {
     @Enumerated(EnumType.STRING)
     private StatusesOfDocuments docStatus;
 
-    private Set<Roles> roles = new HashSet<>();
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Roles role;
 
 }
 

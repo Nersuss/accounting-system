@@ -15,6 +15,5 @@ public class DocumentApplicantDto {
     private String title;
 
     //@NotBlank(message = "Email cannot be empty")
-
     private String docNumber;
 }
