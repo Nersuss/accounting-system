@@ -20,23 +20,11 @@ public class MainController {
     @GetMapping("/")
     public String getMain() {
         //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         //Applicant applicant = applicantService.findByEmail(authentication.getName()).get();
-
         //model.addAttribute("email", applicant.getEmail());
 
         return "landing";
     }
 
-    @PostMapping("/upload")
-    public String postUploadDocument(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        Applicant applicant = applicantService.findByEmail(authentication.getName()).get();
-
-        model.addAttribute("email", applicant.getEmail());
-
-        return "main";
-    }
 
 }

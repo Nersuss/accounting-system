@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 public class CreatePersonalFileDto {
 
-
     @NotNull
     private int additionalPoints;
 

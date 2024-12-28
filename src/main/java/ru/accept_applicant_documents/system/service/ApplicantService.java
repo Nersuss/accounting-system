@@ -3,6 +3,7 @@ package ru.accept_applicant_documents.system.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.accept_applicant_documents.system.dto.RegisterApplicantDto;
+import ru.accept_applicant_documents.system.enums.Roles;
 import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
 import ru.accept_applicant_documents.system.model.Applicant;
 import ru.accept_applicant_documents.system.model.Document;
@@ -11,8 +12,10 @@ import ru.accept_applicant_documents.system.repository.ApplicantRepo;
 import ru.accept_applicant_documents.system.repository.DocumentRepo;
 import ru.accept_applicant_documents.system.repository.ExamResultRepo;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ApplicantService {
@@ -28,7 +31,9 @@ public class ApplicantService {
     public Applicant registerNewApplicantAccount(RegisterApplicantDto applicant) {
 
         return applicantRepo.save(new Applicant(null, applicant.getEmail(), applicant.getPassword(), null,
-                null, null, null, null, applicant.getPhone(), StatusesOfDocuments.UNVERIFIED));
+                null, null, null, null, applicant.getPhone(),
+                StatusesOfDocuments.UNVERIFIED, Roles.APPLICANT));
+
     }
 
     public boolean ApplicantAccountAlreadyExist(String email) {

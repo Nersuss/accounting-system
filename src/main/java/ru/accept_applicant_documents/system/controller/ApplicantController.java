@@ -58,36 +58,14 @@ public class ApplicantController {
         String resourcePath = new File("src/main/resources/applicants/" + applicant.getId()).getAbsolutePath();
 
         File applicantDir = new File(resourcePath);
-//        //File docsDir = new File(applicantDir, "docs");
-//
-        // Создаем директории, если они не существуют
+
         if (!applicantDir.exists()) {
             applicantDir.mkdirs();
         }
-//        if (!docsDir.exists()) {
-//            docsDir.mkdirs();
-//        }
-//
-        file.transferTo(new File(applicantDir + fileName));
 
-        /*
-        * Сохранение фоток
-        *   Создать папку с id абита
-        *   Загрузить в нее все фотки
-        *   Вести учет провереных абитов и создавать им личные дела
-        * Отправка сотрудникам приемной комисси
-        * */
+        file.transferTo(new File(applicantDir + fileName));
 
         return "redirect:/applicant/lk";
     }
-
-    //deprecated**
-//    @PostMapping("/applicant/{id}/addDocument")
-//    public String addApplicantDocument(@ModelAttribute("examDocument") @Valid DocumentApplicantDto documentApplicantDto, Model model, @PathVariable Long id) {
-//
-//        System.out.println(applicantService.addApplicantDocument(new Document(null, documentApplicantDto.getTitle(), documentApplicantDto.getDocNumber(),
-//                null,null,null,null,null,null,null)));
-//        return "main";
-//    }
 
 }

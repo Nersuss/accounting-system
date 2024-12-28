@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import ru.accept_applicant_documents.system.enums.Roles;
 
 @Configuration
 @EnableWebSecurity
@@ -21,41 +22,41 @@ public class SecurityConfig {
     MyUserDetailsService myUserDetailsService;
 
     @Bean
-    public UserDetailsService users() {
-        UserDetails user = User.builder()
-                .username("1")
-                .password(bCryptPasswordEncoder().encode("1"))
-                .roles("USER")
-                .build();
-        UserDetails admin = User.builder()
-                .username("2")
-                .password(bCryptPasswordEncoder().encode("2"))
-                .roles("USER", "ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user, admin);
-    }
-    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> {csrf.disable();
                 })
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests(auth -> {
-                    //auth.requestMatchers("/login", "/register", "/main", "/applicant/*", "/*" ).permitAll();
-                    //auth.anyRequest().authenticated();
-                    auth.anyRequest().permitAll();
+                    auth.requestMatchers("/login", "/register", "/").permitAll();
+                    auth.requestMatchers("/admin/**").hasAuthority(Roles.ADMIN.name());
+                    auth.requestMatchers("/applicant/**").hasAuthority(Roles.APPLICANT.name());
+                    auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> form
                         .defaultSuccessUrl("/applicant/lk", true)
                         .permitAll()
                 )
-
                 .userDetailsService(myUserDetailsService)
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
 
+//    @Bean
+//    public UserDetailsService users() {
+//        UserDetails user = User.builder()
+//                .username("1")
+//                .password(bCryptPasswordEncoder().encode("1"))
+//                .roles("APPLICANT")
+//                .build();
+//        UserDetails admin = User.builder()
+//                .username("2")
+//                .password(bCryptPasswordEncoder().encode("2"))
+//                .roles("ADMIN")
+//                .build();
+//        return new InMemoryUserDetailsManager(user, admin);
+//    }
 
     @Bean
     BCryptPasswordEncoder bCryptPasswordEncoder() {

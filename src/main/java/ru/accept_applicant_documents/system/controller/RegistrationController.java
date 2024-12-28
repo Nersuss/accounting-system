@@ -40,7 +40,7 @@ public class RegistrationController {
             registerApplicantDto.setPassword(bCryptPasswordEncoder.encode(registerApplicantDto.getPassword()));
             applicantService.registerNewApplicantAccount(registerApplicantDto);
         } else {
-            model.addAttribute("account", "Account already exists");
+            model.addAttribute("account", "Аккаунт с такой почтой уже существует.");
             return "register";
         }
         return "redirect:/login";
