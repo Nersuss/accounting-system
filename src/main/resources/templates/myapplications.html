@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .mb-3, .mt-3, .table {
+            margin-bottom: 1.5rem !important;
+        }
+
+        .nav-tabs > .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-outline-secondary {
+            color: black;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .nav-tabs .nav-link {
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .nav-tabs .nav-link.active {
+            border-color: #007bff;
+            background-color: #f8f9fa;
+        }
+
+        .tab-content .table {
+            width: 100%; /* Растягиваем таблицу на всё доступное пространство */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-3">
+    <div class="d-flex justify-content-end align-items-center">
+        <img src="/images/profile-icon.png" alt="Profile Icon" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+        <span th:text="${applicant.email}" class="me-2"></span>
+        <a href="/logout" class="btn btn-outline-secondary">Выход</a>
+    </div>
+
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-3 border-end">
+            <ul class="nav flex-column nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#myApplications" data-bs-toggle="tab">Мои заявления</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#submission" data-bs-toggle="tab">Подача заявления</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#verification" data-bs-toggle="tab">Верификация</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#lists" data-bs-toggle="tab">Все списки</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#settings" data-bs-toggle="tab">Настройки</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-9">
+            <div class="tab-content">
+
+                <!-- Lists Tab -->
+                <div id="lists" class="tab-pane fade show active mt-4 mb-4">
+                    <h2 class="text-center">Ваши заявления</h2>
+                    <form>
+                        <table class="table table-bordered table-striped">
+                            <thead class="table-light">
+                            <tr>
+                                <th>Направление</th>
+                                <th>Код</th>
+                                <th>Набор мест</th>
+                                <th>Приоритет</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Информатика и вычислительная техника</td>
+                                <td>09.03.01</td>
+                                <td>50</td>
+                                <td>
+                                    <select class="form-select" name="priority1">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Прикладная математика</td>
+                                <td>01.03.02</td>
+                                <td>30</td>
+                                <td>
+                                    <select class="form-select" name="priority2">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Экономика</td>
+                                <td>38.03.01</td>
+                                <td>25</td>
+                                <td>
+                                    <select class="form-select" name="priority3">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Сохранить приоритеты</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

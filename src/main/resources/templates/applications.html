@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .mb-3, .mt-3, .table {
+            margin-bottom: 1.5rem !important;
+        }
+
+        .nav-tabs > .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-outline-secondary {
+            color: black;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .nav-tabs .nav-link {
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+
+        .nav-tabs .nav-link.active {
+            border-color: #007bff;
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-3">
+    <div class="d-flex justify-content-end align-items-center">
+        <img src="/images/profile-icon.png" alt="Profile Icon" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+        <span th:text="${applicant.email}" class="me-2"></span>
+        <a href="/logout" class="btn btn-outline-secondary">Выход</a>
+    </div>
+
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-3 border-end">
+            <ul class="nav flex-column nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href="#myapplications" data-bs-toggle="tab">Мои заявления</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#applications" data-bs-toggle="tab">Подача заявления</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#verification" data-bs-toggle="tab">Верификация</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#lists" data-bs-toggle="tab">Все списки</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#settings" data-bs-toggle="tab">Настройки</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-9">
+            <div class="tab-content">
+
+                <!-- Submission Tab -->
+                    <div id="applications" class="tab-pane fade show active mt-4 mb-4">
+                        <h2 class="text-center">Подача заявления</h2>
+                        <form method="POST" action="/applicant/lk/submit" class="w-75 mx-auto">
+                            <div class="mb-4">
+                                <label for="previousEducation" class="form-label">Предыдущее образование:</label>
+                                <select id="previousEducation" name="previousEducation" class="form-select w-50" required>
+                                    <option value="">Выберите уровень образования</option>
+                                    <option value="Среднее общее">Среднее общее</option>
+                                    <option value="Среднее профессиональное">Среднее профессиональное</option>
+                                    <option value="Высшее образование">Высшее образование</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="educationCertificate" class="form-label">Прикрепить аттестат образования:</label>
+                                <div class="d-flex align-items-center w-50">
+                                    <input type="file" id="educationCertificate" name="educationCertificate" class="form-control me-2" onchange="toggleButton(this)">
+                                    <button type="button" class="btn btn-danger hidden" id="removeEducation" onclick="removeFile('educationCertificate', this)">Удалить</button>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="program" class="form-label">Направление:</label>
+                                <select id="program" name="program" class="form-select w-50" required>
+                                    <option value="">Выберите программу</option>
+                                    <option value="Программирование">Программирование</option>
+                                    <option value="Математика">Математика</option>
+                                    <option value="Физика">Физика</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="subject1" class="form-label">Предмет 1:</label>
+                                <div class="d-flex">
+                                    <select id="subject1" name="subject1" class="form-select me-2" required>
+                                        <option value="">Выберите предмет</option>
+                                        <option value="Математика">Математика</option>
+                                        <option value="Физика">Физика</option>
+                                        <option value="Информатика">Информатика</option>
+                                    </select>
+                                    <input type="number" id="score1" name="score1" class="form-control" placeholder="Баллы" min="0" max="100" required>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="subject2" class="form-label">Предмет 2:</label>
+                                <div class="d-flex">
+                                    <select id="subject2" name="subject2" class="form-select me-2" required>
+                                        <option value="">Выберите предмет</option>
+                                        <option value="Математика">Математика</option>
+                                        <option value="Физика">Физика</option>
+                                        <option value="Информатика">Информатика</option>
+                                    </select>
+                                    <input type="number" id="score2" name="score2" class="form-control" placeholder="Баллы" min="0" max="100" required>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="subject3" class="form-label">Предмет 3:</label>
+                                <div class="d-flex">
+                                    <select id="subject3" name="subject3" class="form-select me-2" required>
+                                        <option value="">Выберите предмет</option>
+                                        <option value="Математика">Математика</option>
+                                        <option value="Физика">Физика</option>
+                                        <option value="Информатика">Информатика</option>
+                                    </select>
+                                    <input type="number" id="score3" name="score3" class="form-control" placeholder="Баллы" min="0" max="100" required>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="subject4" class="form-label">Предмет 4:</label>
+                                <div class="d-flex">
+                                    <select id="subject4" name="subject4" class="form-select me-2" required>
+                                        <option value="">Выберите предмет</option>
+                                        <option value="Математика">Математика</option>
+                                        <option value="Физика">Физика</option>
+                                        <option value="Информатика">Информатика</option>
+                                    </select>
+                                    <input type="number" id="score4" name="score4" class="form-control" placeholder="Баллы" min="0" max="100" required>
+                                </div>
+                            </div>
+                            <div class="mb-4 text-center">
+                                <button type="submit" class="btn btn-success">Отправить заявление</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
