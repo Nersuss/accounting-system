@@ -28,7 +28,7 @@ public class SecurityConfig {
                 })
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/login", "/register", "/").permitAll();
+                    auth.requestMatchers("/login", "/register", "/", "/favicon.ico").permitAll();
                     auth.requestMatchers("/admin/**").hasAuthority(Roles.ADMIN.name());
                     auth.requestMatchers("/applicant/**").hasAuthority(Roles.APPLICANT.name());
                     auth.anyRequest().authenticated();

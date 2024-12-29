@@ -55,15 +55,20 @@ public class ApplicantController {
 
         String fileName = file.getOriginalFilename();
 
-        String resourcePath = new File("src/main/resources/applicants/" + applicant.getId()).getAbsolutePath();
+        String resourcePath = new File("uploads/applicants/" + applicant.getId()).getAbsolutePath();
 
+        // Создаем директорию, если она не существует
         File applicantDir = new File(resourcePath);
 
         if (!applicantDir.exists()) {
-            applicantDir.mkdirs();
+            if (!applicantDir.mkdirs()) {
+                throw new IOException("Не удалось создать директорию: " + resourcePath);
+            }
         }
 
-        file.transferTo(new File(applicantDir + fileName));
+        // Сохраняем файл в директорию
+        File destinationFile = new File(applicantDir, fileName);
+        file.transferTo(destinationFile);
 
         return "redirect:/applicant/lk";
     }
