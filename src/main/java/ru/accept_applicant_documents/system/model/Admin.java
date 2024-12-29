@@ -29,5 +29,6 @@ public class Admin {
     private String password;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private Roles role;
 }
