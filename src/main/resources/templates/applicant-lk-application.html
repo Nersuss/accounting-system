@@ -79,6 +79,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/applicant/lk/lists" data-bs-toggle="tab">Все списки</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/applicant/lk/settings" data-bs-toggle="tab">Настройки</a>
                 </li>
@@ -195,13 +196,6 @@
             fileList.appendChild(row);
         });
     }
-
-    document.querySelectorAll('.nav-tabs .nav-link').forEach(link => {
-        link.addEventListener('click', event => {
-            event.preventDefault(); // Отключает любые переходы или действия
-        });
-    });
-
 
     function removeFile(inputId, button) {
         const inputElement = document.getElementById(inputId);
