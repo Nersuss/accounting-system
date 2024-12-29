@@ -34,7 +34,7 @@ public class SecurityConfig {
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> form
-                        .defaultSuccessUrl("/applicant/lk", true)
+                        .defaultSuccessUrl("/lk", true)
                         .permitAll()
                 )
                 .userDetailsService(myUserDetailsService)

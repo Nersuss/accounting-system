@@ -11,6 +11,7 @@ import ru.accept_applicant_documents.system.model.Admin;
 import ru.accept_applicant_documents.system.model.ExamResult;
 import ru.accept_applicant_documents.system.repository.AdminRepo;
 import ru.accept_applicant_documents.system.repository.ExamResultRepo;
+import ru.accept_applicant_documents.system.service.AdminService;
 import ru.accept_applicant_documents.system.service.ApplicantService;
 
 import java.time.LocalDate;
@@ -28,6 +29,9 @@ public class 	SystemApplication implements CommandLineRunner {
 	ApplicantService applicantService;
 
 	@Autowired
+	AdminService adminService;
+
+	@Autowired
 	AdminRepo adminRepo;
 
 	@Autowired
@@ -35,9 +39,11 @@ public class 	SystemApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		//examResultRepo.save(new ExamResult(null, 99, LocalDate.now(), AllSubjects.RUSSIAN_LANGUAGE, applicantService.findById(1L).get()));
-		//System.out.println(applicantService.findExamsApplicantByApplicant(applicantService.findById(1L).get()).toString());
-		//adminRepo.save(new Admin(null, "nerus1337@mail.ru", "Прямоносов Максим Олегович",
-				//bCryptPasswordEncoder.encode("Maksmopd1!"), Roles.ADMIN));
+		// Создание админа по умолчанию
+		if (!adminService.AdminAccountAlreadyExist("admin@mail.ru"))
+		{
+			adminRepo.save(new Admin(null, "admin@mail.ru", "Адольф",
+					bCryptPasswordEncoder.encode("12345678"), Roles.ADMIN));
+		}
 	}
 }

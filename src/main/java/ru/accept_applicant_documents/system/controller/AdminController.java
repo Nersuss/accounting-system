@@ -24,5 +24,13 @@ public class AdminController {
         model.addAttribute("admin", admin);
         return "admin-lk";
     }
+    @GetMapping("/admin/lk/applicants/unverified")
+    public String getAdminLkApplicantsUnverified(Model model)
+    {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Admin admin = adminService.findByEmail(email).get();
+        model.addAttribute("admin", admin);
+        return "admin-lk-applicants-unverified";
+    }
 
 }

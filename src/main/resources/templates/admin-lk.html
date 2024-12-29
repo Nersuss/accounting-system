@@ -5,12 +5,17 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Админ</title>
+    <title>Личный кабинет</title>
 </head>
 <body>
-Здарова ебать
-<br/>
-<br/>
-<span th:text="${admin.email}" class="me-2"></span>
+    <span>Здравствуйте, </span><span th:text="${admin.email}" class="me-2"></span>
+    <br/>
+    <a href="">Абитуриенты с непроверенными документами</a>
+    <br/>
+    <a href="">Абитуриенты с проверенными документами</a>
+    <br/>
+    <a href="">Абитуриенты с неправильными документами</a>
+
+
 </body>
 </html>

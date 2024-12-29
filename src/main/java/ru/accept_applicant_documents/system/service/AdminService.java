@@ -18,6 +18,11 @@ public class AdminService {
         return adminRepo.findByEmail(email);
     }
 
-
+    public boolean AdminAccountAlreadyExist(String email) {
+        if (adminRepo.findByEmail(email).isEmpty()) {
+            return false;
+        }
+        return true;
+    }
 
 }
