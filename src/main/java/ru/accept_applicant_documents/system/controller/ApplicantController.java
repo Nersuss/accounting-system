@@ -25,30 +25,44 @@ public class ApplicantController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
-        return "myapplications";
+        return "applicant-lk-myapplications";
     }
-    @GetMapping("/applicant/lk/edit")
+    @GetMapping("/applicant/lk/application")
+    public String getApplicantLkApplication(Model model) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Applicant applicant = applicantService.findByEmail(email).get();
+        model.addAttribute("applicant", applicant);
+        return "applicant-lk-applications";
+    }
+    @GetMapping("/applicant/lk/lists")
+    public String getApplicantLkLists(Model model) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Applicant applicant = applicantService.findByEmail(email).get();
+        model.addAttribute("applicant", applicant);
+        return "applicant-lk-lists";
+    }
+    @GetMapping("/applicant/lk/settings")
     public String getApplicantEdit(Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
-        return "applicant-lk-edit";
+        return "applicant-lk-settings";
     }
-    @PostMapping("/applicant/lk/edit")
-    public String postApplicantEdit(Model model) {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        Applicant applicant = applicantService.findByEmail(email).get();
-        model.addAttribute("applicant", applicant);
-        return "redirect:/applicant-lk";
-    }
-    @GetMapping("/applicant/lk/edit/docs")
+//    @PostMapping("/applicant/lk/edit")
+//    public String postApplicantEdit(Model model) {
+//        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+//        Applicant applicant = applicantService.findByEmail(email).get();
+//        model.addAttribute("applicant", applicant);
+//        return "redirect:/applicant-lk";
+//    }
+    @GetMapping("/applicant/lk/verification")
     public String getApplicantEditDocs(Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
-        return "applicant-lk-edit-docs";
+        return "applicant-lk-verification";
     }
-    @PostMapping("/applicant/lk/edit/docs")
+    @PostMapping("/applicant/lk/verification")
     public String postApplicantEditDocs(@RequestParam("file") MultipartFile file ) throws IOException {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
