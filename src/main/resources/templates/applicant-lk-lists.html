@@ -69,18 +69,18 @@
         <div class="col-3 border-end">
             <ul class="nav flex-column nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link" href="#myApplications" data-bs-toggle="tab">Мои заявления</a>
+                    <a class="nav-link active" href="/applicant/lk/myapplications" data-bs-toggle="tab">Мои заявления</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#submission" data-bs-toggle="tab">Подача заявления</a>
+                    <a class="nav-link" href="/applicant/lk/application" data-bs-toggle="tab">Подача заявления</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#verification" data-bs-toggle="tab">Верификация</a>
+                    <a class="nav-link" href="/applicant/lk/verification" data-bs-toggle="tab">Верификация</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#lists" data-bs-toggle="tab">Все списки</a>
+                    <a class="nav-link" href="/applicant/lk/lists" data-bs-toggle="tab">Все списки</a>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#settings" data-bs-toggle="tab">Настройки</a>
+                    <a class="nav-link" href="/applicant/lk/settings" data-bs-toggle="tab">Настройки</a>
                 </li>
             </ul>
         </div>
@@ -89,38 +89,41 @@
         <div class="col-9">
             <div class="tab-content">
 
-                <!-- Settings Tab -->
-                <div id="settings" class="tab-pane fade show active mt-4 mb-4">
-                    <h2 class="text-center">Настройки</h2>
-                    <form method="POST" action="/applicant/lk/edit/settings" class="text-center">
-                        <div class="mb-4">
-                            <label for="email" class="form-label">Почта:</label>
-                            <input type="email" id="email" name="email" class="form-control w-25 mx-auto">
-                        </div>
-                        <div class="mb-4">
-                            <label for="phone" class="form-label">Телефон:</label>
-                            <input type="tel" id="phone" name="phone" class="form-control w-25 mx-auto">
-                        </div>
-                        <div class="mb-4">
-                            <label for="password" class="form-label">Старый пароль:</label>
-                            <input type="password" id="password" name="password" class="form-control w-25 mx-auto">
-                        </div>
-                        <div class="mb-4">
-                            <label for="new_password" class="form-label">Новый пароль:</label>
-                            <input type="password" id="new_password" name="new_password" class="form-control w-25 mx-auto">
-                        </div>
-                        <button type="submit" class="btn btn-success">Сохранить изменения</button>
-                    </form>
+                <!-- Lists Tab -->
+                <div id="lists" class="tab-pane fade show active mt-4 mb-4">
+                    <h2 class="text-center">Направления обучения</h2>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-light">
+                        <tr>
+                            <th>Направление</th>
+                            <th>Код</th>
+                            <th>Набор мест</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Информатика и вычислительная техника</td>
+                            <td>09.03.01</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <td>Прикладная математика</td>
+                            <td>01.03.02</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>Экономика</td>
+                            <td>38.03.01</td>
+                            <td>25</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-
-
 
             </div>
         </div>
     </div>
 </div>
-
-
 
 </body>
 </html>
