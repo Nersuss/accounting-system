@@ -32,7 +32,7 @@ public class ApplicantController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
-        return "applicant-lk-applications";
+        return "applicant-lk-application";
     }
     @GetMapping("/applicant/lk/lists")
     public String getApplicantLkLists(Model model) {
