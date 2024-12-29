@@ -113,22 +113,14 @@
                             </div>
                         </div>
 
-                            <label for="pasportpicture" class="form-label">Прикрепить изображение :</label>
+                        <div class="mb-4">
+                            <label for="pasportpicture" class="form-label">Прикрепить изображение снилса:</label>
                             <div class="d-flex align-items-center w-50">
                                 <input type="file" id="snilspicture" name="pasportpicture" class="form-control me-2" onchange="toggleButton(this)">
                                 <button type="button" class="btn btn-danger hidden" id="removeSnils" onclick="removeFile('pasportpicture', this)">Удалить</button>
                             </div>
                         </div>
 
-                        <div class="mb-4">
-                            <label for="previousEducation" class="form-label">Предыдущее образование:</label>
-                            <select id="previousEducation" name="previousEducation" class="form-select w-50" required>
-                                <option value="">Выберите уровень образования</option>
-                                <option value="Среднее общее">Среднее общее</option>
-                                <option value="Среднее профессиональное">Среднее профессиональное</option>
-                                <option value="Высшее образование">Высшее образование</option>
-                            </select>
-                        </div>
                         <div class="mb-4">
                             <label for="educationCertificate" class="form-label">Прикрепить аттестат образования:</label>
                             <div class="d-flex align-items-center w-50">
@@ -141,7 +133,7 @@
                         <div class="mb-4">
                             <label class="form-check-label">
                                 <input type="checkbox" id="specialPrivileges" name="specialPrivileges" class="form-check-input me-2">
-                                Достижения и квоты
+                                Квоты
                             </label>
                         </div>
 
@@ -167,11 +159,42 @@
                             </div>
                         </div>
 
+                        <!-- Достижения -->
+                        <div class="mb-4">
+                            <label class="form-check-label">
+                                <input type="checkbox" id="achievements" name="achievements" class="form-check-input me-2">
+                                Достижения
+                            </label>
+                        </div>
+
+                        <!-- Причина достижений и прикрепление документов -->
+                        <div id="achievementsSection" class="hidden-section">
+                            <div class="mb-4">
+                                <label for="achievementReason" class="form-label">Достижения:</label>
+                                <select id="achievementReason" name="achievementReason" class="form-select w-50">
+                                    <option value="">Выберите достижение</option>
+                                    <option value="Олимпиада">Олимпиада</option>
+                                    <option value="Проект">Проект</option>
+                                    <option value="Исследование">Исследование</option>
+                                    <option value="Иное">Иное</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="achievementDocuments" class="form-label">Прикрепить документы, подтверждающие достижения:</label>
+                                <div class="d-flex align-items-center w-50">
+                                    <input type="file" id="achievementDocuments" name="achievementDocuments" class="form-control me-2" onchange="toggleButton(this)">
+                                    <button type="button" class="btn btn-danger hidden" id="removeAchievementDocuments" onclick="removeFile('achievementDocuments', this)">Удалить</button>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="mb-4 text-center">
                             <button type="submit" class="btn btn-success">Отправить заявление</button>
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>
@@ -223,6 +246,17 @@
         } else {
             privilegesSection.classList.remove('visible-section');
             privilegesSection.classList.add('hidden-section');
+        }
+    });
+
+    document.getElementById('achievements').addEventListener('change', function() {
+        const achievementsSection = document.getElementById('achievementsSection');
+        if (this.checked) {
+            achievementsSection.classList.remove('hidden-section');
+            achievementsSection.classList.add('visible-section');
+        } else {
+            achievementsSection.classList.remove('visible-section');
+            achievementsSection.classList.add('hidden-section');
         }
     });
 
