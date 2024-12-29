@@ -27,13 +27,10 @@ public class 	SystemApplication implements CommandLineRunner {
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Autowired
 	ApplicantService applicantService;
-
 	@Autowired
 	AdminService adminService;
-
 	@Autowired
 	AdminRepo adminRepo;
-
 	@Autowired
 	ExamResultRepo examResultRepo;
 

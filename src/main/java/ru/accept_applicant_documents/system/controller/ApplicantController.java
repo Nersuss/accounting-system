@@ -25,7 +25,7 @@ public class ApplicantController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
-        return "applicant-lk";
+        return "myapplications";
     }
     @GetMapping("/applicant/lk/edit")
     public String getApplicantEdit(Model model) {
