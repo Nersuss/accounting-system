@@ -32,7 +32,7 @@ public class MainController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("APPLICANT"))) {
-            return "redirect:/applicant/lk";
+            return "redirect:/applicant/lk/applications";
         } else if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
             return "redirect:/admin/lk";
         }

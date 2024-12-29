@@ -20,12 +20,12 @@ import java.time.LocalDate;
 public class ApplicantController {
     @Autowired
     ApplicantService applicantService;
-    @GetMapping("/applicant/lk")
+    @GetMapping("/applicant/lk/applications")
     public String getApplicantLk(Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
-        return "applicant-lk-myapplications";
+        return "applicant-lk-applications";
     }
     @GetMapping("/applicant/lk/application")
     public String getApplicantLkApplication(Model model) {
