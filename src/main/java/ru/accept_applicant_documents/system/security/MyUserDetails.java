@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ru.accept_applicant_documents.system.model.Admin;
 import ru.accept_applicant_documents.system.model.Applicant;
 
 import java.util.ArrayList;
@@ -14,27 +15,48 @@ import java.util.Set;
 @Getter
 public class MyUserDetails implements UserDetails {
 
-    private final Applicant applicant;
+    private final Object user; // Объект может быть как Applicant, так и Admin
 
     public MyUserDetails(Applicant applicant) {
-        this.applicant = applicant;
+        this.user = applicant;
+    }
+
+    public MyUserDetails(Admin admin) {
+        this.user = admin;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(applicant.getRole().name()));
+
+        if (user instanceof Applicant)
+        {
+            authorities.add(new SimpleGrantedAuthority(((Applicant) user).getRole().name()));
+        }
+        else if (user instanceof Admin) {
+            authorities.add(new SimpleGrantedAuthority(((Admin) user).getRole().name()));
+        }
         return authorities;
     }
 
     @Override
     public String getPassword() {
-        return applicant.getPassword();
+        if (user instanceof Applicant) {
+            return ((Applicant) user).getPassword();
+        } else if (user instanceof Admin) {
+            return ((Admin) user).getPassword();
+        }
+        return null;
     }
 
     @Override
     public String getUsername() {
-        return applicant.getEmail();
+        if (user instanceof Applicant) {
+            return ((Applicant) user).getEmail();
+        } else if (user instanceof Admin) {
+            return ((Admin) user).getEmail();
+        }
+        return null;
     }
 
     @Override

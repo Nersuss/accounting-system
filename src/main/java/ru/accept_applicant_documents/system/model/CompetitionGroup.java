@@ -26,7 +26,6 @@ public class CompetitionGroup {
 
     private int quantity;
 
-    // Связь ManyToOne
     @ManyToOne
     @NotNull
     private Department department;

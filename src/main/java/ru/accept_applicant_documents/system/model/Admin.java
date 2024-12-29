@@ -6,22 +6,28 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.accept_applicant_documents.system.enums.AllSubjects;
+import ru.accept_applicant_documents.system.enums.Roles;
 
 @Entity
-@Table
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Department {
+public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
-    private String title;
+    @Column(unique = true)
+    @NotNull
+    private String email;
 
-    private  String faculty;
+    @NotNull
+    private String FIO;
 
+    @NotNull
+    private String password;
+
+    @NotNull
+    private Roles role;
 }
