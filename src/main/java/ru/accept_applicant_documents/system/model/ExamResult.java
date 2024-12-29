@@ -31,7 +31,6 @@ public class ExamResult {
     @Enumerated(EnumType.STRING)
     private AllSubjects subject;
 
-    // Связь ManyToOne
     @ManyToOne
     @NotNull
     private Applicant applicant;

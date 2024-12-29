@@ -34,3 +34,4 @@ build/
 
 src/main/resources/applicants/
 src/main/resources/external-config.properties
+uploads/applicants/

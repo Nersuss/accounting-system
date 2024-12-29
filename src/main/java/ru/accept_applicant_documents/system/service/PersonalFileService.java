@@ -13,7 +13,7 @@ import ru.accept_applicant_documents.system.repository.PersonalFileRepo;
 import java.util.Optional;
 
 @Service
-public class PersonalFileService {
+public class PersonalFileService { //***Deprecated
 
     @Autowired
     PersonalFileRepo personalFileRepo;

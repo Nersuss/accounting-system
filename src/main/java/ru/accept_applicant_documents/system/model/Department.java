@@ -24,5 +24,4 @@ public class Department {
 
     private  String faculty;
 
-
 }

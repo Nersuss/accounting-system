@@ -26,12 +26,10 @@ public class Order {
 
     private boolean assent;
 
-    // Связь ManyToOne
     @ManyToOne
     @NotNull
     private PersonalFile personalFile;
 
-    // Связь ManyToOne
     @ManyToOne
     @NotNull
     private CompetitionGroup competitionGroup;

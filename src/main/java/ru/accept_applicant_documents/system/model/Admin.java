@@ -6,35 +6,29 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.accept_applicant_documents.system.enums.Categories;
-import ru.accept_applicant_documents.system.enums.FormsOfEducation;
-
+import ru.accept_applicant_documents.system.enums.Roles;
 
 @Entity
-@Table
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompetitionGroup {
+public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
-    private String title;
-
-    private int quantity;
-
-    @ManyToOne
+    @Column(unique = true)
     @NotNull
-    private Department department;
+    private String email;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
-    private Categories category;
+    private String FIO;
+
+    @NotNull
+    private String password;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private FormsOfEducation formOfEducation;
+    private Roles role;
 }
