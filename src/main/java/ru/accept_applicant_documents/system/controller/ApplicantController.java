@@ -15,6 +15,7 @@ import ru.accept_applicant_documents.system.service.ApplicantService;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Controller
 public class ApplicantController {
@@ -41,6 +42,20 @@ public class ApplicantController {
         model.addAttribute("applicant", applicant);
         return "applicant-lk-lists";
     }
+    @GetMapping("/applicant/lk/lists/concretelist")
+    public String getApplicantLkListsConcretelist(@RequestParam("code") Optional<String> code, Model model) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Applicant applicant = applicantService.findByEmail(email).get();
+        model.addAttribute("applicant", applicant);
+
+        if (code.isPresent())
+        {
+            //model.addAttribute("list", )
+        }
+
+
+        return "applicant-lk-lists-concretelist";
+    }
     @GetMapping("/applicant/lk/settings")
     public String getApplicantEdit(Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -48,13 +63,7 @@ public class ApplicantController {
         model.addAttribute("applicant", applicant);
         return "applicant-lk-settings";
     }
-//    @PostMapping("/applicant/lk/edit")
-//    public String postApplicantEdit(Model model) {
-//        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-//        Applicant applicant = applicantService.findByEmail(email).get();
-//        model.addAttribute("applicant", applicant);
-//        return "redirect:/applicant-lk";
-//    }
+
     @GetMapping("/applicant/lk/verification")
     public String getApplicantEditDocs(Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -63,11 +72,21 @@ public class ApplicantController {
         return "applicant-lk-verification";
     }
     @PostMapping("/applicant/lk/verification")
-    public String postApplicantEditDocs(@RequestParam("file") MultipartFile file ) throws IOException {
+    public String postApplicantEditDocs(
+            @RequestParam("pasportpicture") MultipartFile pasportpicture,
+            @RequestParam("snilspicture") MultipartFile snilspicture,
+            @RequestParam("educationCertificate") MultipartFile educationCertificate,
+            @RequestParam(value = "specialPrivileges", required = false) Boolean specialPrivileges,
+            @RequestParam(value = "bonusReason", required = false) String bonusReason,
+            @RequestParam("privilegeDocuments") MultipartFile privilegeDocuments,
+            @RequestParam(value = "achievements", required = false) Boolean achievements,
+            @RequestParam(value = "achievementReason", required = false) String achievementReason,
+            @RequestParam("achievementDocuments") MultipartFile achievementDocuments) throws IOException {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
 
-        String fileName = file.getOriginalFilename();
+        String fileName = pasportpicture.getOriginalFilename();
+
 
         String resourcePath = new File("uploads/applicants/" + applicant.getId()).getAbsolutePath();
 
@@ -82,9 +101,9 @@ public class ApplicantController {
 
         // Сохраняем файл в директорию
         File destinationFile = new File(applicantDir, fileName);
-        file.transferTo(destinationFile);
+        pasportpicture.transferTo(destinationFile);
 
-        return "redirect:/applicant/lk";
+        return "redirect:/applicant/lk/applications";
     }
 
 }
