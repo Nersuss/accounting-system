@@ -61,6 +61,19 @@
         .visible-section {
             display: block;
         }
+
+        .btn-success {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        h2 {
+            margin-bottom: 2rem;
+        }
+
+        label, .form-check-label {
+            line-height: 1.8;
+        }
     </style>
 </head>
 <body>
@@ -92,7 +105,6 @@
                     <a class="nav-link" href="/applicant/lk/settings">Настройки</a>
                 </li>
             </ul>
-
         </div>
 
         <!-- Main Content -->
@@ -100,38 +112,33 @@
             <div class="tab-content">
 
                 <!-- Verification Tab -->
-                <div id="verification" class="tab-pane fade show active mt-4 mb-4">
-                    <h2 class="text-center">Основные данные</h2>
-                    <form method="POST" action="/applicant/lk/submit" class="w-75 mx-auto">
-                        <div class="mb-4">
-                            <label for="lastName" class="form-label">ФИО:</label>
-                            <input type="text" id="lastName" name="lastName" class="form-control w-50" placeholder="Фамилия Имя Отчество" required>
-                        </div>
+                <div id="verification" class="tab-pane fade show active d-flex flex-column align-items-center mt-4 mb-4">
+                    <h2 class="text-center">Основные данные поступающего</h2>
+                    <form method="POST" action="/applicant/lk/submit" class="w-50">
                         <div class="mb-4">
                             <label for="pasportpicture" class="form-label">Прикрепить изображение паспорта:</label>
-                            <div class="d-flex align-items-center w-50">
+                            <div class="d-flex align-items-center">
                                 <input type="file" id="pasportpicture" name="pasportpicture" class="form-control me-2" onchange="toggleButton(this)">
-                                <button type="button" class="btn btn-danger hidden" id="removePasport" onclick="removeFile('pasportpicture', this)">Удалить</button>
+                                <button type="button" class="btn btn-danger hidden" onclick="removeFile('pasportpicture', this)">Удалить</button>
                             </div>
                         </div>
 
                         <div class="mb-4">
-                            <label for="pasportpicture" class="form-label">Прикрепить изображение снилса:</label>
-                            <div class="d-flex align-items-center w-50">
-                                <input type="file" id="snilspicture" name="pasportpicture" class="form-control me-2" onchange="toggleButton(this)">
-                                <button type="button" class="btn btn-danger hidden" id="removeSnils" onclick="removeFile('pasportpicture', this)">Удалить</button>
+                            <label for="snilspicture" class="form-label">Прикрепить изображение СНИЛСа:</label>
+                            <div class="d-flex align-items-center">
+                                <input type="file" id="snilspicture" name="snilspicture" class="form-control me-2" onchange="toggleButton(this)">
+                                <button type="button" class="btn btn-danger hidden" onclick="removeFile('snilspicture', this)">Удалить</button>
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <label for="educationCertificate" class="form-label">Прикрепить аттестат образования:</label>
-                            <div class="d-flex align-items-center w-50">
+                            <div class="d-flex align-items-center">
                                 <input type="file" id="educationCertificate" name="educationCertificate" class="form-control me-2" onchange="toggleButton(this)">
-                                <button type="button" class="btn btn-danger hidden" id="removeEducation" onclick="removeFile('educationCertificate', this)">Удалить</button>
+                                <button type="button" class="btn btn-danger hidden" onclick="removeFile('educationCertificate', this)">Удалить</button>
                             </div>
                         </div>
 
-                        <!-- Особые привилегии -->
                         <div class="mb-4">
                             <label class="form-check-label">
                                 <input type="checkbox" id="specialPrivileges" name="specialPrivileges" class="form-check-input me-2">
@@ -139,29 +146,27 @@
                             </label>
                         </div>
 
-                        <!-- Причина доп баллов и прикрепление документов -->
                         <div id="privilegesSection" class="hidden-section">
                             <div class="mb-4">
                                 <label for="bonusReason" class="form-label">Причина дополнительных баллов:</label>
-                                <select id="bonusReason" name="bonusReason" class="form-select w-50">
+                                <select id="bonusReason" name="bonusReason" class="form-select">
                                     <option value="">Выберите причину</option>
-                                    <option value="Олимпиада">Олимпиада</option>
-                                    <option value="Волонтёрство">Волонтёрство</option>
-                                    <option value="Спортивные достижения">Спортивные достижения</option>
-                                    <option value="Иные заслуги">Иные заслуги</option>
+                                    <option value="Инвалидность">Инвалидность или ограниченные возможности здоровья</option>
+                                    <option value="Сирота">Сироты или оставшиеся без попечения родителей</option>
+                                    <option value="Ветеран">Ветераны боевых действий</option>
+                                    <option value="Дети военнослужащих">Дети военнослужащих, погибших при исполнении служебных обязанностей</option>
                                 </select>
                             </div>
 
                             <div class="mb-4">
                                 <label for="privilegeDocuments" class="form-label">Прикрепить документы, подтверждающие привилегии:</label>
-                                <div class="d-flex align-items-center w-50">
+                                <div class="d-flex align-items-center">
                                     <input type="file" id="privilegeDocuments" name="privilegeDocuments" class="form-control me-2" onchange="toggleButton(this)">
                                     <button type="button" class="btn btn-danger hidden" id="removePrivilegeDocuments" onclick="removeFile('privilegeDocuments', this)">Удалить</button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Достижения -->
                         <div class="mb-4">
                             <label class="form-check-label">
                                 <input type="checkbox" id="achievements" name="achievements" class="form-check-input me-2">
@@ -169,22 +174,19 @@
                             </label>
                         </div>
 
-                        <!-- Причина достижений и прикрепление документов -->
                         <div id="achievementsSection" class="hidden-section">
                             <div class="mb-4">
                                 <label for="achievementReason" class="form-label">Достижения:</label>
-                                <select id="achievementReason" name="achievementReason" class="form-select w-50">
+                                <select id="achievementReason" name="achievementReason" class="form-select">
                                     <option value="">Выберите достижение</option>
                                     <option value="Олимпиада">Олимпиада</option>
-                                    <option value="Проект">Проект</option>
-                                    <option value="Исследование">Исследование</option>
-                                    <option value="Иное">Иное</option>
+                                    <option value="Спорт">Спортивные достижения высокого уровня</option>
                                 </select>
                             </div>
 
                             <div class="mb-4">
                                 <label for="achievementDocuments" class="form-label">Прикрепить документы, подтверждающие достижения:</label>
-                                <div class="d-flex align-items-center w-50">
+                                <div class="d-flex align-items-center">
                                     <input type="file" id="achievementDocuments" name="achievementDocuments" class="form-control me-2" onchange="toggleButton(this)">
                                     <button type="button" class="btn btn-danger hidden" id="removeAchievementDocuments" onclick="removeFile('achievementDocuments', this)">Удалить</button>
                                 </div>
@@ -192,7 +194,7 @@
                         </div>
 
                         <div class="mb-4 text-center">
-                            <button type="submit" class="btn btn-success">Отправить заявление</button>
+                            <button type="submit" class="btn btn-success">Сохранить</button>
                         </div>
                     </form>
                 </div>
@@ -204,34 +206,21 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    const fileInput = document.getElementById('fileInput');
-    const fileList = document.getElementById('fileList');
-    let allFiles = [];
+    function removeFile(inputId, button) {
+        const inputElement = document.getElementById(inputId);
+        if (inputElement) {
+            inputElement.value = '';
+            button.classList.add('hidden');
+        }
+    }
 
-    function updateFileList() {
-        fileList.innerHTML = '';
-
-        allFiles.forEach((file, index) => {
-            const row = document.createElement('tr');
-
-            const fileNameCell = document.createElement('td');
-            fileNameCell.textContent = file.name;
-
-            const actionsCell = document.createElement('td');
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Удалить';
-            deleteButton.className = 'btn btn-danger';
-
-            deleteButton.onclick = () => {
-                allFiles.splice(index, 1);
-                updateFileList();
-            };
-
-            actionsCell.appendChild(deleteButton);
-            row.appendChild(fileNameCell);
-            row.appendChild(actionsCell);
-            fileList.appendChild(row);
-        });
+    function toggleButton(inputElement) {
+        const button = inputElement.nextElementSibling;
+        if (inputElement.files.length > 0) {
+            button.classList.remove('hidden');
+        } else {
+            button.classList.add('hidden');
+        }
     }
 
     document.getElementById('specialPrivileges').addEventListener('change', function() {
@@ -255,24 +244,6 @@
             achievementsSection.classList.add('hidden-section');
         }
     });
-
-    function removeFile(inputId, button) {
-        const inputElement = document.getElementById(inputId);
-        if (inputElement) {
-            inputElement.value = '';
-        }
-        button.classList.add('hidden');
-    }
-
-    function toggleButton(inputElement) {
-        const button = inputElement.nextElementSibling;
-        if (inputElement.files.length > 0) {
-            button.classList.remove('hidden');
-        } else {
-            button.classList.add('hidden');
-        }
-    }
-
 </script>
 
 </body>

@@ -53,6 +53,30 @@
             border-color: #007bff;
             background-color: #f8f9fa;
         }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-select {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        h2 {
+            margin-bottom: 2rem;
+        }
+
+        label, .form-check-label {
+            line-height: 1.8;
+        }
     </style>
 </head>
 <body>
@@ -91,73 +115,64 @@
             <div class="tab-content">
 
                 <!-- Submission Tab -->
-                    <div id="applications" class="tab-pane fade show active mt-4 mb-4">
-                        <h2 class="text-center">Подача заявления</h2>
-                        <form method="POST" action="/applicant/lk/submit" class="w-75 mx-auto">
+                <div id="applications" class="tab-pane fade show active mt-4 mb-4">
+                    <h2 class="text-center">Подача заявления</h2>
+                    <form method="POST" action="/applicant/lk/submit" class="form-container">
 
-                            <div class="mb-4">
-                                <label for="program" class="form-label">Направление:</label>
-                                <select id="program" name="program" class="form-select w-50" required>
-                                    <option value="">Выберите программу</option>
-                                    <option value="Программирование">Программирование</option>
-                                    <option value="Математика">Математика</option>
-                                    <option value="Физика">Физика</option>
-                                </select>
-                            </div>
-                            <div class="mb-4">
-                                <label for="subject1" class="form-label">Предмет 1:</label>
-                                <div class="d-flex">
-                                    <select id="subject1" name="subject1" class="form-select me-2" required>
-                                        <option value="">Выберите предмет</option>
-                                        <option value="Математика">Математика</option>
-                                        <option value="Физика">Физика</option>
-                                        <option value="Информатика">Информатика</option>
-                                    </select>
-                                    <input type="number" id="score1" name="score1" class="form-control" placeholder="Баллы" min="0" max="100" required>
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label for="subject2" class="form-label">Предмет 2:</label>
-                                <div class="d-flex">
-                                    <select id="subject2" name="subject2" class="form-select me-2" required>
-                                        <option value="">Выберите предмет</option>
-                                        <option value="Математика">Математика</option>
-                                        <option value="Физика">Физика</option>
-                                        <option value="Информатика">Информатика</option>
-                                    </select>
-                                    <input type="number" id="score2" name="score2" class="form-control" placeholder="Баллы" min="0" max="100" required>
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label for="subject3" class="form-label">Предмет 3:</label>
-                                <div class="d-flex">
-                                    <select id="subject3" name="subject3" class="form-select me-2" required>
-                                        <option value="">Выберите предмет</option>
-                                        <option value="Математика">Математика</option>
-                                        <option value="Физика">Физика</option>
-                                        <option value="Информатика">Информатика</option>
-                                    </select>
-                                    <input type="number" id="score3" name="score3" class="form-control" placeholder="Баллы" min="0" max="100" required>
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label for="subject4" class="form-label">Предмет 4:</label>
-                                <div class="d-flex">
-                                    <select id="subject4" name="subject4" class="form-select me-2" required>
-                                        <option value="">Выберите предмет</option>
-                                        <option value="Математика">Математика</option>
-                                        <option value="Физика">Физика</option>
-                                        <option value="Информатика">Информатика</option>
-                                    </select>
-                                    <input type="number" id="score4" name="score4" class="form-control" placeholder="Баллы" min="0" max="100" required>
-                                </div>
-                            </div>
+                        <div class="mb-4">
+                            <label for="program" class="form-label">Направление:</label>
+                            <select id="program" name="program" class="form-select" required>
+                                <option value="">Выберите направление</option>
+                                <option value="Программирование">Программирование</option>
+                                <option value="Математика">Математика</option>
+                                <option value="Физика">Физика</option>
+                            </select>
+                        </div>
 
-                            <div class="mb-4 text-center">
-                                <button type="submit" class="btn btn-success">Отправить заявление</button>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="mb-4">
+                            <label for="subject1" class="form-label">Предмет 1:</label>
+                            <select id="subject1" name="subject1" class="form-select" required>
+                                <option value="">Выберите предмет</option>
+                                <option value="Математика">Математика</option>
+                                <option value="Физика">Физика</option>
+                                <option value="Информатика">Информатика</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="subject2" class="form-label">Предмет 2:</label>
+                            <select id="subject2" name="subject2" class="form-select" required>
+                                <option value="">Выберите предмет</option>
+                                <option value="Математика">Математика</option>
+                                <option value="Физика">Физика</option>
+                                <option value="Информатика">Информатика</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="subject3" class="form-label">Предмет 3:</label>
+                            <select id="subject3" name="subject3" class="form-select" required>
+                                <option value="">Выберите предмет</option>
+                                <option value="Математика">Математика</option>
+                                <option value="Физика">Физика</option>
+                                <option value="Информатика">Информатика</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="subject4" class="form-label">Предмет 4:</label>
+                            <select id="subject4" name="subject4" class="form-select" required>
+                                <option value="">Выберите предмет</option>
+                                <option value="Математика">Математика</option>
+                                <option value="Физика">Физика</option>
+                                <option value="Информатика">Информатика</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4 text-center">
+                            <button type="submit" class="btn btn-primary">Отправить заявление</button>
+                        </div>
+                    </form>
                 </div>
 
             </div>

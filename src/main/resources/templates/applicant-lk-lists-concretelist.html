@@ -47,12 +47,20 @@
         .nav-tabs .nav-link {
             border: 1px solid #dee2e6;
             border-radius: 5px;
-            padding: 0.5rem 0.5rem; /* Уменьшение размера кнопок */
+            padding: 0.5rem 0.5rem;
         }
 
         .nav-tabs .nav-link.active {
             border-color: #007bff;
             background-color: #f8f9fa;
+        }
+
+        h2 {
+            margin-bottom: 2rem;
+        }
+
+        label, .form-check-label {
+            line-height: 1.8;
         }
     </style>
 </head>
@@ -89,6 +97,10 @@
 
         <!-- Main Content -->
         <div class="col-9">
+            <div class="d-flex justify-content-start mb-3">
+                <button class="btn btn-outline-secondary" onclick="window.history.back();">Назад</button>
+            </div>
+
             <div class="tab-content">
                 <div id="lists" class="tab-pane fade show active mt-4 mb-4">
                     <h2 class="text-center">Списки абитуриентов</h2>
