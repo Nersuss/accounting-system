@@ -67,17 +67,23 @@
             border-color: #007bff;
         }
 
+        .btn-success:hover {
+            background-color: #0056b3; /* Синяя с затенением */
+            border-color: #0056b3;
+        }
+
         h2 {
             margin-bottom: 2rem;
         }
 
-        label, .form-check-label {
+        label {
             line-height: 1.8;
         }
 
-        .checkbox-group {
-            margin-top: 2rem;
+        #achLST, #privLST {
+            margin-bottom: 4rem;
         }
+
     </style>
 </head>
 <body>
@@ -118,7 +124,7 @@
                 <!-- Verification Tab -->
                 <div id="verification" class="tab-pane fade show active d-flex flex-column align-items-center mt-4 mb-4">
                     <h2 class="text-center">Основные данные поступающего</h2>
-                    <form method="POST" action="/applicant/lk/verification" class="w-50" enctype="multipart/form-data">
+                    <form method="POST" action="/applicant/lk/submit" class="w-50">
                         <div class="mb-4">
                             <label for="pasportpicture" class="form-label">Прикрепить изображение паспорта:</label>
                             <div class="d-flex align-items-center">
@@ -142,7 +148,7 @@
                             </div>
                         </div>
 
-                        <div class="checkbox-group mb-4">
+                        <div class="mb-4">
                             <label class="form-check-label">
                                 <input type="checkbox" id="specialPrivileges" name="specialPrivileges" class="form-check-input me-2">
                                 Квоты
@@ -163,17 +169,17 @@
                                     <button type="button" class="btn btn-outline-primary" onclick="addSelectOption('privileges-container', 'bonusReason')">Ещё+</button>
                                 </div>
                             </div>
-                            <div class="container mt-5">
+                            <div class="container mt-5" id="privLST">
                                 <div class="mb-3">
-                                    <label for="fileInput" class="form-label">Прикрепите документы:</label>
-                                    <input type="file" class="form-control" id="priviligefileInput">
+                                    <label for="privilegeDocuments" class="form-label">Прикрепите документы:</label>
+                                    <input type="file" class="form-control" id="privilegeDocuments" onchange="addFileToTable('privilegesFileList', this)">
                                 </div>
-                                <ul class="list-group" id="priviligefileList">
+                                <ul class="list-group" id="privilegesFileList">
                                 </ul>
                             </div>
                         </div>
 
-                        <div class="checkbox-group mb-4">
+                        <div class="mb-4">
                             <label class="form-check-label">
                                 <input type="checkbox" id="achievements" name="achievements" class="form-check-input me-2">
                                 Достижения
@@ -192,18 +198,18 @@
                                     <button type="button" class="btn btn-outline-primary" onclick="addSelectOption('achievements-container', 'achievementReason')">Ещё+</button>
                                 </div>
                             </div>
-                            <div class="container mt-5">
+                            <div class="container mt-5" id="achLST">
                                 <div class="mb-3">
                                     <label for="fileInput" class="form-label">Прикрепите документы:</label>
                                     <input type="file" class="form-control" id="fileInput">
                                 </div>
-                                <ul class="list-group" id="achievementsfileList">
+                                <ul class="list-group" id="fileList">
                                 </ul>
                             </div>
                         </div>
 
                         <div class="mb-4 text-center">
-                            <button type="submit" class="btn btn-success">Сохранить</button>
+                            <button id="saveBtn" type="submit" class="btn btn-success">Сохранить</button>
                         </div>
                     </form>
                 </div>
@@ -308,29 +314,61 @@
                     <button type="button" class="btn btn-outline-primary" onclick="addSelectOption('achievements-container', 'achievementReason')">Ещё+</button>
                 </div>`;
         }
-
-        document.getElementById('fileInput').addEventListener('change', (event) => {
-            const fileInput = event.target;
-            const fileList = document.getElementById('fileList');
-
-            // Check if a file is selected
-            if (fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-
-                // Create a new list item
-                const listItem = document.createElement('li');
-                listItem.className = 'list-group-item';
-                listItem.textContent = file.name;
-
-                // Append the file name to the list
-                fileList.appendChild(listItem);
-
-                // Clear the file input
-                fileInput.value = '';
-            }
-        });
-
     });
+
+    document.getElementById('fileInput').addEventListener('change', (event) => {
+        const fileInput = event.target;
+        const fileList = document.getElementById('fileList');
+
+        // Check if a file is selected
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+
+            // Create a new list item
+            const listItem = document.createElement('li');
+            listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+            listItem.textContent = file.name;
+
+            const removeButton = document.createElement('button');
+            removeButton.className = 'btn btn-danger btn-sm';
+            removeButton.textContent = 'Удалить';
+            removeButton.onclick = function () {
+                fileList.removeChild(listItem);
+            };
+
+            listItem.appendChild(removeButton);
+            // Append the file name to the list
+            fileList.appendChild(listItem);
+
+            // Clear the file input
+            fileInput.value = '';
+        }
+    });
+
+    function addFileToTable(listId, inputElement) {
+        const fileInput = inputElement;
+        const fileList = document.getElementById(listId);
+
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+
+            const listItem = document.createElement('li');
+            listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+            listItem.textContent = file.name;
+
+            const removeButton = document.createElement('button');
+            removeButton.className = 'btn btn-danger btn-sm';
+            removeButton.textContent = 'Удалить';
+            removeButton.onclick = function () {
+                fileList.removeChild(listItem);
+            };
+
+            listItem.appendChild(removeButton);
+            fileList.appendChild(listItem);
+
+            fileInput.value = '';
+        }
+    }
 </script>
 
 </body>
