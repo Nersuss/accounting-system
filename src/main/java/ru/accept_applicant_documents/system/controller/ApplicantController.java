@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.accept_applicant_documents.system.dto.DocumentApplicantDto;
+import ru.accept_applicant_documents.system.dto.ShowListOfApplicants;
 import ru.accept_applicant_documents.system.model.Applicant;
 import ru.accept_applicant_documents.system.model.Document;
 import ru.accept_applicant_documents.system.service.ApplicantService;
@@ -50,7 +51,11 @@ public class ApplicantController {
 
         if (code.isPresent())
         {
-            //model.addAttribute("list", )
+
+            ShowListOfApplicants list = new ShowListOfApplicants();
+
+
+            model.addAttribute("list", list);
         }
 
 
@@ -85,9 +90,6 @@ public class ApplicantController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
 
-        String fileName = pasportpicture.getOriginalFilename();
-
-
         String resourcePath = new File("uploads/applicants/" + applicant.getId()).getAbsolutePath();
 
         // Создаем директорию, если она не существует
@@ -99,9 +101,13 @@ public class ApplicantController {
             }
         }
 
-        // Сохраняем файл в директорию
-        File destinationFile = new File(applicantDir, fileName);
-        pasportpicture.transferTo(destinationFile);
+        File destinationFilePasport = new File(applicantDir, pasportpicture.getOriginalFilename());
+        File destinationFileSnils = new File(applicantDir, pasportpicture.getOriginalFilename());
+        File destinationFileCertificate = new File(applicantDir, pasportpicture.getOriginalFilename());
+
+        pasportpicture.transferTo(destinationFilePasport);
+        snilspicture.transferTo(destinationFileSnils);
+        educationCertificate.transferTo(destinationFileCertificate);
 
         return "redirect:/applicant/lk/applications";
     }
