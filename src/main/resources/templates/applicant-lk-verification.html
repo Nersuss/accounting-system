@@ -74,6 +74,10 @@
         label, .form-check-label {
             line-height: 1.8;
         }
+
+        .checkbox-group {
+            margin-top: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -122,7 +126,6 @@
                                 <button type="button" class="btn btn-danger hidden" onclick="removeFile('pasportpicture', this)">Удалить</button>
                             </div>
                         </div>
-
                         <div class="mb-4">
                             <label for="snilspicture" class="form-label">Прикрепить изображение СНИЛСа:</label>
                             <div class="d-flex align-items-center">
@@ -139,7 +142,7 @@
                             </div>
                         </div>
 
-                        <div class="mb-4">
+                        <div class="checkbox-group mb-4">
                             <label class="form-check-label">
                                 <input type="checkbox" id="specialPrivileges" name="specialPrivileges" class="form-check-input me-2">
                                 Квоты
@@ -147,27 +150,30 @@
                         </div>
 
                         <div id="privilegesSection" class="hidden-section">
-                            <div class="mb-4">
-                                <label for="bonusReason" class="form-label">Причина дополнительных баллов:</label>
-                                <select id="bonusReason" name="bonusReason" class="form-select">
-                                    <option value="">Выберите причину</option>
-                                    <option value="Инвалидность">Инвалидность или ограниченные возможности здоровья</option>
-                                    <option value="Сирота">Сироты или оставшиеся без попечения родителей</option>
-                                    <option value="Ветеран">Ветераны боевых действий</option>
-                                    <option value="Дети военнослужащих">Дети военнослужащих, погибших при исполнении служебных обязанностей</option>
-                                </select>
-                            </div>
-
-                            <div class="mb-4">
-                                <label for="privilegeDocuments" class="form-label">Прикрепить документы, подтверждающие привилегии:</label>
-                                <div class="d-flex align-items-center">
-                                    <input type="file" id="privilegeDocuments" name="privilegeDocuments" class="form-control me-2" onchange="toggleButton(this)">
-                                    <button type="button" class="btn btn-danger hidden" id="removePrivilegeDocuments" onclick="removeFile('privilegeDocuments', this)">Удалить</button>
+                            <div class="mb-4 privileges-container">
+                                <label for="bonusReason" class="form-label">Причина квоты:</label>
+                                <div class="d-flex align-items-center mb-2">
+                                    <select id="bonusReason" name="bonusReason" class="form-select me-2">
+                                        <option value="">Выберите причину</option>
+                                        <option value="Инвалидность">Инвалидность или ограниченные возможности здоровья</option>
+                                        <option value="Сирота">Сироты или оставшиеся без попечения родителей</option>
+                                        <option value="Ветеран">Ветераны боевых действий</option>
+                                        <option value="Дети военнослужащих">Дети военнослужащих, погибших при исполнении служебных обязанностей</option>
+                                    </select>
+                                    <button type="button" class="btn btn-outline-primary" onclick="addSelectOption('privileges-container', 'bonusReason')">Ещё+</button>
                                 </div>
+                            </div>
+                            <div class="container mt-5">
+                                <div class="mb-3">
+                                    <label for="fileInput" class="form-label">Прикрепите документы:</label>
+                                    <input type="file" class="form-control" id="priviligefileInput">
+                                </div>
+                                <ul class="list-group" id="priviligefileList">
+                                </ul>
                             </div>
                         </div>
 
-                        <div class="mb-4">
+                        <div class="checkbox-group mb-4">
                             <label class="form-check-label">
                                 <input type="checkbox" id="achievements" name="achievements" class="form-check-input me-2">
                                 Достижения
@@ -175,21 +181,24 @@
                         </div>
 
                         <div id="achievementsSection" class="hidden-section">
-                            <div class="mb-4">
+                            <div class="mb-4 achievements-container">
                                 <label for="achievementReason" class="form-label">Достижения:</label>
-                                <select id="achievementReason" name="achievementReason" class="form-select">
-                                    <option value="">Выберите достижение</option>
-                                    <option value="Олимпиада">Олимпиада</option>
-                                    <option value="Спорт">Спортивные достижения высокого уровня</option>
-                                </select>
-                            </div>
-
-                            <div class="mb-4">
-                                <label for="achievementDocuments" class="form-label">Прикрепить документы, подтверждающие достижения:</label>
-                                <div class="d-flex align-items-center">
-                                    <input type="file" id="achievementDocuments" name="achievementDocuments" class="form-control me-2" onchange="toggleButton(this)">
-                                    <button type="button" class="btn btn-danger hidden" id="removeAchievementDocuments" onclick="removeFile('achievementDocuments', this)">Удалить</button>
+                                <div class="d-flex align-items-center mb-2">
+                                    <select id="achievementReason" name="achievementReason" class="form-select me-2">
+                                        <option value="">Выберите достижение</option>
+                                        <option value="Олимпиада">Олимпиада</option>
+                                        <option value="Спорт">Спортивные достижения высокого уровня</option>
+                                    </select>
+                                    <button type="button" class="btn btn-outline-primary" onclick="addSelectOption('achievements-container', 'achievementReason')">Ещё+</button>
                                 </div>
+                            </div>
+                            <div class="container mt-5">
+                                <div class="mb-3">
+                                    <label for="fileInput" class="form-label">Прикрепите документы:</label>
+                                    <input type="file" class="form-control" id="fileInput">
+                                </div>
+                                <ul class="list-group" id="achievementsfileList">
+                                </ul>
                             </div>
                         </div>
 
@@ -223,26 +232,104 @@
         }
     }
 
+    function addSelectOption(containerClass, selectName) {
+        const container = document.querySelector(`.${containerClass}`);
+        const newDiv = document.createElement('div');
+        newDiv.className = 'd-flex align-items-center mb-2';
+
+        const newSelect = document.createElement('select');
+        newSelect.name = selectName;
+        newSelect.className = 'form-select me-2';
+        newSelect.innerHTML = `
+            <option value="">Выберите</option>
+            ${selectName === 'bonusReason'
+            ? `
+                <option value="Инвалидность">Инвалидность или ограниченные возможности здоровья</option>
+                <option value="Сирота">Сироты или оставшиеся без попечения родителей</option>
+                <option value="Ветеран">Ветераны боевых действий</option>
+                <option value="Дети военнослужащих">Дети военнослужащих, погибших при исполнении служебных обязанностей</option>`
+            : `
+                <option value="Олимпиада">Олимпиада</option>
+                <option value="Спорт">Спортивные достижения высокого уровня</option>`}
+        `;
+
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.className = 'btn btn-danger';
+        removeButton.textContent = 'Удалить';
+        removeButton.onclick = function () {
+            container.removeChild(newDiv);
+        };
+
+        newDiv.appendChild(newSelect);
+        newDiv.appendChild(removeButton);
+        container.appendChild(newDiv);
+    }
+
     document.getElementById('specialPrivileges').addEventListener('change', function() {
         const privilegesSection = document.getElementById('privilegesSection');
+        const privilegesContainer = document.querySelector('.privileges-container');
         if (this.checked) {
             privilegesSection.classList.remove('hidden-section');
             privilegesSection.classList.add('visible-section');
         } else {
             privilegesSection.classList.remove('visible-section');
             privilegesSection.classList.add('hidden-section');
+            privilegesContainer.innerHTML = `<label for="bonusReason" class="form-label">Причина дополнительных баллов:</label>
+                <div class="d-flex align-items-center mb-2">
+                    <select id="bonusReason" name="bonusReason" class="form-select me-2">
+                        <option value="">Выберите причину</option>
+                        <option value="Инвалидность">Инвалидность или ограниченные возможности здоровья</option>
+                        <option value="Сирота">Сироты или оставшиеся без попечения родителей</option>
+                        <option value="Ветеран">Ветераны боевых действий</option>
+                        <option value="Дети военнослужащих">Дети военнослужащих, погибших при исполнении служебных обязанностей</option>
+                    </select>
+                    <button type="button" class="btn btn-outline-primary" onclick="addSelectOption('privileges-container', 'bonusReason')">Ещё+</button>
+                </div>`;
         }
     });
 
     document.getElementById('achievements').addEventListener('change', function() {
         const achievementsSection = document.getElementById('achievementsSection');
+        const achievementsContainer = document.querySelector('.achievements-container');
         if (this.checked) {
             achievementsSection.classList.remove('hidden-section');
             achievementsSection.classList.add('visible-section');
         } else {
             achievementsSection.classList.remove('visible-section');
             achievementsSection.classList.add('hidden-section');
+            achievementsContainer.innerHTML = `<label for="achievementReason" class="form-label">Достижения:</label>
+                <div class="d-flex align-items-center mb-2">
+                    <select id="achievementReason" name="achievementReason" class="form-select me-2">
+                        <option value="">Выберите достижение</option>
+                        <option value="Олимпиада">Олимпиада</option>
+                        <option value="Спорт">Спортивные достижения высокого уровня</option>
+                    </select>
+                    <button type="button" class="btn btn-outline-primary" onclick="addSelectOption('achievements-container', 'achievementReason')">Ещё+</button>
+                </div>`;
         }
+
+        document.getElementById('fileInput').addEventListener('change', (event) => {
+            const fileInput = event.target;
+            const fileList = document.getElementById('fileList');
+
+            // Check if a file is selected
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+
+                // Create a new list item
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item';
+                listItem.textContent = file.name;
+
+                // Append the file name to the list
+                fileList.appendChild(listItem);
+
+                // Clear the file input
+                fileInput.value = '';
+            }
+        });
+
     });
 </script>
 
