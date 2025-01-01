@@ -24,13 +24,37 @@ public class AdminController {
         model.addAttribute("admin", admin);
         return "admin-lk";
     }
-    @GetMapping("/admin/lk/applicants/unverified")
-    public String getAdminLkApplicantsUnverified(Model model)
+    @GetMapping("/admin/lk/unchecked")
+    public String getAdminUnchecked(Model model)
     {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Admin admin = adminService.findByEmail(email).get();
         model.addAttribute("admin", admin);
-        return "admin-lk-applicants-unverified";
+        return "admin-unchecked";
+    }
+    @GetMapping("/admin/lk/incorrect")
+    public String getAdminIncorrect(Model model)
+    {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Admin admin = adminService.findByEmail(email).get();
+        model.addAttribute("admin", admin);
+        return "admin-incorrect";
+    }
+    @GetMapping("/admin/lk/verified")
+    public String getAdminVerified(Model model)
+    {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Admin admin = adminService.findByEmail(email).get();
+        model.addAttribute("admin", admin);
+        return "admin-verified";
+    }
+    @GetMapping("/admin/lk/settings")
+    public String getAdminLkSettings(Model model)
+    {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Admin admin = adminService.findByEmail(email).get();
+        model.addAttribute("admin", admin);
+        return "admin-lk-settings";
     }
 
 }

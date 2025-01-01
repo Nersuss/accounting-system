@@ -79,7 +79,7 @@
 <div class="container mt-3">
     <div class="d-flex justify-content-end align-items-center">
         <img src="/images/profile-icon.png" alt="Profile Icon" class="rounded-circle me-2" style="width: 40px; height: 40px;">
-        <span th:text="${applicant.email}" class="me-2"></span>
+        <span th:text="${admin.email}" class="me-2"></span>
         <a href="/logout" class="btn btn-outline-secondary">Выход</a>
     </div>
 
@@ -88,16 +88,16 @@
         <div class="col-3 border-end">
             <ul class="nav flex-column nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/admin/lk/unchecked">Непроверенные абитуриенты</a>
+                    <a class="nav-link" href="/admin/lk/unchecked">Непроверенные абитуриенты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/lk/checked">Проверенные абитуриенты</a>
+                    <a class="nav-link" href="/admin/lk/verified">Проверенные абитуриенты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/lk/wrong">Абитуриенты с неправильными документами</a>
+                    <a class="nav-link active" href="/admin/lk/incorrect">Абитуриенты с неправильными документами</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/applicant/lk/settings">Настройки</a>
+                    <a class="nav-link" href="/admin/lk/settings">Настройки</a>
                 </li>
             </ul>
         </div>
@@ -107,7 +107,7 @@
             <div class="tab-content">
 
                 <div class="container mt-5">
-                    <h2 class="text-center">Проверенные абитуриенты</h2>
+                    <h2 class="text-center">Абитуриенты с неверными документами</h2>
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -120,9 +120,9 @@
                         <tbody>
                         <tr>
                             <td>1</td>
-                            <td><a href="admin/lk/concreteapplicant">Иванов Иван Иванович</a></td>
+                            <td><a href="/admin/lk/concreteapplicant">Иванов Иван Иванович</a></td>
                             <td>01.01.2024</td>
-                            <td><span class="badge bg-success">Проверено</span></td>
+                            <td><span class="badge bg-danger">Неправильно</span></td>
                         </tr>
                         </tbody>
                     </table>
