@@ -57,4 +57,13 @@ public class AdminController {
         return "admin-lk-settings";
     }
 
+    @GetMapping("/admin/lk/concreteapplicant")
+    public String getAdminLkConcreteApplicant(Model model)
+    {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Admin admin = adminService.findByEmail(email).get();
+        model.addAttribute("admin", admin);
+        return "admin-concreteapplicant";
+    }
+
 }

@@ -32,7 +32,7 @@ public class ApplicantService {
 
         return applicantRepo.save(new Applicant(null, applicant.getEmail(), applicant.getPassword(), null,
                 null, null, null, null, applicant.getPhone(),
-                StatusesOfDocuments.UNCHECKED, Roles.APPLICANT));
+                StatusesOfDocuments.INCORRECT, Roles.APPLICANT));
     }
 
     public boolean ApplicantAccountAlreadyExist(String email) {
@@ -64,5 +64,9 @@ public class ApplicantService {
         return applicantRepo.findById(id);
     }
 
+    public void setDocStatusByEmail(StatusesOfDocuments status, String email)
+    {
+        applicantRepo.setDocStatus(status, email);
+    }
 
 }
