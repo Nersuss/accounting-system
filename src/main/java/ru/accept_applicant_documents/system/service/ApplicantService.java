@@ -69,4 +69,9 @@ public class ApplicantService {
         applicantRepo.setDocStatus(status, email);
     }
 
+    public List<Applicant> findAllByDocStatus(StatusesOfDocuments status)
+    {
+        return applicantRepo.findAllByDocStatus(status);
+    }
+
 }

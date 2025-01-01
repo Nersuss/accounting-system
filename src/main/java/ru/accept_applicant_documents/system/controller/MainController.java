@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.accept_applicant_documents.system.model.Applicant;
+import ru.accept_applicant_documents.system.repository.ApplicantRepo;
 import ru.accept_applicant_documents.system.service.ApplicantService;
 
 @Controller

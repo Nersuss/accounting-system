@@ -7,14 +7,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.accept_applicant_documents.system.enums.AllSubjects;
 import ru.accept_applicant_documents.system.enums.Roles;
+import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
 import ru.accept_applicant_documents.system.model.Admin;
+import ru.accept_applicant_documents.system.model.Applicant;
 import ru.accept_applicant_documents.system.model.ExamResult;
 import ru.accept_applicant_documents.system.repository.AdminRepo;
+import ru.accept_applicant_documents.system.repository.ApplicantRepo;
 import ru.accept_applicant_documents.system.repository.ExamResultRepo;
 import ru.accept_applicant_documents.system.service.AdminService;
 import ru.accept_applicant_documents.system.service.ApplicantService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @SpringBootApplication
 public class 	SystemApplication implements CommandLineRunner {
@@ -29,6 +33,8 @@ public class 	SystemApplication implements CommandLineRunner {
 	ApplicantService applicantService;
 	@Autowired
 	AdminService adminService;
+	@Autowired
+	ApplicantRepo applicantRepo;
 	@Autowired
 	AdminRepo adminRepo;
 	@Autowired
