@@ -72,6 +72,39 @@
             line-height: 1.8;
         }
 
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-container form {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-container button {
+            width: 200px;
+        }
+
+        #save-btn, #label2 {
+            margin-top: 1rem
+        }
+
+        #accept-btn, #reject-btn {
+            margin-bottom: 4rem
+        }
+
+        #accept-btn {
+            background-color: #28a745; /* Зеленый цвет */
+            border-color: #28a745;
+        }
+
+        #accept-btn:hover {
+            background-color: #218838; /* Темнее при наведении */
+            border-color: #218838;
+        }
+
     </style>
 </head>
 <body>
@@ -110,29 +143,84 @@
                     <button class="btn btn-outline-secondary" onclick="window.history.back();">Назад</button>
                 </div>
 
-                <div class="container mt-5">
+                <div class="container mt-5 form-container">
+                    <h2>Абитуриент: <span th:text="${applicant.email}"></span></h2>
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="button" class="btn btn-success me-2" id="accept-btn">Принять</button>
+                        <button type="button" class="btn btn-danger" id="reject-btn">Отклонить</button>
+                    </div>
+
+                    <h2 id="label2">Предоставленные данные:</h2>
+
+                    <!-- Поля для ввода данных -->
+                    <form>
+                        <div class="mb-3">
+                            <label for="snilsInput" class="form-label">СНИЛС</label>
+                            <input type="text" class="form-control" id="snilsInput" placeholder="Введите номер СНИЛС">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="passportInput" class="form-label">Серия и номер паспорта</label>
+                            <input type="text" class="form-control" id="passportInput" placeholder="Введите серию и номер паспорта">
+                        </div>
+
+                        <!--<div class="mb-3">
+                            <label for="passportPhoto" class="form-label">Фото паспорта</label>
+                            <img id="passportPhoto" src="Михаил Тайчер.jpeg" alt="Фото паспорта" class="img-thumbnail">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="snilsPhoto" class="form-label">Фото СНИЛС</label>
+                            <img id="snilsPhoto" src="/files/snils.jpg" alt="Фото СНИЛС" class="img-thumbnail">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="snilsPhoto" class="form-label">Фото Аттестата</label>
+                            <img id="attestatPhoto" src="/files/snils.jpg" alt="Фото аттестата" class="img-thumbnail">
+                        </div>
+                        -->
+                    </form>
+
+                    <div class="mb-3">
+                        <button type="submit" id="save-btn" class="btn btn-success">Сохранить</button>
+                    </div>
+
+                    <h2 class="mt-5">Предоставленные файлы:</h2>
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>ФИО</th>
-                            <th>Дата подачи</th>
-                            <th>Статус</th>
+                            <th>Имя файла</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><a href="/admin/lk/concreteapplicant">Иванов Иван Иванович</a></td>
-                            <td>01.01.2024</td>
-                            <td><span class="badge bg-success">Проверено</span></td>
-                        </tr>
+                        <tbody id="fileList">
+                        <!-- Dynamic content -->
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const fileList = document.getElementById('fileList');
+
+        const files = { id, name};
+
+        fileList.innerHTML = '';
+        files.forEach((file, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${file.name}</td>
+            `;
+            fileList.appendChild(row);
+        });
+    });
+</script>
+
 </body>
 </html>
