@@ -147,8 +147,16 @@
                     <h2>Абитуриент: <span th:text="${applicant.email}"></span></h2>
                     <h2 style="margin-top: 1rem">Подтверждение документов:</h2>
                     <div class="d-flex justify-content-center mt-4">
-                        <button type="button" class="btn btn-success me-2" id="accept-btn">Подтвердить</button>
-                        <button type="button" class="btn btn-danger" id="reject-btn">Отклонить</button>
+                        <form action="/admin/lk/applicant" method="POST" style="display: inline;">
+                            <input type="hidden" name="email" th:value="${applicant.email}" />
+                            <input type="hidden" name="status" value="ACCEPT"/>
+                            <button type="submit" class="btn btn-success me-2">Подтвердить</button>
+                        </form>
+                        <form action="/admin/lk/applicant" method="POST" style="display: inline;">
+                            <input type="hidden" name="email" th:value="${applicant.email}"/>
+                            <input type="hidden" name="status" value="REJECT"/>
+                            <button type="submit" class="btn btn-danger">Отклонить</button>
+                        </form>
                     </div>
 
                     <h2 id="label2">Поля документов:</h2>
@@ -201,8 +209,5 @@
         </div>
     </div>
 </div>
-
-
-
 </body>
 </html>
