@@ -79,14 +79,10 @@ public class ApplicantController {
     public String getApplicantEditDocs(Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
-        model.addAttribute("applicant", applicant);
 
-        if (applicant.getDocStatus().equals(StatusesOfDocuments.INCORRECT))
-            model.addAttribute("msg", "INCORRECT");
-        if (applicant.getDocStatus().equals(StatusesOfDocuments.VERIFIED))
-            model.addAttribute("msg", "VERIFIED");
-        if (applicant.getDocStatus().equals(StatusesOfDocuments.UNCHECKED))
-            model.addAttribute("msg", "UNCHECKED");
+        model.addAttribute("applicant", applicant);
+        String docStatus = applicant.getDocStatus().name();
+        model.addAttribute("status", docStatus); // Используйте docsStatus вместо docs-status (допустимый синтаксис)
 
         return "applicant-lk-verification";
     }
