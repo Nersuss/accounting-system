@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.accept_applicant_documents.system.dto.DocumentApplicantDto;
 import ru.accept_applicant_documents.system.dto.ShowListOfApplicants;
 import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
+import ru.accept_applicant_documents.system.enums.TypesOfDocuments;
 import ru.accept_applicant_documents.system.model.Applicant;
 import ru.accept_applicant_documents.system.model.Document;
 import ru.accept_applicant_documents.system.service.ApplicantService;
@@ -114,6 +115,10 @@ public class ApplicantController {
         pasportpicture.transferTo(destinationFilePasport);
         snilspicture.transferTo(destinationFileSnils);
         educationCertificate.transferTo(destinationFileCertificate);
+
+        applicantService.addDocument(new Document("Паспорт", destinationFilePasport.getCanonicalPath(), TypesOfDocuments.PASSPORT, applicant));
+        applicantService.addDocument(new Document("СНИЛС", destinationFileSnils.getCanonicalPath(), TypesOfDocuments.SNILS, applicant));
+        applicantService.addDocument(new Document("Аттестат", destinationFileCertificate.getCanonicalPath(), TypesOfDocuments.CERTIFICATE, applicant));
 
         applicantService.setDocStatusByEmail(StatusesOfDocuments.UNCHECKED, email);
 

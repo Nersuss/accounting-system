@@ -1,17 +1,90 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Приемная комиссия</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .navbar-nav .nav-link {
+            font-size: 1.25rem; /* Увеличение размера текста */
+            margin-left: 15px; /* Увеличение промежутков между элементами */
+            margin-right: 15px; /* Чтобы сохранить симметрию */
+        }
+
+        .navbar-nav .nav-link:hover {
+            font-weight: bold; /* Опционально: выделение текста при наведении */
+        }
+
+        #bottom-line{
+            margin-top:8rem
+        }
+    </style>
 </head>
+
 <body>
-    Подавай документы, мразь.
-    <br/>
-    <a href="/login">Вход</a>
-    <br/>
-    <a href="/register">выход</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Зарегистрироваться</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Войти</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<header class="bg-primary text-white text-center py-5">
+    <div class="container">
+        <h1>Система дистанционной подачи документов для поступления в ВУЗ</h1>
+    </div>
+</header>
+
+<section id="about" class="py-5">
+    <div class="container">
+        <h2 class="text-center" style="margin-bottom: 2rem">О нас</h2>
+        <p class="text-center" style="font-size: 1.1rem;">Наша система создана для того, чтобы сделать процесс поступления в учебное заведение проще, быстрее и, главное, без лишних бумажных приключений.</p>
+        <p class="text-center" style="font-size: 1.1rem;">Забудьте про очереди и утерянные документы — у нас всё работает четко, как часы.</p>
+    </div>
+</section>
+
+<section id="carousel" class="py-5 bg-light">
+    <div class="container">
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/images/landing1.jpg" class="d-block" alt="First Slide">
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/landing2.jpg" class="d-block w-100" alt="Second Slide">
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/landing3.jpg" class="d-block w-100" alt="Third Slide">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-dark text-white text-center py-3" id="bottom-line">
+    <div class="container">
+        <p>&copy; Система подачи заявлений ТПЧ.</p>
+        <p>2024-2025</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

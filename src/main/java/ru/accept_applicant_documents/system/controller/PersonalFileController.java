@@ -48,8 +48,8 @@ public class PersonalFileController { ///deprecated**
     @PostMapping("/personalFile/{id}/addDocument")
     public String addApplicantDocument(@ModelAttribute("examDocument") @Valid DocumentApplicantDto documentApplicantDto, Model model, @PathVariable Long id) {
 
-        System.out.println(applicantService.addApplicantDocument(new Document(null, documentApplicantDto.getTitle(), documentApplicantDto.getDocNumber(),
-                null,null,null,null,null,null,null)));
+        //System.out.println(applicantService.addApplicantDocument(new Document(null, documentApplicantDto.getTitle(), documentApplicantDto.getDocNumber(),
+                //null,null,null,null,null,null,null)));
 
         return "main";
     }

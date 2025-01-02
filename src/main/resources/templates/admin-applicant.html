@@ -180,36 +180,30 @@
                         <tr>
                             <th>#</th>
                             <th>Имя файла</th>
+                            <th>Ссылка</th>
                         </tr>
                         </thead>
-                        <tbody id="fileList">
-                        <!-- Dynamic content -->
+                        <tbody>
+                        <tr th:each="file, iterStat : ${files}">
+                            <td th:text="${iterStat.count}"></td>
+                            <td th:text="${file.name}"></td>
+                            <td>
+                                <a th:href="${file.path}" target="_blank" th:text="'Открыть ' + ${file.name}"></a>
+                            </td>
+                            <td>
+                                <img th:src="${file.path}" alt="Превью изображения" style="max-width: 100px; max-height: 100px;">
+                            </td>
+                        </tr>
+
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const fileList = document.getElementById('fileList');
 
-        const files = { id, name};
-
-        fileList.innerHTML = '';
-        files.forEach((file, index) => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${index + 1}</td>
-                <td>${file.name}</td>
-            `;
-            fileList.appendChild(row);
-        });
-    });
-</script>
 
 </body>
 </html>

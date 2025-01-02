@@ -45,4 +45,10 @@ public class Document {
     @NotNull
     private Applicant applicant;
 
+    public Document(String title, String pathToImage, TypesOfDocuments type, Applicant applicant) {
+        this.title = title;
+        this.pathToImage = pathToImage;
+        this.type = type;
+        this.applicant = applicant;
+    }
 }
