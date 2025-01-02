@@ -16,7 +16,9 @@ import ru.accept_applicant_documents.system.service.ApplicantService;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -90,8 +92,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/lk/applicant")
-    public String getAdminLkConcreteApplicant(@RequestParam("email") String applicantEmail, Model model)
-    {
+    public String getAdminLkConcreteApplicant(@RequestParam("email") String applicantEmail, Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Admin admin = adminService.findByEmail(email).get();
         model.addAttribute("admin", admin);
@@ -102,15 +103,18 @@ public class AdminController {
 
         List<Document> docs = documentRepo.findAllByApplicant(applicant);
 
-        List<String> documentPaths = new ArrayList<>();
+        List<Map<String, String>> documentDetails = new ArrayList<>();
         for (Document doc : docs) {
             File file = new File(doc.getPathToImage()); // Получаем файл по пути из документа
             if (file.exists()) {
-                documentPaths.add("/uploads/applicants/" + applicant.getId() + "/" + file.getName());
+                Map<String, String> fileInfo = new HashMap<>();
+                fileInfo.put("path", "/uploads/applicants/" + applicant.getId() + "/" + file.getName());
+                fileInfo.put("name", file.getName());
+                documentDetails.add(fileInfo);
             }
         }
 
-        model.addAttribute("docs", documentPaths);
+        model.addAttribute("files", documentDetails);
 
         return "admin-applicant";
     }
