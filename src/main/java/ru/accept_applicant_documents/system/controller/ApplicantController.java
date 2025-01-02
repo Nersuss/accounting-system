@@ -43,7 +43,7 @@ public class ApplicantController {
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
 
-        departmentRepo.
+        model.addAttribute("departments", departmentRepo.findAll());
 
         return "applicant-lk-application";
     }

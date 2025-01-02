@@ -14,6 +14,7 @@ import ru.accept_applicant_documents.system.model.Department;
 import ru.accept_applicant_documents.system.model.ExamResult;
 import ru.accept_applicant_documents.system.repository.AdminRepo;
 import ru.accept_applicant_documents.system.repository.ApplicantRepo;
+import ru.accept_applicant_documents.system.repository.DepartmentRepo;
 import ru.accept_applicant_documents.system.repository.ExamResultRepo;
 import ru.accept_applicant_documents.system.service.AdminService;
 import ru.accept_applicant_documents.system.service.ApplicantService;
@@ -41,6 +42,8 @@ public class 	SystemApplication implements CommandLineRunner {
 	AdminRepo adminRepo;
 	@Autowired
 	ExamResultRepo examResultRepo;
+	@Autowired
+	DepartmentRepo departmentRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
