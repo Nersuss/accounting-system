@@ -120,14 +120,14 @@
                     <form method="POST" action="/applicant/lk/submit" class="form-container">
 
                         <div class="mb-4">
-                            <label for="program" class="form-label">Направление:</label>
-                            <select id="program" name="program" class="form-select" required>
-                                <option value="">Выберите направление</option>
-                                <option value="Программирование">Программирование</option>
-                                <option value="Математика">Математика</option>
-                                <option value="Физика">Физика</option>
+                            <label for="program" class="form-label text-right" style="margin-left: 105px;">Направление:</label>
+                            <select id="program" name="program" class="form-select text-center" required>
+                                <option th:each="department : ${departments}"
+                                        th:value="${department.title}"
+                                        th:text="${department.title}"></option>
                             </select>
                         </div>
+
 
                         <div class="mb-4">
                             <label for="subject1" class="form-label">Предмет 1:</label>
