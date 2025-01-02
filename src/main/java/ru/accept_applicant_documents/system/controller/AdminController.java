@@ -124,9 +124,9 @@ public class AdminController {
     public String postAdminLkApplicant(@RequestParam("email") String applicantEmail,
                                        @RequestParam("status") String status) {
 
-        if (status == "ACCEPT")
+        if (status.equals("ACCEPT"))
             applicantService.setDocStatusByEmail(StatusesOfDocuments.VERIFIED, applicantEmail);
-        if (status == "REJECT")
+        if (status.equals("REJECT"))
             applicantService.setDocStatusByEmail(StatusesOfDocuments.INCORRECT, applicantEmail);
 
         return "redirect:/admin/lk/unchecked";
