@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
 import ru.accept_applicant_documents.system.model.Admin;
@@ -117,6 +118,12 @@ public class AdminController {
         model.addAttribute("files", documentDetails);
 
         return "admin-applicant";
+    }
+
+    @PostMapping("/admin/lk/applicant")
+    public String postAdminLkApplicant() {
+
+        return "redirect:/admin/lk/unchecked";
     }
 
 }

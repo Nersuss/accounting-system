@@ -21,10 +21,6 @@ public class MainController {
 
     @GetMapping("/")
     public String getMain() {
-        //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        //Applicant applicant = applicantService.findByEmail(authentication.getName()).get();
-        //model.addAttribute("email", applicant.getEmail());
-
         return "landing";
     }
 
@@ -35,13 +31,8 @@ public class MainController {
         if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("APPLICANT"))) {
             return "redirect:/applicant/lk/applications";
         } else if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
-            return "redirect:/admin/lk/incorrect";
+            return "redirect:/admin/lk/unchecked";
         }
-
-
-
         return "redirect:/";
     }
-
-
 }
