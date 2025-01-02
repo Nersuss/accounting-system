@@ -124,13 +124,13 @@
                     <a class="nav-link" href="/admin/lk/unchecked">Непроверенные абитуриенты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/lk/checked">Проверенные абитуриенты</a>
+                    <a class="nav-link" href="/admin/lk/verified">Проверенные абитуриенты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/lk/wrong">Абитуриенты с неправильными документами</a>
+                    <a class="nav-link" href="/admin/lk/incorrect">Абитуриенты с неправильными документами</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/applicant/lk/settings">Настройки</a>
+                    <a class="nav-link" href="/admin//lk/settings">Настройки</a>
                 </li>
             </ul>
         </div>
@@ -145,12 +145,13 @@
 
                 <div class="container mt-5 form-container">
                     <h2>Абитуриент: <span th:text="${applicant.email}"></span></h2>
+                    <h2 style="margin-top: 1rem">Подтверждение документов:</h2>
                     <div class="d-flex justify-content-center mt-4">
-                        <button type="button" class="btn btn-success me-2" id="accept-btn">Принять</button>
+                        <button type="button" class="btn btn-success me-2" id="accept-btn">Подтвердить</button>
                         <button type="button" class="btn btn-danger" id="reject-btn">Отклонить</button>
                     </div>
 
-                    <h2 id="label2">Предоставленные данные:</h2>
+                    <h2 id="label2">Поля документов:</h2>
 
                     <!-- Поля для ввода данных -->
                     <form>
@@ -178,23 +179,21 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Имя файла</th>
-                            <th>Ссылка</th>
+                            <th style="text-align: center">#</th>
+                            <th style="text-align: center">Ссылка для просмотра</th>
+                            <th style="text-align: center">Превью файла</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="file, iterStat : ${files}">
-                            <td th:text="${iterStat.count}"></td>
-                            <td th:text="${file.name}"></td>
-                            <td>
+                            <td style="text-align: center" th:text="${iterStat.count}"></td>
+                            <td style="text-align: center">
                                 <a th:href="${file.path}" target="_blank" th:text="'Открыть ' + ${file.name}"></a>
                             </td>
-                            <td>
-                                <img th:src="${file.path}" alt="Превью изображения" style="max-width: 100px; max-height: 100px;">
+                            <td style="text-align: center; vertical-align: middle;">
+                                <img th:src="${file.path}" alt="Превью изображения" style="max-width: 300px; max-height: 300px;">
                             </td>
                         </tr>
-
                         </tbody>
                     </table>
                 </div>

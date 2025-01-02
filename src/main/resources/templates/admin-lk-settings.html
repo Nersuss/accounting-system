@@ -112,11 +112,7 @@
                     <form method="POST" action="/admin/lk/edit/settings" class="text-center">
                         <div class="mb-4">
                             <label for="email" class="form-label">Почта:</label>
-                            <input type="email" id="email" name="email" class="form-control w-25 mx-auto">
-                        </div>
-                        <div class="mb-4">
-                            <label for="phone" class="form-label">Телефон:</label>
-                            <input type="tel" id="phone" name="phone" class="form-control w-25 mx-auto">
+                            <input type="email" id="email" name="email" class="form-control w-25 mx-auto" th:value="${admin.email}">
                         </div>
                         <div class="mb-4">
                             <label for="password" class="form-label">Старый пароль:</label>
@@ -129,15 +125,9 @@
                         <button type="submit" class="btn btn-success">Сохранить изменения</button>
                     </form>
                 </div>
-
-
-
             </div>
         </div>
     </div>
 </div>
-
-
-
 </body>
 </html>
