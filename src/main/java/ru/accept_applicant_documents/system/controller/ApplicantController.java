@@ -49,8 +49,8 @@ public class ApplicantController {
         return "applicant-lk-lists";
     }
 
-    @GetMapping("/applicant/lk/lists/concretelist")
-    public String getApplicantLkListsConcretelist(@RequestParam("code") Optional<String> code, Model model) {
+    @GetMapping("/applicant/lk/lists/list")
+    public String getApplicantLkListsList(@RequestParam("code") Optional<String> code, Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
@@ -63,8 +63,23 @@ public class ApplicantController {
             model.addAttribute("list", list);
         }
 
+        return "applicant-lk-list";
+    }
+    @GetMapping("/applicant/lk/applications/list")
+    public String getApplicantLkApplicationsList(@RequestParam("code") Optional<String> code, Model model) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Applicant applicant = applicantService.findByEmail(email).get();
+        model.addAttribute("applicant", applicant);
 
-        return "applicant-lk-lists-concretelist";
+        if (code.isPresent()) {
+
+            ShowListOfApplicants list = new ShowListOfApplicants();
+
+
+            model.addAttribute("list", list);
+        }
+
+        return "applicant-lk-list";
     }
 
     @GetMapping("/applicant/lk/settings")
