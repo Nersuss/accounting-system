@@ -53,6 +53,8 @@ public class 	SystemApplication implements CommandLineRunner {
 			adminRepo.save(new Admin(null, "admin@mail.ru", "Адольф",
 					bCryptPasswordEncoder.encode("12345678"), Roles.ADMIN));
 		}
+		if (departmentRepo.findById(1L).isEmpty())
+			init();
 	}
 
 	public void init() {
