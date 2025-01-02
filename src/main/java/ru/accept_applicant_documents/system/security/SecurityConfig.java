@@ -24,18 +24,19 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> {csrf.disable();
+                .csrf(csrf -> {
+                    csrf.disable();
                 })
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/login", "/register", "/", "/favicon.ico").permitAll();
+                    auth.requestMatchers("/register", "/", "/favicon.ico").permitAll();
+                    auth.requestMatchers("/login").not().authenticated();
                     auth.requestMatchers("/admin/**").hasAuthority(Roles.ADMIN.name());
                     auth.requestMatchers("/applicant/**").hasAuthority(Roles.APPLICANT.name());
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> form
                         .defaultSuccessUrl("/lk", true)
-                        .permitAll()
                 )
                 .userDetailsService(myUserDetailsService)
                 .httpBasic(Customizer.withDefaults());
