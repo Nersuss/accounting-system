@@ -35,7 +35,7 @@ public class MainController {
         if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("APPLICANT"))) {
             return "redirect:/applicant/lk/applications";
         } else if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
-            return "redirect:/admin/incorrect";
+            return "redirect:/admin/lk/incorrect";
         }
 
         return "redirect:/";
