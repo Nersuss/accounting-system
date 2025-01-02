@@ -55,7 +55,7 @@ public class ApplicantService {
         return examResult;
     }
 
-    public Document addApplicantDocument(Document document){
+    public Document addDocument(Document document){
         documentRepo.save(document);
         return document;
     }
