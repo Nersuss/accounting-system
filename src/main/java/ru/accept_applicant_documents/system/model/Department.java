@@ -9,7 +9,6 @@ import lombok.Setter;
 import ru.accept_applicant_documents.system.enums.AllSubjects;
 
 @Entity
-@Table
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,7 +16,6 @@ import ru.accept_applicant_documents.system.enums.AllSubjects;
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
     private String title;

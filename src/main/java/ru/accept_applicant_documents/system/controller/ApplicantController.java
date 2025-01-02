@@ -13,6 +13,7 @@ import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
 import ru.accept_applicant_documents.system.enums.TypesOfDocuments;
 import ru.accept_applicant_documents.system.model.Applicant;
 import ru.accept_applicant_documents.system.model.Document;
+import ru.accept_applicant_documents.system.repository.DepartmentRepo;
 import ru.accept_applicant_documents.system.service.ApplicantService;
 
 import java.io.File;
@@ -24,6 +25,9 @@ import java.util.Optional;
 public class ApplicantController {
     @Autowired
     ApplicantService applicantService;
+
+    @Autowired
+    DepartmentRepo departmentRepo;
 
     @GetMapping("/applicant/lk/applications")
     public String getApplicantLk(Model model) {
@@ -38,6 +42,9 @@ public class ApplicantController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
+
+        departmentRepo.
+
         return "applicant-lk-application";
     }
 

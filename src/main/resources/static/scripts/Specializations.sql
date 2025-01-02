@@ -1,4 +1,3 @@
-// PostgreSQL скрипт для создания таблицы и добавления данных
 CREATE TABLE departments (
                                  id SERIAL PRIMARY KEY,
                                  title TEXT NOT NULL,
