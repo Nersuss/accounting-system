@@ -84,6 +84,15 @@
             margin-bottom: 4rem;
         }
 
+        .message-spacing {
+            margin-top: 6rem; /* Отступ сверху */
+        }
+
+        .message-spacing-incorrect {
+            margin-top: 4rem; /* Отступ сверху */
+            margin-bottom: 3rem; /* Отступ сверху */
+        }
+
     </style>
 </head>
 <body>
@@ -121,9 +130,21 @@
         <div class="col-9">
             <div class="tab-content">
 
+                <div th:if="${status == 'VERIFIED'}" class="message-spacing">
+                    <h5 class="text-center text-success">Ваши документы подтверждены</h5>
+                </div>
+                <div th:if="${status == 'UNCHECKED'}" class="message-spacing">
+                    <h5 class="text-center text-warning">Ваши документы находятся на проверке</h5>
+                </div>
+                <div th:if="${status == 'INCORRECT'}" class="message-spacing-incorrect">
+                    <h5 class="text-center text-danger">Вы не подали документы или ваши документы не прошли проверку</h5>
+                </div>
+
                 <!-- Verification Tab -->
-                <div id="verification" class="tab-pane fade show active d-flex flex-column align-items-center mt-4 mb-4">
-                    <h2 class="text-center">Основные данные поступающего</h2>
+                <div th:if="${status != 'VERIFIED' && status != 'UNCHECKED'}"
+                     id="verification"
+                     class="tab-pane fade show active d-flex flex-column align-items-center mt-4 mb-4">
+                    <h5 class="text-center" style="margin-bottom: 2rem">Основные данные поступающего</h5>
                     <form method="POST" action="/applicant/lk/verification" class="w-50" enctype="multipart/form-data">
                         <div class="mb-4">
                             <label for="pasportpicture" class="form-label">Прикрепить изображение паспорта:</label>
@@ -213,7 +234,6 @@
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
