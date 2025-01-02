@@ -29,14 +29,6 @@ public class AdminController {
     @Autowired
     DocumentRepo documentRepo;
 
-    @GetMapping("/admin/lk")
-    public String getAdminLk(Model model)
-    {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        Admin admin = adminService.findByEmail(email).get();
-        model.addAttribute("admin", admin);
-        return "admin-lk";
-    }
     @GetMapping("/admin/lk/unchecked")
     public String getAdminUnchecked(Model model)
     {
