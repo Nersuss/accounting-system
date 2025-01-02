@@ -72,6 +72,7 @@ public class ApplicantController {
 
         return "applicant-lk-list";
     }
+
     @GetMapping("/applicant/lk/applications/list")
     public String getApplicantLkApplicationsList(@RequestParam("code") Optional<String> code, Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
