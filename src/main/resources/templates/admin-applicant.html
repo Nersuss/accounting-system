@@ -150,12 +150,12 @@
                         <form action="/admin/lk/applicant" method="POST" style="display: inline;">
                             <input type="hidden" name="email" th:value="${applicant.email}" />
                             <input type="hidden" name="status" value="ACCEPT"/>
-                            <button type="submit" class="btn btn-success me-2">Подтвердить</button>
+                            <button type="submit" class="btn btn-success me-2" id="accept-btn">Подтвердить</button>
                         </form>
                         <form action="/admin/lk/applicant" method="POST" style="display: inline;">
                             <input type="hidden" name="email" th:value="${applicant.email}"/>
                             <input type="hidden" name="status" value="REJECT"/>
-                            <button type="submit" class="btn btn-danger">Отклонить</button>
+                            <button type="submit" class="btn btn-danger" id="reject-btn">Отклонить</button>
                         </form>
                     </div>
 
