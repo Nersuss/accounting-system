@@ -5,12 +5,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
 import ru.accept_applicant_documents.system.model.Admin;
 import ru.accept_applicant_documents.system.model.Applicant;
+import ru.accept_applicant_documents.system.model.Document;
+import ru.accept_applicant_documents.system.repository.DocumentRepo;
 import ru.accept_applicant_documents.system.service.AdminService;
 import ru.accept_applicant_documents.system.service.ApplicantService;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +26,8 @@ public class AdminController {
     AdminService adminService;
     @Autowired
     ApplicantService applicantService;
+    @Autowired
+    DocumentRepo documentRepo;
 
     @GetMapping("/admin/lk")
     public String getAdminLk(Model model)
@@ -90,13 +97,30 @@ public class AdminController {
         return "admin-lk-settings";
     }
 
-    @GetMapping("/admin/lk/concreteapplicant")
-    public String getAdminLkConcreteApplicant(Model model)
+    @GetMapping("/admin/lk/applicant")
+    public String getAdminLkConcreteApplicant(@RequestParam("email") String applicantEmail, Model model)
     {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Admin admin = adminService.findByEmail(email).get();
         model.addAttribute("admin", admin);
-        return "admin-concreteapplicant";
+
+        Applicant applicant = applicantService.findByEmail(applicantEmail).get();
+
+        model.addAttribute("applicant", applicant);
+
+        List<Document> docs = documentRepo.findAllByApplicant(applicant);
+
+        List<String> documentPaths = new ArrayList<>();
+        for (Document doc : docs) {
+            File file = new File(doc.getPathToImage()); // Получаем файл по пути из документа
+            if (file.exists()) {
+                documentPaths.add("/uploads/applicants/" + applicant.getId() + "/" + file.getName());
+            }
+        }
+
+        model.addAttribute("docs", documentPaths);
+
+        return "admin-applicant";
     }
 
 }
