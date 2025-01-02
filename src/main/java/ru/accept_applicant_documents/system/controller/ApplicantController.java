@@ -80,6 +80,14 @@ public class ApplicantController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
+
+        if (applicant.getDocStatus().equals(StatusesOfDocuments.INCORRECT))
+            model.addAttribute("msg", "INCORRECT");
+        if (applicant.getDocStatus().equals(StatusesOfDocuments.VERIFIED))
+            model.addAttribute("msg", "VERIFIED");
+        if (applicant.getDocStatus().equals(StatusesOfDocuments.UNCHECKED))
+            model.addAttribute("msg", "UNCHECKED");
+
         return "applicant-lk-verification";
     }
 
