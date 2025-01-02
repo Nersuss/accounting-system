@@ -116,7 +116,7 @@ public class ApplicantController {
         snilspicture.transferTo(destinationFileSnils);
         educationCertificate.transferTo(destinationFileCertificate);
 
-        applicantService.addDocument("Паспорт", destinationFilePasport.getAbsolutePath(), TypesOfDocuments.PASSPORT, applicant);
+        applicantService.addDocument(new Document("Паспорт", destinationFilePasport.getAbsolutePath(), TypesOfDocuments.PASSPORT, applicant));
 
         applicantService.setDocStatusByEmail(StatusesOfDocuments.UNCHECKED, email);
 
