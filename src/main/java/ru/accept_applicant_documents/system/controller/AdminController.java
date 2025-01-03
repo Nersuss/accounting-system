@@ -12,6 +12,7 @@ import ru.accept_applicant_documents.system.model.Admin;
 import ru.accept_applicant_documents.system.model.Applicant;
 import ru.accept_applicant_documents.system.model.Document;
 import ru.accept_applicant_documents.system.repository.DocumentRepo;
+import ru.accept_applicant_documents.system.repository.SubjectRepo;
 import ru.accept_applicant_documents.system.service.AdminService;
 import ru.accept_applicant_documents.system.service.ApplicantService;
 
@@ -31,6 +32,8 @@ public class AdminController {
     ApplicantService applicantService;
     @Autowired
     DocumentRepo documentRepo;
+    @Autowired
+    SubjectRepo subjectRepo;
 
     @GetMapping("/admin/lk/unchecked")
     public String getAdminUnchecked(Model model)
@@ -111,6 +114,7 @@ public class AdminController {
             }
         }
         model.addAttribute("files", documentDetails);
+        model.addAttribute("subjects", subjectRepo.findAll());
         return "admin-applicant";
     }
 

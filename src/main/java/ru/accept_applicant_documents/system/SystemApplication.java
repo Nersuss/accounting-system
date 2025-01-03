@@ -8,14 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.accept_applicant_documents.system.enums.AllSubjects;
 import ru.accept_applicant_documents.system.enums.Roles;
 import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
-import ru.accept_applicant_documents.system.model.Admin;
-import ru.accept_applicant_documents.system.model.Applicant;
-import ru.accept_applicant_documents.system.model.Department;
-import ru.accept_applicant_documents.system.model.ExamResult;
-import ru.accept_applicant_documents.system.repository.AdminRepo;
-import ru.accept_applicant_documents.system.repository.ApplicantRepo;
-import ru.accept_applicant_documents.system.repository.DepartmentRepo;
-import ru.accept_applicant_documents.system.repository.ExamResultRepo;
+import ru.accept_applicant_documents.system.model.*;
+import ru.accept_applicant_documents.system.repository.*;
 import ru.accept_applicant_documents.system.service.AdminService;
 import ru.accept_applicant_documents.system.service.ApplicantService;
 
@@ -41,7 +35,7 @@ public class 	SystemApplication implements CommandLineRunner {
 	@Autowired
 	AdminRepo adminRepo;
 	@Autowired
-	ExamResultRepo examResultRepo;
+	SubjectRepo subjectRepo;
 	@Autowired
 	DepartmentRepo departmentRepo;
 
@@ -55,6 +49,8 @@ public class 	SystemApplication implements CommandLineRunner {
 		}
 		if (departmentRepo.findById(1L).isEmpty())
 			init();
+		if (subjectRepo.findById(1L).isEmpty())
+			initallsubjects();
 	}
 
 	public void init() {
@@ -202,5 +198,26 @@ public class 	SystemApplication implements CommandLineRunner {
 				new Department(null, "Право и экономика", "Юридического")
 		);
 		departmentRepo.saveAll(departments);
+	}
+	public void initallsubjects() {
+		List<Subject> allsubjects = Arrays.asList(
+				new Subject(null, "Математика (базовый уровень)"),
+				new Subject(null, "Математика (профильный уровень)"),
+				new Subject(null, "Русский язык"),
+				new Subject(null, "Физика"),
+				new Subject(null, "Химия"),
+				new Subject(null, "История"),
+				new Subject(null, "Обществознание"),
+				new Subject(null, "Информатика"),
+				new Subject(null, "Биология"),
+				new Subject(null, "География"),
+				new Subject(null, "Английский язык"),
+				new Subject(null, "Немецкий язык"),
+				new Subject(null, "Французский язык"),
+				new Subject(null, "Испанский язык"),
+				new Subject(null, "Китайский язык"),
+				new Subject(null, "Литература")
+		);
+		subjectRepo.saveAll(allsubjects);
 	}
 }
