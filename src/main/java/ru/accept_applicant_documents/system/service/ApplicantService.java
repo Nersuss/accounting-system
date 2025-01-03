@@ -24,7 +24,6 @@ public class ApplicantService {
     ApplicantRepo applicantRepo;
     @Autowired
     ExamResultRepo examResultRepo;
-
     @Autowired
     DocumentRepo documentRepo;
 
@@ -50,12 +49,12 @@ public class ApplicantService {
         return examResultRepo.findAllByApplicant(applicant);
     }
 
-    public ExamResult addApplicantExamResult(ExamResult examResult){
+    public ExamResult addApplicantExamResult(ExamResult examResult) {
         examResultRepo.save(examResult);
         return examResult;
     }
 
-    public Document addDocument(Document document){
+    public Document addDocument(Document document) {
         documentRepo.save(document);
         return document;
     }
@@ -64,13 +63,11 @@ public class ApplicantService {
         return applicantRepo.findById(id);
     }
 
-    public void setDocStatusByEmail(StatusesOfDocuments status, String email)
-    {
+    public void setDocStatusByEmail(StatusesOfDocuments status, String email) {
         applicantRepo.setDocStatus(status, email);
     }
 
-    public List<Applicant> findAllByDocStatus(StatusesOfDocuments status)
-    {
+    public List<Applicant> findAllByDocStatus(StatusesOfDocuments status) {
         return applicantRepo.findAllByDocStatus(status);
     }
 
