@@ -97,13 +97,9 @@ public class AdminController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Admin admin = adminService.findByEmail(email).get();
         model.addAttribute("admin", admin);
-
         Applicant applicant = applicantService.findByEmail(applicantEmail).get();
-
         model.addAttribute("applicant", applicant);
-
         List<Document> docs = documentRepo.findAllByApplicant(applicant);
-
         List<Map<String, String>> documentDetails = new ArrayList<>();
         for (Document doc : docs) {
             File file = new File(doc.getPathToImage()); // Получаем файл по пути из документа
@@ -114,9 +110,7 @@ public class AdminController {
                 documentDetails.add(fileInfo);
             }
         }
-
         model.addAttribute("files", documentDetails);
-
         return "admin-applicant";
     }
 
