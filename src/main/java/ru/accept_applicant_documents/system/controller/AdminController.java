@@ -116,15 +116,6 @@ public class AdminController {
         }
         model.addAttribute("files", documentDetails);
         model.addAttribute("subjects", subjectRepo.findAll());
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            String subjectsJson = objectMapper.writeValueAsString(subjectRepo.findAll());
-
-            model.addAttribute("subjectsJson", subjectsJson);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         return "admin-applicant";
     }
