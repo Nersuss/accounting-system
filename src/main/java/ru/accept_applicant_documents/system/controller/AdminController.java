@@ -1,5 +1,6 @@
 package ru.accept_applicant_documents.system.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -115,6 +116,16 @@ public class AdminController {
         }
         model.addAttribute("files", documentDetails);
         model.addAttribute("subjects", subjectRepo.findAll());
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String subjectsJson = objectMapper.writeValueAsString(subjectRepo.findAll());
+
+            model.addAttribute("subjectsJson", subjectsJson);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return "admin-applicant";
     }
 
