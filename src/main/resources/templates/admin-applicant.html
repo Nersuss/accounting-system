@@ -211,12 +211,23 @@
                             <div id="achievementsSection">
                                 <div class="achievement-group">
                                     <select name="achievementReason" class="form-select">
-                                        <option value="">Математика</option>
-                                        <option value="Олимпиада">Олимпиада</option>
-                                        <option value="Спорт">Спортивные достижения высокого уровня</option>
+                                        <option th:each="subjects : ${subjects}"
+                                                th:value="${subjects.title}"
+                                                th:text="${subjects.title}"></option>
                                     </select>
                                     <input type="number" name="achievementPoints" class="form-control" placeholder="Баллы" min="0">
                                     <button type="button" class="btn btn-outline-primary add-achievement">Ещё+</button>
+                                </div>
+                            </div>
+
+                            <!-- Скрытый шаблон -->
+                            <div id="achievementTemplate" class="d-none">
+                                <div class="achievement-group">
+                                    <select name="achievementReason" class="form-select">
+                                        <option th:each="subject : ${subjects}" th:value="${subject.title}" th:text="${subject.title}"></option>
+                                    </select>
+                                    <input type="number" name="achievementPoints" class="form-control" placeholder="Баллы" min="0">
+                                    <button type="button" class="btn btn-outline-danger remove-achievement">Удалить</button>
                                 </div>
                             </div>
                         </form>
@@ -243,26 +254,19 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const achievementsSection = document.getElementById('achievementsSection');
+        const template = document.getElementById('achievementTemplate');
 
         achievementsSection.addEventListener('click', function (e) {
             if (e.target.classList.contains('add-achievement')) {
-                const newGroup = document.createElement('div');
-                newGroup.className = 'achievement-group';
+                // Клонирование шаблона
+                const newGroup = template.querySelector('.achievement-group').cloneNode(true);
 
-                newGroup.innerHTML = `
-                    <select name="achievementReason" class="form-select">
-                        <option value="">Математика</option>
-                        <option value="Олимпиада">Олимпиада</option>
-                        <option value="Спорт">Спортивные достижения высокого уровня</option>
-                    </select>
-                    <input type="number" name="achievementPoints" class="form-control" placeholder="Баллы" min="0">
-                    <button type="button" class="btn btn-outline-danger remove-achievement">Удалить</button>
-                `;
-
+                // Вставка нового блока в конец секции
                 achievementsSection.appendChild(newGroup);
             }
 
             if (e.target.classList.contains('remove-achievement')) {
+                // Удаление блока
                 e.target.parentElement.remove();
             }
         });
