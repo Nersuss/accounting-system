@@ -105,6 +105,25 @@
             border-color: #218838;
         }
 
+        #achievementsSection .achievement-group {
+            display: flex;
+            align-items: center; /* Выравнивание по вертикали */
+            justify-content: flex-start; /* Расположение слева направо */
+            gap: 10px; /* Отступы между элементами */
+            margin-bottom: 10px; /* Отступ между группами */
+        }
+
+        #achievementsSection .form-select,
+        #achievementsSection .form-control {
+            width: 200px; /* Устанавливаем фиксированную ширину для более аккуратного внешнего вида */
+            flex-shrink: 0; /* Элементы не будут сжиматься */
+        }
+
+        #achievementsSection .btn {
+            flex-shrink: 0; /* Кнопки остаются фиксированного размера */
+        }
+
+
     </style>
 </head>
 <body>
@@ -144,20 +163,8 @@
                 </div>
 
                 <div class="container mt-5 form-container">
-                    <h2>Абитуриент: <span th:text="${applicant.email}"></span></h2>
-                    <h2 style="margin-top: 1rem">Подтверждение документов:</h2>
-                    <div class="d-flex justify-content-center mt-4">
-                        <form action="/admin/lk/applicant" method="POST" style="display: inline;">
-                            <input type="hidden" name="email" th:value="${applicant.email}" />
-                            <input type="hidden" name="status" value="ACCEPT"/>
-                            <button type="submit" class="btn btn-success me-2" id="accept-btn">Подтвердить</button>
-                        </form>
-                        <form action="/admin/lk/applicant" method="POST" style="display: inline;">
-                            <input type="hidden" name="email" th:value="${applicant.email}"/>
-                            <input type="hidden" name="status" value="REJECT"/>
-                            <button type="submit" class="btn btn-danger" id="reject-btn">Отклонить</button>
-                        </form>
-                    </div>
+                    <h5>Абитуриент: <span th:text="${applicant.email}"></span></h5>
+
 
                     <h2 id="label2">Поля документов:</h2>
 
@@ -177,17 +184,28 @@
                             <label for="PassportNumberInput" class="form-label">Номер паспорта</label>
                             <input type="text" class="form-control" id="PassportNumberInput" placeholder="Введите номер паспорта">
                         </div>
-                    </form>
 
-                    <div class="mb-3">
-                        <button type="submit" id="save-btn" class="btn btn-success">Сохранить</button>
-                    </div>
+                        <!-- Поля для ввода данных -->
+                        <label for="snilsInput" class="form-label">Баллы ЕГЭ:</label>
+                        <form>
+                            <div id="achievementsSection">
+                                <div class="achievement-group">
+                                    <select name="achievementReason" class="form-select">
+                                        <option value="">Математика</option>
+                                        <option value="Олимпиада">Олимпиада</option>
+                                        <option value="Спорт">Спортивные достижения высокого уровня</option>
+                                    </select>
+                                    <input type="number" name="achievementPoints" class="form-control" placeholder="Баллы" min="0">
+                                    <button type="button" class="btn btn-outline-primary add-achievement">Ещё+</button>
+                                </div>
+                            </div>
+                        </form>
 
                     <h2 class="mt-5">Предоставленные файлы:</h2>
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th style="text-align: center">#</th>
+                            <th style="text-align: center">№</th>
                             <th style="text-align: center">Ссылка для просмотра</th>
                             <th style="text-align: center">Превью файла</th>
                         </tr>
@@ -204,10 +222,53 @@
                         </tr>
                         </tbody>
                     </table>
+                        <h5 style="margin-top: 1rem">Подтверждение документов:</h5>
+                        <div class="d-flex justify-content-center mt-4">
+                            <form action="/admin/lk/applicant" method="POST" style="display: inline;">
+                                <input type="hidden" name="email" th:value="${applicant.email}" />
+                                <input type="hidden" name="status" value="ACCEPT"/>
+                                <button type="submit" class="btn btn-success me-2" id="accept-btn">Подтвердить</button>
+                            </form>
+                            <form action="/admin/lk/applicant" method="POST" style="display: inline;">
+                                <input type="hidden" name="email" th:value="${applicant.email}"/>
+                                <input type="hidden" name="status" value="REJECT"/>
+                                <button type="submit" class="btn btn-danger" id="reject-btn">Отклонить</button>
+                            </form>
+                        </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const achievementsSection = document.getElementById('achievementsSection');
+
+        achievementsSection.addEventListener('click', function (e) {
+            if (e.target.classList.contains('add-achievement')) {
+                const newGroup = document.createElement('div');
+                newGroup.className = 'achievement-group';
+
+                newGroup.innerHTML = `
+                    <select name="achievementReason" class="form-select">
+                        <option value="">Математика</option>
+                        <option value="Олимпиада">Олимпиада</option>
+                        <option value="Спорт">Спортивные достижения высокого уровня</option>
+                    </select>
+                    <input type="number" name="achievementPoints" class="form-control" placeholder="Баллы" min="0">
+                    <button type="button" class="btn btn-outline-danger remove-achievement">Удалить</button>
+                `;
+
+                achievementsSection.appendChild(newGroup);
+            }
+
+            if (e.target.classList.contains('remove-achievement')) {
+                e.target.parentElement.remove();
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
