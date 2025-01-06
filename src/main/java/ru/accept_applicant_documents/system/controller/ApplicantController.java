@@ -77,8 +77,8 @@ public class ApplicantController {
         return "paid-lists";
     }
 
-    @GetMapping("/applicant/lk/lists/list")
-    public String getApplicantLkListsList(@RequestParam("code") Optional<String> code, Model model) {
+    @GetMapping("/applicant/lk/list")
+    public String getApplicantLkList(@RequestParam("code") Optional<String> code, Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
