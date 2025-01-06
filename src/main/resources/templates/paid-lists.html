@@ -115,7 +115,7 @@
                         <tbody>
                         <tr th:each="department, iter : ${departments}">
                             <td>
-                                <a th:href="'/applicant/lk/lists/list?code=' + ${iter.index + 1}" th:text="${department.title}"></a>
+                                <a th:href="'/applicant/lk/choice/list?code=' + ${iter.index + 1}" th:text="${department.title}"></a>
                             </td>
                             <td th:text="${iter.index + 1}"></td>
                             <td>80</td>
