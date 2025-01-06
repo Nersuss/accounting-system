@@ -21,4 +21,6 @@ public class Department {
 
     private  String faculty;
 
+    private String code;
+
 }
