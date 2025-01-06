@@ -189,62 +189,58 @@
 
                     <h5 id="label2" style="margin-top: 1rem">Поля документов:</h5>
                     <!-- Поля для ввода данных -->
-                    <form>
+                    <form action="/admin/lk/applicant" method="POST">
+                        <input type="hidden" name="email" th:value="${applicant.email}" />
+
                         <div class="mb-3">
                             <label for="snilsInput" class="form-label">СНИЛС</label>
-                            <input type="text" class="form-control" id="snilsInput" placeholder="Введите номер СНИЛС">
+                            <input type="text" class="form-control" id="snilsInput" name="snils" placeholder="Введите номер СНИЛС">
                         </div>
 
                         <div class="mb-3">
                             <label for="PassporSeriestInput" class="form-label">Серия паспорта</label>
-                            <input type="text" class="form-control" id="PassporSeriestInput" placeholder="Введите серию паспорта">
+                            <input type="text" class="form-control" id="PassporSeriestInput" name="passportSeries" placeholder="Введите серию паспорта">
                         </div>
 
                         <div class="mb-3">
                             <label for="PassportNumberInput" class="form-label">Номер паспорта</label>
-                            <input type="text" class="form-control" id="PassportNumberInput" placeholder="Введите номер паспорта">
+                            <input type="text" class="form-control" id="PassportNumberInput" name="passportNumber" placeholder="Введите номер паспорта">
                         </div>
 
-                        <!-- Поля для ввода данных -->
                         <label for="snilsInput" class="form-label">Баллы ЕГЭ:</label>
-                        <form>
-                            <div id="achievementsSection">
-                                <div class="achievement-group">
-                                    <select name="achievementReason" class="form-select">
-                                        <option th:each="subjects : ${subjects}"
-                                                th:value="${subjects.title}"
-                                                th:text="${subjects.title}"></option>
-                                    </select>
-                                    <input type="number" name="achievementPoints" class="form-control" placeholder="Баллы" min="0">
-                                    <button type="button" class="btn btn-outline-primary add-achievement">Ещё+</button>
-                                </div>
+                        <div id="achievementsSection">
+                            <div class="achievement-group">
+                                <select name="subjects[]" class="form-select">
+                                    <option th:each="subjects : ${subjects}"
+                                            th:value="${subjects.title}"
+                                            th:text="${subjects.title}"></option>
+                                </select>
+                                <input type="number" name="points[]" class="form-control" placeholder="Баллы" min="0">
+                                <button type="button" class="btn btn-outline-primary add-achievement">Ещё+</button>
                             </div>
-
-                            <!-- Скрытый шаблон -->
-                            <div id="achievementTemplate" class="d-none">
-                                <div class="achievement-group">
-                                    <select name="achievementReason" class="form-select">
-                                        <option th:each="subject : ${subjects}" th:value="${subject.title}" th:text="${subject.title}"></option>
-                                    </select>
-                                    <input type="number" name="achievementPoints" class="form-control" placeholder="Баллы" min="0">
-                                    <button type="button" class="btn btn-outline-danger remove-achievement">Удалить</button>
-                                </div>
-                            </div>
-                        </form>
-
-                        <h5 style="margin-top: 3rem">Подтверждение документов:</h5>
-                        <div class="d-flex justify-content-center mt-4">
-                            <form action="/admin/lk/applicant" method="POST" style="display: inline;">
-                                <input type="hidden" name="email" th:value="${applicant.email}" />
-                                <input type="hidden" name="status" value="ACCEPT"/>
-                                <button type="submit" class="btn btn-success me-2" id="accept-btn">Подтвердить</button>
-                            </form>
-                            <form action="/admin/lk/applicant" method="POST" style="display: inline;">
-                                <input type="hidden" name="email" th:value="${applicant.email}"/>
-                                <input type="hidden" name="status" value="REJECT"/>
-                                <button type="submit" class="btn btn-danger" id="reject-btn">Отклонить</button>
-                            </form>
                         </div>
+
+                        <div id="achievementTemplate" class="d-none">
+                            <div class="achievement-group">
+                                <select name="subjects[]" class="form-select">
+                                    <option th:each="subject : ${subjects}" th:value="${subject.title}" th:text="${subject.title}"></option>
+                                </select>
+                                <input type="number" name="points[]" class="form-control" placeholder="Баллы" min="0">
+                                <button type="button" class="btn btn-outline-danger remove-achievement">Удалить</button>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <input type="hidden" name="status" value="ACCEPT" />
+                            <button type="submit" class="btn btn-success me-2" id="accept-btn">Подтвердить</button>
+                        </div>
+                    </form>
+
+                    <form action="/admin/lk/applicant" method="POST" style="display: inline;">
+                        <input type="hidden" name="email" th:value="${applicant.email}" />
+                        <input type="hidden" name="status" value="REJECT" />
+                        <button type="submit" class="btn btn-danger" id="reject-btn">Отклонить</button>
+                    </form>
                 </div>
             </div>
         </div>
