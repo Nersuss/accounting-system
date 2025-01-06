@@ -45,7 +45,7 @@
         }
 
         .form-container p {
-            color: red;
+            color: black;
             font-size: 0.9rem;
             margin-top: -0.5rem;
             margin-bottom: 1rem;
@@ -95,7 +95,7 @@
         <input type="tel" th:field="*{phone}" />
         <p th:if="${#fields.hasErrors('phone')}" th:errorclass="error" th:errors="*{phone}"></p>
 
-        <button type="submit">Зарегистрироваться</button>
+        <button type="submit" style="margin-top: 1rem; margin-bottom: 1rem">Зарегистрироваться</button>
     </form>
     <a th:href="@{/login}">Вход</a>
 </div>
