@@ -66,7 +66,13 @@
         label, .form-check-label {
             line-height: 1.8;
         }
+
+         .checkbox-cell {
+             text-align: center; /* Горизонтальное центрирование */
+             vertical-align: middle; /* Вертикальное центрирование */
+         }
     </style>
+
 </head>
 <body>
 
@@ -88,7 +94,7 @@
                     <a class="nav-link" href="/applicant/lk/application">Подача заявления</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link d-flex align-items-center" href="/applicant/lk/verification">Верификация</a>
+                    <a class="nav-link d-flex align-items-center" href="/applicant/lk/verification">Верификация</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/applicant/lk/choice">Все списки</a>
@@ -105,9 +111,11 @@
                 <!-- Lists Tab -->
                 <div id="lists" class="tab-pane fade show active mt-4 mb-4">
                     <h5 class="text-center" style="margin-bottom: 2rem">Ваши заявления</h5>
+                    <h6 class="text-center" style="margin-bottom: 2rem">Пометьте выбранное для подачи оригинала направление</h6>
                     <table class="table table-bordered table-striped">
                         <thead class="table-light">
                         <tr>
+                            <th>Выбрать</th>
                             <th>Направление</th>
                             <th>Код</th>
                             <th>Набор мест</th>
@@ -115,16 +123,19 @@
                         </thead>
                         <tbody>
                         <tr>
+                            <td class="checkbox-cell"><input type="radio" name="direction" value="09.03.01"></td>
                             <td><a href="/applicant/lk/list?code=09.03.01">Информатика и вычислительная техника</a></td>
                             <td>09.03.01</td>
                             <td>50</td>
                         </tr>
                         <tr>
+                            <td class="checkbox-cell"><input type="radio" name="direction" value="01.03.02"></td>
                             <td><a href="/applicant/lk/list?code=01.03.02">Прикладная математика</a></td>
                             <td>01.03.02</td>
                             <td>30</td>
                         </tr>
                         <tr>
+                            <td class="checkbox-cell"><input type="radio" name="direction" value="38.03.01"></td>
                             <td><a href="/applicant/lk/list?code=38.03.01">Экономика</a></td>
                             <td>38.03.01</td>
                             <td>25</td>
