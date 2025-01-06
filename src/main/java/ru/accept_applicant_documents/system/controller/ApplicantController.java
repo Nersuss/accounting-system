@@ -181,4 +181,9 @@ public class ApplicantController {
         return "redirect:/applicant/lk/applications";
     }
 
+    @PostMapping("/applicant/lk/application")
+    public String postApplicantLkApplication()
+    {
+        return "redirect:/applicant/lk/applications";
+    }
 }
