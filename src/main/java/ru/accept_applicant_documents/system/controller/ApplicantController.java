@@ -48,12 +48,33 @@ public class ApplicantController {
         return "applicant-lk-application";
     }
 
-    @GetMapping("/applicant/lk/lists")
-    public String getApplicantLkLists(Model model) {
+    @GetMapping("/applicant/lk/choice")
+    public String getApplicantLkChoice(Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
-        return "applicant-lk-lists";
+
+        return "applicant-lk-choice";
+    }
+
+    @GetMapping("/applicant/lk/choice/budget-lists")
+    public String getApplicantLkBudget(Model model) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Applicant applicant = applicantService.findByEmail(email).get();
+        model.addAttribute("applicant", applicant);
+        model.addAttribute("departments", departmentRepo.findAll());
+
+        return "budget-lists";
+    }
+
+    @GetMapping("/applicant/lk/choice/paid-lists")
+    public String getApplicantLkPaid(Model model) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Applicant applicant = applicantService.findByEmail(email).get();
+        model.addAttribute("applicant", applicant);
+        model.addAttribute("departments", departmentRepo.findAll());
+
+        return "paid-lists";
     }
 
     @GetMapping("/applicant/lk/lists/list")
