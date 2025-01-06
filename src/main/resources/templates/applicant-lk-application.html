@@ -129,54 +129,40 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="subject1" class="form-label">Предмет 1:</label>
-                            <select id="subject1" name="subject1" class="form-select" required>
-                                <option value="">Выберите предмет</option>
-                                <option value="Математика">Математика</option>
-                                <option value="Физика">Физика</option>
-                                <option value="Информатика">Информатика</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="subject2" class="form-label">Предмет 2:</label>
-                            <select id="subject2" name="subject2" class="form-select" required>
-                                <option value="">Выберите предмет</option>
-                                <option value="Математика">Математика</option>
-                                <option value="Физика">Физика</option>
-                                <option value="Информатика">Информатика</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="subject3" class="form-label">Предмет 3:</label>
-                            <select id="subject3" name="subject3" class="form-select" required>
-                                <option value="">Выберите предмет</option>
-                                <option value="Математика">Математика</option>
-                                <option value="Физика">Физика</option>
-                                <option value="Информатика">Информатика</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="subject4" class="form-label">Предмет 4:</label>
-                            <select id="subject4" name="subject4" class="form-select" required>
-                                <option value="">Выберите предмет</option>
-                                <option value="Математика">Математика</option>
-                                <option value="Физика">Физика</option>
-                                <option value="Информатика">Информатика</option>
-                            </select>
+                            <label class="form-label">Предметы ЭГЕ:</label>
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-light">
+                                <tr>
+                                    <th>Экзамен</th>
+                                    <th>Балл</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="subject, iter : ${subjects}">
+                                    <td>
+                                        <a th:text="${subject.subject.title}"></a>
+                                    </td>
+                                    <td>
+                                        <a th:text="${subject.score}"></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
 
                         <div class="mb-4">
                             <label class="form-label" style="margin-right: 40px; margin-top: 1rem">Форма обучения:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" id="fulltime" name="studyForm" value="Очное">
-                                <label class="form-check-label" for="fulltime">Очное</label>
+                                <label class="form-check-label" for="fulltime">Очная</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" id="parttime" name="studyForm" value="Заочное">
-                                <label class="form-check-label" for="parttime">Заочное</label>
+                                <label class="form-check-label" for="parttime">Заочная</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="fulltimeandcorespondence" name="studyForm" value="Заочное">
+                                <label class="form-check-label" for="fulltimeandcorespondence">Очно-заочная</label>
                             </div>
                         </div>
 
