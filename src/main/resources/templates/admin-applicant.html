@@ -123,6 +123,12 @@
             flex-shrink: 0; /* Кнопки остаются фиксированного размера */
         }
 
+        .btn-action {
+            width: 200px; /* Задаем одинаковую ширину */
+            display: block; /* Убираем inline-стиль, чтобы кнопки занимали всю ширину */
+            text-align: center; /* Центрируем текст */
+        }
+
     </style>
 </head>
 <body>
@@ -227,6 +233,7 @@
                         <div id="achievementTemplate" class="d-none">
                             <div class="achievement-group">
                                 <select name="subjects[]" class="form-select">
+                                    <option value="" disabled selected>Выберите предмет</option>
                                     <option th:each="subject : ${subjects}" th:value="${subject.title}" th:text="${subject.title}"></option>
                                 </select>
                                 <input type="number" name="points[]" class="form-control" placeholder="Баллы" min="0">
@@ -234,16 +241,17 @@
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-center mt-4">
+                        <div class="d-flex justify-content-center" style="width: 100%;">
                             <input type="hidden" name="status" value="ACCEPT" />
-                            <button style="margin-top: 1.5rem" type="submit" class="btn btn-success me-2" id="accept-btn">Подтвердить</button>
+                            <button style="margin-top: 1.5rem" type="submit" class="btn btn-success btn-action me-2" id="accept-btn">Подтвердить</button>
                         </div>
                     </form>
 
-                    <form class="d-flex justify-content-center" action="/admin/lk/applicant" method="POST" style="display: inline;">
-                        <input type="hidden" name="email" th:value="${applicant.email}" />
+                    <form action="/admin/lk/applicant" method="POST" style="width: 100%;">
+                        <div class="d-flex justify-content-center">
                         <input type="hidden" name="status" value="REJECT" />
-                        <button type="submit" class="btn btn-danger" id="reject-btn">Отклонить</button>
+                        <button type="submit" style="margin-right: 7px" class="btn btn-danger btn-action">Отклонить</button>
+                        </div>
                     </form>
                 </div>
             </div>
