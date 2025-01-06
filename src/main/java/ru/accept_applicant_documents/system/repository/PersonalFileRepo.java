@@ -14,6 +14,6 @@ public interface PersonalFileRepo extends JpaRepository<PersonalFile, Long> {
 
     Optional<PersonalFile> findById(Long id);
 
-
+    Optional<PersonalFile> findByApplicant(Applicant applicant);
 
 }

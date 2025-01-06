@@ -31,6 +31,10 @@ public class PersonalFileService { //***Deprecated
         return personalFileRepo.findById(id);
     }
 
+    public Optional<PersonalFile> findByApplicant(Applicant applicant)
+    {
+        return personalFileRepo.findByApplicant(applicant);
+    }
 
 
 }

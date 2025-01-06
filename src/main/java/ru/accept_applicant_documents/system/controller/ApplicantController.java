@@ -14,13 +14,17 @@ import ru.accept_applicant_documents.system.enums.TypesOfDocuments;
 import ru.accept_applicant_documents.system.model.Applicant;
 import ru.accept_applicant_documents.system.model.Document;
 import ru.accept_applicant_documents.system.model.ExamResult;
+import ru.accept_applicant_documents.system.model.Order;
 import ru.accept_applicant_documents.system.repository.DepartmentRepo;
 import ru.accept_applicant_documents.system.repository.ExamResultRepo;
+import ru.accept_applicant_documents.system.repository.OrderRepo;
 import ru.accept_applicant_documents.system.service.ApplicantService;
+import ru.accept_applicant_documents.system.service.PersonalFileService;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +38,10 @@ public class ApplicantController {
 
     @Autowired
     ExamResultRepo examResultRepo;
+//    @Autowired
+//    OrderRepo orderRepo;
+    @Autowired
+    PersonalFileService personalFileService;
 
     @GetMapping("/applicant/lk/applications")
     public String getApplicantLk(Model model) {
@@ -182,8 +190,18 @@ public class ApplicantController {
     }
 
     @PostMapping("/applicant/lk/application")
-    public String postApplicantLkApplication()
-    {
+    public String postApplicantLkApplication(
+            @RequestParam("program") String program,
+            @RequestParam("studyForm") String studyForm,
+            @RequestParam("studyType") String studyType) {
+
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Applicant applicant = applicantService.findByEmail(email).get();
+
+        //orderRepo.save(new Order(null, LocalDateTime.now(), false, personalFileService.findByApplicant(applicant), ))
+
+
         return "redirect:/applicant/lk/applications";
     }
+
 }
