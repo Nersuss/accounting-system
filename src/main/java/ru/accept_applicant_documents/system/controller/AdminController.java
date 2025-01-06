@@ -12,10 +12,12 @@ import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
 import ru.accept_applicant_documents.system.model.Admin;
 import ru.accept_applicant_documents.system.model.Applicant;
 import ru.accept_applicant_documents.system.model.Document;
+import ru.accept_applicant_documents.system.model.PersonalFile;
 import ru.accept_applicant_documents.system.repository.DocumentRepo;
 import ru.accept_applicant_documents.system.repository.SubjectRepo;
 import ru.accept_applicant_documents.system.service.AdminService;
 import ru.accept_applicant_documents.system.service.ApplicantService;
+import ru.accept_applicant_documents.system.service.PersonalFileService;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,6 +37,8 @@ public class AdminController {
     DocumentRepo documentRepo;
     @Autowired
     SubjectRepo subjectRepo;
+    @Autowired
+    PersonalFileService personalFileService;
 
     @GetMapping("/admin/lk/unchecked")
     public String getAdminUnchecked(Model model)
@@ -122,10 +126,14 @@ public class AdminController {
 
     @PostMapping("/admin/lk/applicant")
     public String postAdminLkApplicant(@RequestParam("email") String applicantEmail,
-                                       @RequestParam("status") String status) {
+                                       @RequestParam("status") String status) throws InterruptedException {
 
         if (status.equals("ACCEPT"))
+        {
             applicantService.setDocStatusByEmail(StatusesOfDocuments.VERIFIED, applicantEmail);
+            Thread.sleep(50L);
+            //personalFileService.createNewPersonalFile(new PersonalFile(null, rand, 0, applicantService.findByEmail(applicantEmail).get()));
+        }
         if (status.equals("REJECT"))
             applicantService.setDocStatusByEmail(StatusesOfDocuments.INCORRECT, applicantEmail);
 
