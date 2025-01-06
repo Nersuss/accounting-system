@@ -232,11 +232,11 @@
 
                         <div id="achievementTemplate" class="d-none">
                             <div class="achievement-group">
-                                <select name="subjects[]" class="form-select">
+                                <select name="subjects[]" class="form-select" disabled>
                                     <option value="" disabled selected>Выберите предмет</option>
                                     <option th:each="subject : ${subjects}" th:value="${subject.title}" th:text="${subject.title}"></option>
                                 </select>
-                                <input type="number" name="points[]" class="form-control" placeholder="Баллы" min="0">
+                                <input type="number" name="points[]" class="form-control" placeholder="Баллы" min="0" disabled>
                                 <button type="button" class="btn btn-outline-danger remove-achievement">Удалить</button>
                             </div>
                         </div>
@@ -269,6 +269,9 @@
                 // Клонирование шаблона
                 const newGroup = template.querySelector('.achievement-group').cloneNode(true);
 
+                // Удаление атрибута disabled из клонированных элементов
+                newGroup.querySelectorAll('select, input').forEach(el => el.disabled = false);
+
                 // Вставка нового блока в конец секции
                 achievementsSection.appendChild(newGroup);
             }
@@ -279,6 +282,7 @@
             }
         });
     });
+
 </script>
 
 </body>
