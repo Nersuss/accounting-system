@@ -13,12 +13,15 @@ import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
 import ru.accept_applicant_documents.system.enums.TypesOfDocuments;
 import ru.accept_applicant_documents.system.model.Applicant;
 import ru.accept_applicant_documents.system.model.Document;
+import ru.accept_applicant_documents.system.model.ExamResult;
 import ru.accept_applicant_documents.system.repository.DepartmentRepo;
+import ru.accept_applicant_documents.system.repository.ExamResultRepo;
 import ru.accept_applicant_documents.system.service.ApplicantService;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -28,6 +31,9 @@ public class ApplicantController {
 
     @Autowired
     DepartmentRepo departmentRepo;
+
+    @Autowired
+    ExamResultRepo examResultRepo;
 
     @GetMapping("/applicant/lk/applications")
     public String getApplicantLk(Model model) {
@@ -44,6 +50,8 @@ public class ApplicantController {
         model.addAttribute("applicant", applicant);
 
         model.addAttribute("departments", departmentRepo.findAll());
+        //List<ExamResult> ll = examResultRepo.findAllByApplicant(applicant);
+        model.addAttribute("subjects", examResultRepo.findAllByApplicant(applicant));
 
         return "applicant-lk-application";
     }
