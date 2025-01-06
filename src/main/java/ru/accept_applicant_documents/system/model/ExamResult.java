@@ -3,7 +3,6 @@ package ru.accept_applicant_documents.system.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import ru.accept_applicant_documents.system.enums.AllSubjects;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -28,8 +27,8 @@ public class ExamResult {
     private LocalDate date;
     
     @NotNull
-    @Enumerated(EnumType.STRING)
-    private AllSubjects subject;
+    @ManyToOne
+    private Subject subject;
 
     @ManyToOne
     @NotNull

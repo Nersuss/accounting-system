@@ -16,7 +16,6 @@ import ru.accept_applicant_documents.system.dto.CreatePersonalFileDto;
 import ru.accept_applicant_documents.system.dto.DocumentApplicantDto;
 import ru.accept_applicant_documents.system.dto.ExamResultApplicantDto;
 import ru.accept_applicant_documents.system.dto.RegisterApplicantDto;
-import ru.accept_applicant_documents.system.enums.AllSubjects;
 import ru.accept_applicant_documents.system.model.Applicant;
 import ru.accept_applicant_documents.system.model.Document;
 import ru.accept_applicant_documents.system.model.ExamResult;

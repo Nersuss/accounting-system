@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.accept_applicant_documents.system.enums.AllSubjects;
-
 
 @Entity
 @Table
@@ -24,8 +22,8 @@ public class SubjectOfDepartment {
     private int positionOfSubject;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
-    private AllSubjects subject;
+    @ManyToOne
+    private Subject subject;
 
     @ManyToOne
     @NotNull

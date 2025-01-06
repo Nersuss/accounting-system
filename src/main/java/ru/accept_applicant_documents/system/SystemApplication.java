@@ -5,7 +5,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import ru.accept_applicant_documents.system.enums.AllSubjects;
 import ru.accept_applicant_documents.system.enums.Roles;
 import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
 import ru.accept_applicant_documents.system.model.*;
