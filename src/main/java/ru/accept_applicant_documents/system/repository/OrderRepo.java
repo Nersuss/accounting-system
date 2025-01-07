@@ -22,6 +22,12 @@ public interface OrderRepo extends JpaRepository<Order, Long> {
 
     @Transactional
     @Modifying
+    @Query("update Order o set o.assent = ?1 where o.personalFile = ?2")
+    int setAssentByPersonalFile(boolean assent, PersonalFile personalFile);
+
+
+    @Transactional
+    @Modifying
     @Query("update Order o set o.assent = ?1 where o.personalFile = ?2 and o.competitionGroup = ?3")
-    int setAssent(boolean assent, PersonalFile personalFile, CompetitionGroup competitionGroup);
+    int setAssentByPersonalFileAndCompetitionGroup(boolean assent, PersonalFile personalFile, CompetitionGroup competitionGroup);
 }

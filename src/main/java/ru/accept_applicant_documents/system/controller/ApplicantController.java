@@ -69,7 +69,8 @@ public class ApplicantController {
         Applicant applicant = applicantService.findByEmail(email).get();
         //model.addAttribute("applicant", applicant);
 
-        orderRepo.setAssent(true, personalFileService.findByApplicant(applicant).get(),
+        orderRepo.setAssentByPersonalFile(false, personalFileService.findByApplicant(applicant).get());
+        orderRepo.setAssentByPersonalFileAndCompetitionGroup(true, personalFileService.findByApplicant(applicant).get(),
                 competitionGroupRepo.findById(competitionGroupId).get());
 
         return "redirect:/applicant/lk/applications";
