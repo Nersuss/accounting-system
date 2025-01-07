@@ -118,35 +118,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>123-456-789 01</td>
-                            <td>001234</td>
-                            <td>1</td>
-                            <td>85, 90, 78</td>
-                            <td>253</td>
-                            <td>Да</td>
-                            <td>Да</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>987-654-321 02</td>
-                            <td>001235</td>
-                            <td>2</td>
-                            <td>88, 76, 80</td>
-                            <td>244</td>
-                            <td>Нет</td>
-                            <td>Нет</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>456-789-123 03</td>
-                            <td>001236</td>
-                            <td>1</td>
-                            <td>90, 85, 88</td>
-                            <td>263</td>
-                            <td>Да</td>
-                            <td>Да</td>
+                        <tr th:each="list : ${list}">
+                            <td th:text="${list.id}"></td>
+                            <td th:text="${list.SNILS}"></td>
+                            <td th:text="${list.registrationNumber}"></td>
+                            <td th:text="${list.priority}"></td>
+                            <td th:text="${list.scoresBtExams}"></td>
+                            <td th:text="${list.summaryScore}"></td>
+                            <td th:text="${list.presenceOfAdvantages}"></td>
+                            <td th:text="${list.presenceOfOriginal}"></td>
                         </tr>
                         </tbody>
                     </table>
