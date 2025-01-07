@@ -27,4 +27,5 @@ public interface ApplicantRepo extends JpaRepository<Applicant, Long> {
     List<Applicant> findAllByDocStatus(StatusesOfDocuments status);
 
 
+
 }

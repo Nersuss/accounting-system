@@ -11,13 +11,8 @@ import ru.accept_applicant_documents.system.dto.DocumentApplicantDto;
 import ru.accept_applicant_documents.system.dto.ShowListOfApplicants;
 import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
 import ru.accept_applicant_documents.system.enums.TypesOfDocuments;
-import ru.accept_applicant_documents.system.model.Applicant;
-import ru.accept_applicant_documents.system.model.Document;
-import ru.accept_applicant_documents.system.model.ExamResult;
-import ru.accept_applicant_documents.system.model.Order;
-import ru.accept_applicant_documents.system.repository.DepartmentRepo;
-import ru.accept_applicant_documents.system.repository.ExamResultRepo;
-import ru.accept_applicant_documents.system.repository.OrderRepo;
+import ru.accept_applicant_documents.system.model.*;
+import ru.accept_applicant_documents.system.repository.*;
 import ru.accept_applicant_documents.system.service.ApplicantService;
 import ru.accept_applicant_documents.system.service.PersonalFileService;
 
@@ -38,10 +33,14 @@ public class ApplicantController {
 
     @Autowired
     ExamResultRepo examResultRepo;
-//    @Autowired
-//    OrderRepo orderRepo;
+    @Autowired
+    OrderRepo orderRepo;
     @Autowired
     PersonalFileService personalFileService;
+    @Autowired
+    CompetitionGroupRepo competitionGroupRepo;
+    @Autowired
+    SubjectOfDepartmentRepo subjectOfDepartmentRepo;
 
     @GetMapping("/applicant/lk/applications")
     public String getApplicantLk(Model model) {
@@ -198,7 +197,15 @@ public class ApplicantController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
 
-        //orderRepo.save(new Order(null, LocalDateTime.now(), false, personalFileService.findByApplicant(applicant), ))
+        List<ExamResult> applicantExams = examResultRepo.findAllByApplicant(applicant);
+
+        Department department = departmentRepo.findByTitle(program);
+
+        List<SubjectOfDepartment> subjectsOfDepartments = subjectOfDepartmentRepo.findAllByDepartment(department);
+
+
+//                orderRepo.save(new Order(null, LocalDateTime.now(), false, personalFileService.findByApplicant(applicant).get(),
+//                competitionGroupRepo.findByTitle(program + "-" + studyForm + "-" + studyType)));
 
 
         return "redirect:/applicant/lk/applications";

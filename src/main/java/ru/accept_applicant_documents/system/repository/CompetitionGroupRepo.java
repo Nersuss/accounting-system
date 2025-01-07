@@ -6,4 +6,5 @@ import ru.accept_applicant_documents.system.model.CompetitionGroup;
 
 @Repository
 public interface CompetitionGroupRepo extends JpaRepository<CompetitionGroup, Long> {
+    CompetitionGroup findByTitle(String title);
 }
