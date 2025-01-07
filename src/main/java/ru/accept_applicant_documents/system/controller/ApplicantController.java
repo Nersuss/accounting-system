@@ -67,7 +67,7 @@ public class ApplicantController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
-        List<Order> orders = orderRepo.findByPersonalFile(personalFileService.findByApplicant(applicant).get());
+        List<Order> orders = orderRepo.findAllByPersonalFile(personalFileService.findByApplicant(applicant).get());
 
         model.addAttribute("orders", orders);
 
