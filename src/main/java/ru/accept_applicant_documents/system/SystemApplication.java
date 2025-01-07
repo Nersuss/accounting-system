@@ -302,16 +302,16 @@ public class SystemApplication implements CommandLineRunner {
     public void initSubjectOfDepartments() {
         List<SubjectOfDepartment> SubjectsOfDepartments = Arrays.asList(
                 // "Биологии" - "Физико химическая биология"
-                new SubjectOfDepartment(null, 2, subjectRepo.findByTitle("Русский язык"), departmentRepo.findByTitle("Физико химическая биология")),
-                new SubjectOfDepartment(null, 1, subjectRepo.findByTitle("Математика (базовый уровень)"), departmentRepo.findByTitle("Физико химическая биология")),
-                new SubjectOfDepartment(null, 1, subjectRepo.findByTitle("Биология"), departmentRepo.findByTitle("Физико химическая биология")),
-                new SubjectOfDepartment(null, 1, subjectRepo.findByTitle("Химия"), departmentRepo.findByTitle("Физико химическая биология")),
+                new SubjectOfDepartment(null, 1, subjectRepo.findByTitle("Русский язык"), departmentRepo.findByTitle("Физико химическая биология")),
+                new SubjectOfDepartment(null, 2, subjectRepo.findByTitle("Математика (базовый уровень)"), departmentRepo.findByTitle("Физико химическая биология")),
+                new SubjectOfDepartment(null, 3, subjectRepo.findByTitle("Биология"), departmentRepo.findByTitle("Физико химическая биология")),
+                new SubjectOfDepartment(null, 3, subjectRepo.findByTitle("Химия"), departmentRepo.findByTitle("Физико химическая биология")),
 
                 // Новый department: "Информации" - "Информатика и вычислительная техника"
                 new SubjectOfDepartment(null, 2, subjectRepo.findByTitle("Математика (профильный уровень)"), departmentRepo.findByTitle("Информатика и вычислительная техника")),
-                new SubjectOfDepartment(null, 2, subjectRepo.findByTitle("Информатика"), departmentRepo.findByTitle("Информатика и вычислительная техника")),
-                new SubjectOfDepartment(null, 2, subjectRepo.findByTitle("Физика"), departmentRepo.findByTitle("Информатика и вычислительная техника")),
-                new SubjectOfDepartment(null, 2, subjectRepo.findByTitle("Русский язык"), departmentRepo.findByTitle("Информатика и вычислительная техника"))
+                new SubjectOfDepartment(null, 3, subjectRepo.findByTitle("Информатика"), departmentRepo.findByTitle("Информатика и вычислительная техника")),
+                new SubjectOfDepartment(null, 3, subjectRepo.findByTitle("Физика"), departmentRepo.findByTitle("Информатика и вычислительная техника")),
+                new SubjectOfDepartment(null, 1, subjectRepo.findByTitle("Русский язык"), departmentRepo.findByTitle("Информатика и вычислительная техника"))
         );
         SubjectOfDepartmentRepo.saveAll(SubjectsOfDepartments);
     }
