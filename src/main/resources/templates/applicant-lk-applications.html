@@ -139,14 +139,14 @@
                 <!-- Lists Tab -->
                 <div id="lists" class="tab-pane fade show active mt-4 mb-4">
                     <h5 class="text-center" style="margin-bottom: 2rem">Ваши заявления</h5>
-                    <h6 class="text-center" style="margin-bottom: 2rem">Пометьте выбранное для подачи оригинала направление</h6>
+                    <h6 class="text-center" style="margin-bottom: 2rem">Выберите направление для подачи оригинала</h6>
                     <table class="table table-bordered table-striped">
                         <thead class="table-light">
                         <tr>
                             <th>Направление</th>
                             <th>Код</th>
-                            <th>Набор мест</th>
-                            <th>Действия</th>
+                            <th>Количество мест</th>
+                            <th>Подача оригинала</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -157,7 +157,7 @@
                             <td>
                                 <form method="POST" action="/applicant/lk/applications">
                                     <input type="hidden" name="code" value="09.03.01">
-                                    <button type="submit" onclick="handleClick(this)" class="btn btn-submit">Подать оригиналы</button>
+                                    <button type="submit" onclick="handleClick(this)" class="btn btn-submit">Подать оригинал</button>
                                 </form>
                             </td>
                         </tr>
@@ -168,7 +168,7 @@
                             <td>
                                 <form method="POST" action="/applicant/lk/applications">
                                     <input type="hidden" name="code" value="01.03.02">
-                                    <button type="submit" onclick="handleClick(this)" class="btn btn-submit">Подать оригиналы</button>
+                                    <button type="submit" onclick="handleClick(this)" class="btn btn-submit">Подать оригинал</button>
                                 </form>
                             </td>
                         </tr>
@@ -191,7 +191,6 @@
 
         button.classList.add('active');
         button.disabled = true;
-        button.textContent = "Выбрано!";
         activeButton = button;
     }
 </script>
