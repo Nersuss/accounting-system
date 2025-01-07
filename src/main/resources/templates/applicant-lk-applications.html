@@ -150,24 +150,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td><a href="/applicant/lk/list?code=09.03.01">Информатика и вычислительная техника</a></td>
-                            <td>09.03.01</td>
-                            <td>50</td>
+                        <tr th:each="order : ${orders}">
                             <td>
-                                <form method="POST" action="/applicant/lk/applications">
-                                    <input type="hidden" name="code" value="09.03.01">
-                                    <button type="submit" onclick="handleClick(this)" class="btn btn-submit">Подать оригинал</button>
-                                </form>
+                                <a th:href="@{'/applicant/lk/list?code=' + ${order.competitionGroup.department.code}}"
+                                   th:text="${order.competitionGroup.title}"></a>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="/applicant/lk/list?code=01.03.02">Прикладная математика</a></td>
-                            <td>01.03.02</td>
-                            <td>30</td>
+                            <td th:text="${order.competitionGroup.department.code}"></td>
+                            <td th:text="${order.competitionGroup.quantity}"></td>
                             <td>
                                 <form method="POST" action="/applicant/lk/applications">
-                                    <input type="hidden" name="code" value="01.03.02">
+                                    <input type="hidden" name="code" th:value="${order.competitionGroup.department.code}">
+                                    <input type="hidden" name="competitionGroupId" th:value="${order.competitionGroup.id}">
                                     <button type="submit" onclick="handleClick(this)" class="btn btn-submit">Подать оригинал</button>
                                 </form>
                             </td>
