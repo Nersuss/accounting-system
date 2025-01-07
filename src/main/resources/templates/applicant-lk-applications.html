@@ -159,8 +159,13 @@
                             <td th:text="${order.competitionGroup.quantity}"></td>
                             <td>
                                 <form method="POST" action="/applicant/lk/applications">
+                                    <input type="hidden" name="code" th:value="${order.competitionGroup.department.code}">
                                     <input type="hidden" name="competitionGroupId" th:value="${order.competitionGroup.id}">
-                                    <button type="submit" class="btn btn-submit">Подать оригинал</button>
+                                    <button type="submit"
+                                            th:classappend="${order.selected} ? 'btn-submit active' : 'btn-submit'"
+                                            th:text="${order.selected} ? 'Оригинал подан' : 'Подать оригинал'">
+                                        Подать оригинал
+                                    </button>
                                 </form>
                             </td>
                         </tr>
@@ -172,19 +177,5 @@
     </div>
 </div>
 
-<script>
-    let activeButton = null;
-
-    function handleClick(button) {
-        if (activeButton) {
-            activeButton.classList.remove('active');
-            activeButton.disabled = false;
-        }
-
-        button.classList.add('active');
-        button.disabled = true;
-        activeButton = button;
-    }
-</script>
 </body>
 </html>

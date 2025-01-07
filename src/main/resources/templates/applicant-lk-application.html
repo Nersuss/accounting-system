@@ -184,6 +184,13 @@
                     </form>
                 </div>
             </div>
+
+            <!-- Статус UNCHECKED или INCORRECT -->
+            <div th:if="${applicant.docStatus == 'UNCHECKED' || applicant.docStatus == 'INCORRECT'}" class="text-center mt-5">
+                <h5 class="text-danger">Ваша верификация не пройдена!</h5>
+                <p>Пожалуйста, проверьте загруженные документы или свяжитесь с поддержкой для уточнения деталей.</p>
+                <a href="/applicant/lk/verification" class="btn btn-warning mt-3">Перейти к верификации</a>
+            </div>
         </div>
     </div>
 </div>
