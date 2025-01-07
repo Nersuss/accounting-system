@@ -67,10 +67,38 @@
             line-height: 1.8;
         }
 
-         .checkbox-cell {
-             text-align: center; /* Горизонтальное центрирование */
-             vertical-align: middle; /* Вертикальное центрирование */
-         }
+        .btn-submit {
+            background-color: #d0ebff;
+            color: black;
+            border: 1px solid #a1c6e5;
+            border-radius: 5px;
+        }
+
+        .btn-submit.active {
+            background-color: #d3f9d8;
+            border-color: #a3e4b4;
+            pointer-events: none;
+        }
+
+        .btn-submit:focus {
+            outline: none;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .btn-submit:hover {
+            background-color: #b8d8f0;
+            color: black;
+            border-color: #91b8d0;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
     </style>
 
 </head>
@@ -115,30 +143,34 @@
                     <table class="table table-bordered table-striped">
                         <thead class="table-light">
                         <tr>
-                            <th>Выбрать</th>
                             <th>Направление</th>
                             <th>Код</th>
                             <th>Набор мест</th>
+                            <th>Действия</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="checkbox-cell"><input type="radio" name="direction" value="09.03.01"></td>
                             <td><a href="/applicant/lk/list?code=09.03.01">Информатика и вычислительная техника</a></td>
                             <td>09.03.01</td>
                             <td>50</td>
+                            <td>
+                                <form method="POST" action="/applicant/lk/applications">
+                                    <input type="hidden" name="code" value="09.03.01">
+                                    <button type="submit" onclick="handleClick(this)" class="btn btn-submit">Подать оригиналы</button>
+                                </form>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="checkbox-cell"><input type="radio" name="direction" value="01.03.02"></td>
                             <td><a href="/applicant/lk/list?code=01.03.02">Прикладная математика</a></td>
                             <td>01.03.02</td>
                             <td>30</td>
-                        </tr>
-                        <tr>
-                            <td class="checkbox-cell"><input type="radio" name="direction" value="38.03.01"></td>
-                            <td><a href="/applicant/lk/list?code=38.03.01">Экономика</a></td>
-                            <td>38.03.01</td>
-                            <td>25</td>
+                            <td>
+                                <form method="POST" action="/applicant/lk/applications">
+                                    <input type="hidden" name="code" value="01.03.02">
+                                    <button type="submit" onclick="handleClick(this)" class="btn btn-submit">Подать оригиналы</button>
+                                </form>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -147,5 +179,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    let activeButton = null;
+
+    function handleClick(button) {
+        if (activeButton) {
+            activeButton.classList.remove('active');
+            activeButton.disabled = false;
+        }
+
+        button.classList.add('active');
+        button.disabled = true;
+        button.textContent = "Выбрано!";
+        activeButton = button;
+    }
+</script>
 </body>
 </html>
