@@ -6,6 +6,4 @@ import ru.accept_applicant_documents.system.model.CompetitionList;
 
 @Repository
 public interface CompetitionListRepo extends JpaRepository<CompetitionList, Long> {
-
-    //CompetitionList createCompetitionList()
 }
