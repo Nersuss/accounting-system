@@ -162,8 +162,7 @@
                                     <input type="hidden" name="code" th:value="${order.competitionGroup.department.code}">
                                     <input type="hidden" name="competitionGroupId" th:value="${order.competitionGroup.id}">
                                     <button type="submit"
-                                            th:classappend="${order.selected} ? 'btn-submit active' : 'btn-submit'"
-                                            th:text="${order.selected} ? 'Оригинал подан' : 'Подать оригинал'">
+                                            th:classappend="${order.assent} ? 'btn-submit active' : 'btn-submit'">
                                         Подать оригинал
                                     </button>
                                 </form>
