@@ -17,6 +17,8 @@ import java.util.Optional;
 @Repository
 public interface OrderRepo extends JpaRepository<Order, Long> {
 
+    @Transactional
+    @Query("SELECT o FROM Order o WHERE o.personalFile = ?1 ORDER BY o.date ASC")
     List<Order> findAllByPersonalFile(PersonalFile personalFile);
 
 
@@ -30,4 +32,6 @@ public interface OrderRepo extends JpaRepository<Order, Long> {
     @Modifying
     @Query("update Order o set o.assent = ?1 where o.personalFile = ?2 and o.competitionGroup = ?3")
     int setAssentByPersonalFileAndCompetitionGroup(boolean assent, PersonalFile personalFile, CompetitionGroup competitionGroup);
+
+
 }
