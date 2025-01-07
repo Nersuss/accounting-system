@@ -138,12 +138,12 @@
         <div class="col-9">
             <div class="tab-content">
 
-                <div th:if="${applicant.docStatus != 'VERIFIED'}" class="message-spacing">
+                <div th:if="${applicant.docStatus.name() != 'VERIFIED'}" class="message-spacing">
                     <h5 style="margin-top: 6rem" class="text-center">Вы не прошли верификацию!</h5>
                 </div>
 
                 <!-- Lists Tab -->
-                <div th:if="${applicant.docStatus == 'VERIFIED'}"
+                <div th:if="${applicant.docStatus.name() == 'VERIFIED'}"
                         id="lists" class="tab-pane fade show active mt-4 mb-4">
                     <h5 class="text-center" style="margin-bottom: 2rem">Ваши заявления</h5>
                     <h6 class="text-center" style="margin-bottom: 2rem">Выберите направление для подачи оригинала</h6>
