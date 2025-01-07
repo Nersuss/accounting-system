@@ -63,13 +63,14 @@ public class ApplicantController {
     }
 
     @PostMapping("/applicant/lk/applications")
-    public String postApplicantLkApplications(Model model) {
+    public String postApplicantLkApplications(@RequestParam("competitionGroupId") Long competitionGroupId,
+                                              Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
-        List<Order> orders = orderRepo.findAllByPersonalFile(personalFileService.findByApplicant(applicant).get());
 
-        model.addAttribute("orders", orders);
+        orderRepo.setAssent(true, personalFileService.findByApplicant(applicant).get(),
+                competitionGroupRepo.findById(competitionGroupId).get());
 
         return "redirect:/applicant-lk-applications";
     }
@@ -83,6 +84,7 @@ public class ApplicantController {
         model.addAttribute("departments", departmentRepo.findAll());
         //List<ExamResult> ll = examResultRepo.findAllByApplicant(applicant);
         model.addAttribute("subjects", examResultRepo.findAllByApplicant(applicant));
+
 
         return "applicant-lk-application";
     }
