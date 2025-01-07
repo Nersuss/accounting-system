@@ -48,11 +48,30 @@ public class ApplicantController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
+
+        if (personalFileService.findByApplicant(applicant).isPresent())
+        {
+            List<Order> orders = orderRepo.findAllByPersonalFile(personalFileService.findByApplicant(applicant).get());
+            model.addAttribute("status", "VERIFIED");
+            model.addAttribute("orders", orders);
+        }
+        model.addAttribute("status", "UNVERIFIED");
+
+
+
+        return "applicant-lk-applications";
+    }
+
+    @PostMapping("/applicant/lk/applications")
+    public String postApplicantLkApplications(Model model) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Applicant applicant = applicantService.findByEmail(email).get();
+        model.addAttribute("applicant", applicant);
         List<Order> orders = orderRepo.findAllByPersonalFile(personalFileService.findByApplicant(applicant).get());
 
         model.addAttribute("orders", orders);
 
-        return "applicant-lk-applications";
+        return "redirect:/applicant-lk-applications";
     }
 
     @GetMapping("/applicant/lk/application")
