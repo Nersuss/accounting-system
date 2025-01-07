@@ -72,7 +72,7 @@ public class ApplicantController {
         orderRepo.setAssent(true, personalFileService.findByApplicant(applicant).get(),
                 competitionGroupRepo.findById(competitionGroupId).get());
 
-        return "redirect:/applicant/lk-applications";
+        return "redirect:/applicant/lk/applications";
     }
 
     @GetMapping("/applicant/lk/application")
