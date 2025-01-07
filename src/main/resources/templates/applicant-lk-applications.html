@@ -99,6 +99,7 @@
             border-color: #91b8d0;
             transition: background-color 0.3s, border-color 0.3s;
         }
+
     </style>
 
 </head>
@@ -150,7 +151,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="order : ${orders}">
+                        <tr style="vertical-align: middle;" th:each="order : ${orders}">
                             <td>
                                 <a th:href="@{'/applicant/lk/list?code=' + ${order.competitionGroup.department.code}}"
                                    th:text="${order.competitionGroup.title}"></a>
@@ -161,7 +162,7 @@
                                 <form method="POST" action="/applicant/lk/applications">
                                     <input type="hidden" name="code" th:value="${order.competitionGroup.department.code}">
                                     <input type="hidden" name="competitionGroupId" th:value="${order.competitionGroup.id}">
-                                    <button type="submit"
+                                    <button type="submit" style="width: 100%; height: 100%; height: 40px"
                                             th:classappend="${order.assent} ? 'btn-submit active' : 'btn-submit'">
                                         Подать оригинал
                                     </button>
