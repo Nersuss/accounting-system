@@ -22,6 +22,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class ApplicantController {
@@ -47,6 +48,10 @@ public class ApplicantController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
+        List<Order> orders = orderRepo.findAllByPersonalFile(personalFileService.findByApplicant(applicant).get());
+
+        model.addAttribute("orders", orders);
+
         return "applicant-lk-applications";
     }
 
@@ -196,16 +201,37 @@ public class ApplicantController {
 
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
+        Department department = departmentRepo.findByTitle(program);
 
         List<ExamResult> applicantExams = examResultRepo.findAllByApplicant(applicant);
 
-        Department department = departmentRepo.findByTitle(program);
-
         List<SubjectOfDepartment> subjectsOfDepartments = subjectOfDepartmentRepo.findAllByDepartment(department);
 
+        // Проверка соответствия экзаменов
+        List<Subject> requiredSubjects = subjectsOfDepartments.stream()
+                .map(SubjectOfDepartment::getSubject)
+                .toList();
 
-//                orderRepo.save(new Order(null, LocalDateTime.now(), false, personalFileService.findByApplicant(applicant).get(),
-//                competitionGroupRepo.findByTitle(program + "-" + studyForm + "-" + studyType)));
+        List<Subject> applicantSubjects = applicantExams.stream()
+                .map(ExamResult::getSubject)
+                .toList();
+
+        // Поиск отсутствующих предметов
+        List<Subject> missingSubjects = requiredSubjects.stream()
+                .filter(subject -> !applicantSubjects.contains(subject))
+                .toList();
+
+        if (!missingSubjects.isEmpty()) {
+            String missingSubjectsTitles = missingSubjects.stream()
+                    .map(Subject::getTitle)
+                    .collect(Collectors.joining(", "));
+
+            // Уведомление пользователя о несоответствии
+            //return "redirect:/applicant/lk/applications?error=Missing subjects: " + missingSubjectsTitles;
+        }
+
+                orderRepo.save(new Order(null, LocalDateTime.now(), false, personalFileService.findByApplicant(applicant).get(),
+                competitionGroupRepo.findByTitle(program + "-" + studyType + "-" + studyForm)));
 
 
         return "redirect:/applicant/lk/applications";
