@@ -5,8 +5,10 @@ import org.springframework.stereotype.Repository;
 import ru.accept_applicant_documents.system.model.Department;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface DepartmentRepo extends JpaRepository<Department, Long> {
-    //List<Department> findAll();
+
+    Department findByTitle(String title);
 }
