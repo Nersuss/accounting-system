@@ -1,5 +1,6 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
+    <title>Вход</title>
     <style>
         body {
             display: flex;
@@ -83,18 +84,18 @@
 <body>
 <div class="form-container">
     <h1>Вход</h1>
-    <form th:action="@{/login}" method="POST" enctype="utf8">
+    <form action="/login" method="POST" enctype="utf8">
         <label>Введите Email</label>
-        <input type="email" th:field="*{email}" />
-        <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}"></p>
+        <input type="email" name="username"/>
+
 
         <label>Введите пароль</label>
-        <input type="password" th:field="*{password}" />
-        <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></p>
+        <input type="password" name="password"/>
+
 
         <button type="submit" style="margin-top: 1rem; margin-bottom: 1rem">Войти</button>
     </form>
-    <a th:href="@{/register}">Регистрация</a>
+    <a href="/register">Регистрация</a>
 </div>
 </body>
 </html>

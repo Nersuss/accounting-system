@@ -29,13 +29,14 @@ public class SecurityConfig {
                 })
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/register", "/", "/favicon.ico", "/images/**").permitAll();
-                    auth.requestMatchers("/login").not().authenticated();
+                    auth.requestMatchers("/register", "/", "/favicon.ico", "/images/**", "/login").permitAll();
+                    //auth.requestMatchers("/login").not().authenticated();
                     auth.requestMatchers("/admin/**").hasAuthority(Roles.ADMIN.name());
                     auth.requestMatchers("/applicant/**").hasAuthority(Roles.APPLICANT.name());
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> form
+                        .loginPage("/login")
                         .defaultSuccessUrl("/lk", true)
                 )
                 .userDetailsService(myUserDetailsService)
