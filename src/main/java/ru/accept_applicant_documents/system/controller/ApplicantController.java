@@ -138,7 +138,7 @@ public class ApplicantController {
 
             for (Order order : orders)
             {
-                snils = documentRepo.findAllByApplicantAndTypesOfDocuments(order.getPersonalFile().getApplicant(),
+                snils = documentRepo.findAllByApplicantAndType(order.getPersonalFile().getApplicant(),
                         TypesOfDocuments.SNILS);
             }
             model.addAttribute("ordersSnils", new OrdersSnils(orders, snils));

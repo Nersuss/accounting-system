@@ -15,5 +15,5 @@ public interface DocumentRepo extends JpaRepository<Document, Long> {
 
     List<Document> findAllByApplicant(Applicant applicant);
 
-    List<Document> findAllByApplicantAndTypesOfDocuments(Applicant applicant, TypesOfDocuments typesOfDocuments);
+    List<Document> findAllByApplicantAndType(Applicant applicant, TypesOfDocuments typesOfDocuments);
 }
