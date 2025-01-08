@@ -32,4 +32,7 @@ public interface OrderRepo extends JpaRepository<Order, Long> {
 
     List<Order> findAllByCompetitionGroupDepartment(Department department);
 
+    Order findByPersonalFileAndCompetitionGroupDepartment(PersonalFile personalFile, Department department);
+
+
 }
