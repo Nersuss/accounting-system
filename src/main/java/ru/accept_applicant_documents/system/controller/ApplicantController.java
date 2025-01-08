@@ -135,14 +135,17 @@ public class ApplicantController {
             List<Order> orders = orderRepo.findAllByCompetitionGroupDepartment(departmentRepo.findByCode(code.get()));
 
             List<Document> snils = new ArrayList<>();
-
+            List<List<ExamResult>> examResultsLists = new ArrayList<>();
             for (Order order : orders)
             {
                 snils.add(documentRepo.findByApplicantAndType(order.getPersonalFile().getApplicant(),
                         TypesOfDocuments.SNILS));
+                List<ExamResult> examResults = examResultRepo.findAllByApplicant(order.getPersonalFile().getApplicant());
+                examResultsLists.add(examResults);
             }
             model.addAttribute("orders", orders);
             model.addAttribute("snils", snils);
+            model.addAttribute("examResultsLists", examResultsLists);
         }
 
         return "applicant-lk-list";
@@ -224,7 +227,6 @@ public class ApplicantController {
 
         List<SubjectOfDepartment> subjectsOfDepartments = subjectOfDepartmentRepo.findAllByDepartment(department);
 
-        //List<Order> orderApplicantList = orderRepo.findAllByPersonalFile(personalFileService.findByApplicant(applicant).get());
         Order orderApplicant = orderRepo.findByPersonalFileAndCompetitionGroupDepartment(personalFileService.findByApplicant(applicant).get(), department);
 
         if (orderApplicant != null)
