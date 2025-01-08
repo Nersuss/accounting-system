@@ -127,20 +127,20 @@
             <div class="tab-content">
 
                 <div th:if="${status == 'VERIFIED'}" class="message-spacing">
-                    <h5 class="text-center text-success">Ваши документы подтверждены</h5>
+                    <h5 class="text-center text-success">Ваши документы подтверждены.</h5>
                 </div>
                 <div th:if="${status == 'UNCHECKED'}" class="message-spacing">
-                    <h5 class="text-center text-warning">Ваши документы находятся на проверке</h5>
+                    <h5 class="text-center text-warning">Ваши документы находятся на проверке.</h5>
                 </div>
                 <div th:if="${status == 'INCORRECT'}" class="message-spacing-incorrect">
-                    <h5 class="text-center text-danger">Вы не подали документы или ваши документы не прошли проверку</h5>
+                    <h5 class="text-center text-danger">Вы не подали документы или ваши документы не прошли проверку.</h5>
                 </div>
 
                 <!-- Verification Tab -->
                 <div th:if="${status != 'VERIFIED' && status != 'UNCHECKED'}"
                      id="verification"
                      class="tab-pane fade show active d-flex flex-column align-items-center mt-4 mb-4">
-                    <h5 class="text-center" style="margin-bottom: 2rem">Основные данные поступающего</h5>
+                    <h5 class="text-center" style="margin-bottom: 2rem">Загрузите ваши документы</h5>
                     <form method="POST" action="/applicant/lk/verification" class="w-50" enctype="multipart/form-data">
                         <div class="mb-4">
                             <label for="pasportpicture" class="form-label">Прикрепить изображение паспорта:</label>
@@ -226,7 +226,7 @@
                         </div>
 
                         <div class="mb-4 text-center">
-                            <button id="saveBtn" type="submit" class="btn btn-success">Сохранить</button>
+                            <button id="saveBtn" type="submit" class="btn btn-success">Отправить документы</button>
                         </div>
                     </form>
                 </div>

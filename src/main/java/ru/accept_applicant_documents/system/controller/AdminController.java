@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
+import ru.accept_applicant_documents.system.enums.TypesOfDocuments;
 import ru.accept_applicant_documents.system.model.*;
 import ru.accept_applicant_documents.system.repository.DocumentRepo;
 import ru.accept_applicant_documents.system.repository.ExamResultRepo;
@@ -136,19 +137,23 @@ public class AdminController {
             @RequestParam("points[]") List<Integer> points,
             @RequestParam("status") String status) throws InterruptedException {
 
+        Applicant applicant = applicantService.findByEmail(applicantEmail).get();
+
         if (status.equals("ACCEPT"))
         {
             applicantService.setDocStatusByEmail(StatusesOfDocuments.VERIFIED, applicantEmail);
-            //Thread.sleep(50L);
+            Thread.sleep(50L);
             // Обрабатываем баллы ЕГЭ
             for (int i = 0; i < subjects.size(); i++) {
                 String subject = subjects.get(i);
                 int point = points.get(i);
 
-                examResultRepo.save(new ExamResult(null, point, LocalDate.now(), subjectRepo.findByTitle(subject),
+                examResultRepo.save(new ExamResult(null, point,
+                        LocalDate.now(), subjectRepo.findByTitle(subject),
                         applicantService.findByEmail(applicantEmail).get()));
             }
-
+            documentRepo.setSeriesByApplicantAndType(snils, applicant, TypesOfDocuments.SNILS);
+            documentRepo.setSeriesByApplicantAndType(passportSeries, applicant, TypesOfDocuments.PASSPORT);
         }
         if (status.equals("REJECT"))
             applicantService.setDocStatusByEmail(StatusesOfDocuments.INCORRECT, applicantEmail);
