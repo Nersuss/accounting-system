@@ -281,19 +281,19 @@ public class SystemApplication implements CommandLineRunner {
 			competitionGroups.add(new CompetitionGroup(null,
 					department.getTitle() + "-" +
 							categoryRepo.findById(1L).get().getTitle() + "-" +
-							formOfEducationRepo.findById(2L).get().getTitle(), 70, department,
+							formOfEducationRepo.findById(2L).get().getTitle(), 10, department,
 					categoryRepo.findById(1L).get(), formOfEducationRepo.findById(2L).get()));
 
 			competitionGroups.add(new CompetitionGroup(null,
 					department.getTitle() + "-" +
 							categoryRepo.findById(2L).get().getTitle() + "-" +
-							formOfEducationRepo.findById(2L).get().getTitle(), 20, department,
+							formOfEducationRepo.findById(2L).get().getTitle(), 5, department,
 					categoryRepo.findById(2L).get(), formOfEducationRepo.findById(2L).get()));
 
 			competitionGroups.add(new CompetitionGroup(null,
 					department.getTitle() + "-" +
 							categoryRepo.findById(3L).get().getTitle() + "-" +
-							formOfEducationRepo.findById(2L).get().getTitle(), 10, department,
+							formOfEducationRepo.findById(2L).get().getTitle(), 3, department,
 					categoryRepo.findById(3L).get(), formOfEducationRepo.findById(2L).get()));
         }
         competitionGroupRepo.saveAll(competitionGroups);
