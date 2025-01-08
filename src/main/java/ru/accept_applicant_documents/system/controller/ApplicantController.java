@@ -141,7 +141,6 @@ public class ApplicantController {
                 snils.add(documentRepo.findByApplicantAndType(order.getPersonalFile().getApplicant(),
                         TypesOfDocuments.SNILS));
             }
-            //model.addAttribute("ordersSnils", new OrdersSnils(orders, snils));
             model.addAttribute("orders", orders);
             model.addAttribute("snils", snils);
         }
@@ -225,33 +224,42 @@ public class ApplicantController {
 
         List<SubjectOfDepartment> subjectsOfDepartments = subjectOfDepartmentRepo.findAllByDepartment(department);
 
-        // Проверка соответствия экзаменов
-        List<Subject> requiredSubjects = subjectsOfDepartments.stream()
-                .map(SubjectOfDepartment::getSubject)
-                .toList();
+        boolean haveFirstRequiredSubject = false;
+        boolean haveSecondRequiredSubject = false;
+        boolean haveOptionalSubject = false;
 
-        List<Subject> applicantSubjects = applicantExams.stream()
-                .map(ExamResult::getSubject)
-                .toList();
-
-        // Поиск отсутствующих предметов
-        List<Subject> missingSubjects = requiredSubjects.stream()
-                .filter(subject -> !applicantSubjects.contains(subject))
-                .toList();
-
-        if (!missingSubjects.isEmpty()) {
-            String missingSubjectsTitles = missingSubjects.stream()
-                    .map(Subject::getTitle)
-                    .collect(Collectors.joining(", "));
-
-            // Уведомление пользователя о несоответствии
-            //return "redirect:/applicant/lk/applications?error=Missing subjects: " + missingSubjectsTitles;
+        for (SubjectOfDepartment subjectOfDepartment : subjectsOfDepartments)
+        {
+            if (subjectOfDepartment.haveUniquePosition(subjectsOfDepartments)) {
+                for (ExamResult examResult : applicantExams)
+                {
+                    if ((subjectOfDepartment.getSubject().getTitle() == examResult.getSubject().getTitle()) && (haveFirstRequiredSubject))
+                        haveSecondRequiredSubject = true;
+                    if ((subjectOfDepartment.getSubject().getTitle() == examResult.getSubject().getTitle()))
+                        haveFirstRequiredSubject = true;
+                }
+            }
+            else
+            {
+                for (ExamResult examResult : applicantExams)
+                {
+                    if (subjectOfDepartment.getSubject().getTitle() == examResult.getSubject().getTitle())
+                    {
+                        haveOptionalSubject = true;
+                    }
+                }
+            }
         }
 
-                orderRepo.save(new Order(null, LocalDateTime.now(), false, personalFileService.findByApplicant(applicant).get(),
-                competitionGroupRepo.findByTitle(program + "-" + studyType + "-" + studyForm)));
-
-
+        if ((haveOptionalSubject) && (haveFirstRequiredSubject) && (haveSecondRequiredSubject))
+        {
+            orderRepo.save(new Order(null, LocalDateTime.now(), false, personalFileService.findByApplicant(applicant).get(),
+                    competitionGroupRepo.findByTitle(program + "-" + studyType + "-" + studyForm)));
+        }
+        else
+        {
+            return "redirect:/applicant/lk/applications?error";
+        }
         return "redirect:/applicant/lk/applications";
     }
 

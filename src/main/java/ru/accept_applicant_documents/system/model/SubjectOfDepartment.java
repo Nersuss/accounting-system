@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table
 @Getter
@@ -28,4 +30,13 @@ public class SubjectOfDepartment {
     @ManyToOne
     @NotNull
     private Department department;
+
+    public boolean haveUniquePosition(List<SubjectOfDepartment> subjectsOfDepartment){
+        for (SubjectOfDepartment subject : subjectsOfDepartment)
+        {
+            if ((positionOfSubject == subject.getPositionOfSubject()) && (id != subject.getId()))
+                return false;
+        }
+        return true;
+    }
 }
