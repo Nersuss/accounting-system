@@ -136,16 +136,47 @@ public class ApplicantController {
 
             List<Document> snils = new ArrayList<>();
             List<List<ExamResult>> examResultsLists = new ArrayList<>();
-            for (Order order : orders)
-            {
+            List<Integer> summScores = new ArrayList<>();
+
+            for (Order order : orders) {
                 snils.add(documentRepo.findByApplicantAndType(order.getPersonalFile().getApplicant(),
                         TypesOfDocuments.SNILS));
                 List<ExamResult> examResults = examResultRepo.findAllByApplicant(order.getPersonalFile().getApplicant());
                 examResultsLists.add(examResults);
+
+                // Фильтрация и суммирование оценок
+                int russianScore = examResults.stream()
+                        .filter(exam -> "Русский язык".equalsIgnoreCase(exam.getSubject().getTitle()))
+                        .mapToInt(ExamResult::getScore)
+                        .findFirst()
+                        .orElse(0);
+
+                int mathScore = examResults.stream()
+                        .filter(exam -> "Математика (профильный уровень)".equalsIgnoreCase(exam.getSubject().getTitle()))
+                        .mapToInt(ExamResult::getScore)
+                        .findFirst()
+                        .orElseGet(() -> examResults.stream()
+                                .filter(exam -> "Математика (базовый уровень)".equalsIgnoreCase(exam.getSubject().getTitle()))
+                                .mapToInt(ExamResult::getScore)
+                                .findFirst()
+                                .orElse(0));
+
+                int highestOtherScore = examResults.stream()
+                        .filter(exam -> !"Русский язык".equalsIgnoreCase(exam.getSubject().getTitle())
+                                && !"Математика (базовый уровень)".equalsIgnoreCase(exam.getSubject().getTitle())
+                                && !"Математика (профильный уровень)".equalsIgnoreCase(exam.getSubject().getTitle()))
+                        .mapToInt(ExamResult::getScore)
+                        .max()
+                        .orElse(0);
+
+                int totalScore = russianScore + mathScore + highestOtherScore;
+                summScores.add(totalScore); // Добавить итоговую сумму в список
             }
+
             model.addAttribute("orders", orders);
             model.addAttribute("snils", snils);
             model.addAttribute("examResultsLists", examResultsLists);
+            model.addAttribute("summScores", summScores); // Добавить суммы в модель
         }
 
         return "applicant-lk-list";
