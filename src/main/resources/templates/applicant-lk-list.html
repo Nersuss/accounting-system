@@ -103,37 +103,32 @@
 
             <div class="tab-content">
                 <div id="lists" class="tab-pane fade show active mt-4 mb-4">
-                    <h5 class="text-center" style="margin-bottom: 2rem">Списки абитуриентов</h5>
+                    <h5 class="text-center" style="margin-bottom: 2rem">Список абитуриентов на "<a th:text="${orders[0].competitionGroup.title}"></a>"</h5>
                     <table class="table table-bordered table-striped">
                         <thead class="table-light">
                         <tr>
-                            <th>#</th>
+                            <th>№</th>
                             <th>СНИЛС/ID</th>
                             <th>Рег. номер</th>
-                            <th>Приоритет в заявлении</th>
                             <th>Кол-во баллов за каждое вступительное испытание</th>
                             <th>Сумма конкурсных баллов</th>
-                            <th>Наличие преимущественных прав зачисления</th>
-                            <th>Наличие оригинала</th>
+                            <th style="text-align: center">Наличие оригинала</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="list : ${list}">
-                            <td th:text="${list.id}"></td>
-                            <td th:text="${list.SNILS}"></td>
-                            <td th:text="${list.registrationNumber}"></td>
-                            <td th:text="${list.priority}"></td>
-                            <td th:text="${list.scoresBtExams}"></td>
-                            <td th:text="${list.summaryScore}"></td>
-                            <td th:text="${list.presenceOfAdvantages}"></td>
-                            <td th:text="${list.presenceOfOriginal}"></td>
+                        <tr th:each="order, iterStat : ${orders}">
+                            <td th:text="${iterStat.index+1}"></td>
+                            <td th:text="${snils[iterStat.index].series}"></td>
+                            <td th:text="${order.personalFile.registrationNumber}"></td>
+                            <td th:text="${order.competitionGroup.title}"></td>
+                            <td th:text="${order.competitionGroup.title}"></td>
+                            <td style="text-align: center" th:text="${order.assent} == true ? 'ДА' : 'НЕТ'"></td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
