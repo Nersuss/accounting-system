@@ -148,6 +148,7 @@ public class AdminController {
                 examResultRepo.save(new ExamResult(null, point, LocalDate.now(), subjectRepo.findByTitle(subject),
                         applicantService.findByEmail(applicantEmail).get()));
             }
+
         }
         if (status.equals("REJECT"))
             applicantService.setDocStatusByEmail(StatusesOfDocuments.INCORRECT, applicantEmail);

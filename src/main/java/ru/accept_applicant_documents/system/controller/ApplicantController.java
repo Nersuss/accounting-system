@@ -141,7 +141,9 @@ public class ApplicantController {
                 snils = documentRepo.findAllByApplicantAndType(order.getPersonalFile().getApplicant(),
                         TypesOfDocuments.SNILS);
             }
-            model.addAttribute("ordersSnils", new OrdersSnils(orders, snils));
+            //model.addAttribute("ordersSnils", new OrdersSnils(orders, snils));
+            model.addAttribute("orders", orders);
+            model.addAttribute("snils", snils);
         }
 
         return "applicant-lk-list";
