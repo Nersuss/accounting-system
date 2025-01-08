@@ -120,7 +120,7 @@ public class ApplicantController {
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
         model.addAttribute("departments", departmentRepo.findAll());
-        model.addAttribute("competitionGroupBudget", competitionGroupRepo.findAllByDepartmentAnd())
+        //model.addAttribute("competitionGroupBudget", competitionGroupRepo.findAllByDepartmentAnd())
 
         return "paid";
     }
@@ -138,7 +138,8 @@ public class ApplicantController {
 
             for (Order order : orders)
             {
-                snils = documentRepo.findAllByApplicantAndTypesOfDocuments(order.getPersonalFile().getApplicant(), TypesOfDocuments.SNILS);
+                snils = documentRepo.findAllByApplicantAndTypesOfDocuments(order.getPersonalFile().getApplicant(),
+                        TypesOfDocuments.SNILS);
             }
             model.addAttribute("ordersSnils", new OrdersSnils(orders, snils));
         }
