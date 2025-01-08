@@ -86,7 +86,7 @@
                     <a class="nav-link" href="/applicant/lk/verification">Верификация</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/applicant/lk/choice">Все списки</a>
+                    <a class="nav-link active" href="/applicant/lk/lists">Все списки</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/applicant/lk/settings">Настройки</a>
@@ -100,25 +100,19 @@
 
                 <!-- Lists Tab -->
                 <div id="lists" class="tab-pane fade show active mt-4 mb-4">
-                    <div class="d-flex justify-content-start mb-3">
-                        <button class="btn btn-outline-secondary" onclick="window.history.back();">Назад</button>
-                    </div>
-                    <h5 class="text-center" style="margin-bottom: 2rem">Списки на платное обучение</h5>
+                    <h5 class="text-center" style="margin-bottom: 2rem">Направления обучения</h5>
                     <table class="table table-bordered table-striped">
                         <thead class="table-light">
                         <tr>
-                            <th>Направление</th>
-                            <th>Код</th>
-                            <th>Набор мест</th>
+                            <th>Поступление</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="department : ${departments}">
-                            <td>
-                                <a th:href="'/applicant/lk/list?code=' + ${department.code}" th:text="${department.title}"></a>
-                            </td>
-                            <td th:text="${department.code}"></td>
-                            <td>80</td>
+                        <tr>
+                            <td><a href="/applicant/lk/lists/budget">Списки поступающих на бюджет</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/applicant/lk/lists/paid">Списки поступающих на платное</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -127,6 +121,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
