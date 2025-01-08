@@ -108,6 +108,7 @@ public class ApplicantController {
         return "budget";
     }
 
+
     @GetMapping("/applicant/lk/lists/paid")
     public String getApplicantLkPaid(Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
