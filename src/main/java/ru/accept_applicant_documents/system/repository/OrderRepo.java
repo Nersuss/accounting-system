@@ -6,10 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
-import ru.accept_applicant_documents.system.model.Applicant;
-import ru.accept_applicant_documents.system.model.CompetitionGroup;
-import ru.accept_applicant_documents.system.model.Order;
-import ru.accept_applicant_documents.system.model.PersonalFile;
+import ru.accept_applicant_documents.system.model.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,5 +30,6 @@ public interface OrderRepo extends JpaRepository<Order, Long> {
     @Query("update Order o set o.assent = ?1 where o.personalFile = ?2 and o.competitionGroup = ?3")
     int setAssentByPersonalFileAndCompetitionGroup(boolean assent, PersonalFile personalFile, CompetitionGroup competitionGroup);
 
+    List<Order> findAllByCompetitionGroupDepartment(Department department);
 
 }

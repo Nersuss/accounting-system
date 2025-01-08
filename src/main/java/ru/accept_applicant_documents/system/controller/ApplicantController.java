@@ -1,6 +1,7 @@
 package ru.accept_applicant_documents.system.controller;
 
 import jakarta.validation.Valid;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -127,12 +128,15 @@ public class ApplicantController {
 
         if (code.isPresent()) {
 
-            ShowListOfApplicants list = new ShowListOfApplicants();
+            //ShowListOfApplicants list = new ShowListOfApplicants();
 
-            List<CompetitionGroup> competitionGroups = competitionGroupRepo.findAllByDepartment(departmentRepo.findByCode(code.get()));
+            //List<CompetitionGroup> competitionGroups = competitionGroupRepo.findAllByDepartment(departmentRepo.findByCode(code.get()));
 
+            //Department department = departmentRepo.findByCode(code.get());
 
-            model.addAttribute("group", competitionGroups);
+            List<Order> orders = orderRepo.findAllByCompetitionGroupDepartment(departmentRepo.findByCode(code.get()));
+
+            model.addAttribute("orders", orders);
         }
 
         return "applicant-lk-list";
