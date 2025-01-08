@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.accept_applicant_documents.system.dto.DocumentApplicantDto;
 import ru.accept_applicant_documents.system.dto.ShowListOfApplicants;
 import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
 import ru.accept_applicant_documents.system.enums.TypesOfDocuments;
@@ -19,7 +18,6 @@ import ru.accept_applicant_documents.system.service.PersonalFileService;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -91,33 +89,33 @@ public class ApplicantController {
         return "applicant-lk-application";
     }
 
-    @GetMapping("/applicant/lk/choice")
+    @GetMapping("/applicant/lk/lists")
     public String getApplicantLkChoice(Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
 
-        return "applicant-lk-choice";
+        return "applicant-lk-lists";
     }
 
-    @GetMapping("/applicant/lk/choice/budget-lists")
+    @GetMapping("/applicant/lk/lists/budget")
     public String getApplicantLkBudget(Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
         model.addAttribute("departments", departmentRepo.findAll());
 
-        return "budget-lists";
+        return "budget";
     }
 
-    @GetMapping("/applicant/lk/choice/paid-lists")
+    @GetMapping("/applicant/lk/lists/paid")
     public String getApplicantLkPaid(Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
         model.addAttribute("departments", departmentRepo.findAll());
 
-        return "paid-lists";
+        return "paid";
     }
 
     @GetMapping("/applicant/lk/list")
