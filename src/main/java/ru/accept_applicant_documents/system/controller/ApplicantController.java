@@ -224,6 +224,12 @@ public class ApplicantController {
 
         List<SubjectOfDepartment> subjectsOfDepartments = subjectOfDepartmentRepo.findAllByDepartment(department);
 
+        //List<Order> orderApplicantList = orderRepo.findAllByPersonalFile(personalFileService.findByApplicant(applicant).get());
+        Order orderApplicant = orderRepo.findByPersonalFileAndCompetitionGroupDepartment(personalFileService.findByApplicant(applicant).get(), department);
+
+        if (orderApplicant != null)
+            return "redirect:/applicant/lk/applications?error";
+
         boolean haveFirstRequiredSubject = false;
         boolean haveSecondRequiredSubject = false;
         boolean haveOptionalSubject = false;
