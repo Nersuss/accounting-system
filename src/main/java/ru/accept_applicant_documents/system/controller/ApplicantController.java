@@ -214,8 +214,7 @@ public class ApplicantController {
     public String postApplicantLkApplication(
             @RequestParam("program") String program,
             @RequestParam("studyForm") String studyForm,
-            @RequestParam("studyType") String studyType,
-            Model model) {
+            @RequestParam("studyType") String studyType) {
 
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
@@ -259,8 +258,7 @@ public class ApplicantController {
         }
         else
         {
-            model.addAttribute("error", "have");
-            return "applicant-lk-applications";
+            return "redirect:/applicant/lk/applications?error";
         }
         return "redirect:/applicant/lk/applications";
     }
