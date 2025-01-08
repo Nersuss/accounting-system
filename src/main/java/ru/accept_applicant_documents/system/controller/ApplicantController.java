@@ -3,11 +3,13 @@ package ru.accept_applicant_documents.system.controller;
 import jakarta.validation.Valid;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.accept_applicant_documents.system.dto.OrdersSnils;
 import ru.accept_applicant_documents.system.dto.ShowListOfApplicants;
 import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
 import ru.accept_applicant_documents.system.enums.TypesOfDocuments;
@@ -19,6 +21,7 @@ import ru.accept_applicant_documents.system.service.PersonalFileService;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,6 +44,8 @@ public class ApplicantController {
     CompetitionGroupRepo competitionGroupRepo;
     @Autowired
     SubjectOfDepartmentRepo subjectOfDepartmentRepo;
+    @Autowired
+    private DocumentRepo documentRepo;
 
     @GetMapping("/applicant/lk/applications")
     public String getApplicantLk(Model model) {
@@ -115,6 +120,7 @@ public class ApplicantController {
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
         model.addAttribute("departments", departmentRepo.findAll());
+        model.addAttribute("competitionGroupBudget", competitionGroupRepo.findAllByDepartmentAnd())
 
         return "paid";
     }
@@ -126,16 +132,15 @@ public class ApplicantController {
         model.addAttribute("applicant", applicant);
 
         if (code.isPresent()) {
-
-            //ShowListOfApplicants list = new ShowListOfApplicants();
-
-            //List<CompetitionGroup> competitionGroups = competitionGroupRepo.findAllByDepartment(departmentRepo.findByCode(code.get()));
-
-            //Department department = departmentRepo.findByCode(code.get());
-
             List<Order> orders = orderRepo.findAllByCompetitionGroupDepartment(departmentRepo.findByCode(code.get()));
 
-            model.addAttribute("orders", orders);
+            List<Document> snils = new ArrayList<>();
+
+            for (Order order : orders)
+            {
+                snils = documentRepo.findAllByApplicantAndTypesOfDocuments(order.getPersonalFile().getApplicant(), TypesOfDocuments.SNILS);
+            }
+            model.addAttribute("ordersSnils", new OrdersSnils(orders, snils));
         }
 
         return "applicant-lk-list";
