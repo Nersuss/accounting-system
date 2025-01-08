@@ -115,7 +115,7 @@
                         <tbody>
                         <tr th:each="department : ${departments}">
                             <td>
-                                <a th:href="'/applicant/lk/choice/list?code=' + ${department.code}" th:text="${department.title}"></a>
+                                <a th:href="'/applicant/lk/list?code=' + ${department.code}" th:text="${department.title}"></a>
                             </td>
                             <td th:text="${department.code}"></td>
                             <td>80</td>
