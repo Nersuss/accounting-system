@@ -129,8 +129,10 @@ public class ApplicantController {
 
             ShowListOfApplicants list = new ShowListOfApplicants();
 
+            List<CompetitionGroup> competitionGroups = competitionGroupRepo.findAllByDepartment(departmentRepo.findByCode(code.get()));
 
-            model.addAttribute("list", list);
+
+            model.addAttribute("group", competitionGroups);
         }
 
         return "applicant-lk-list";

@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface DepartmentRepo extends JpaRepository<Department, Long> {
 
     Department findByTitle(String title);
+
+    Department findByCode(String code);
 }
