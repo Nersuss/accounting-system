@@ -228,7 +228,7 @@ public class ApplicantController {
         Order orderApplicant = orderRepo.findByPersonalFileAndCompetitionGroupDepartment(personalFileService.findByApplicant(applicant).get(), department);
 
         if (orderApplicant != null)
-            return "redirect:/applicant/lk/applications?error";
+            return "redirect:/applicant/lk/application?error";
 
         boolean haveFirstRequiredSubject = false;
         boolean haveSecondRequiredSubject = false;
@@ -264,7 +264,7 @@ public class ApplicantController {
         }
         else
         {
-            return "redirect:/applicant/lk/applications?error";
+            return "redirect:/applicant/lk/application?error";
         }
         return "redirect:/applicant/lk/applications";
     }
