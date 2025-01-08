@@ -1,15 +1,42 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             background-color: #f9f9f9;
-            font-family: sans-serif;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 1rem;
+            border-bottom: 1px solid #dee2e6;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            flex-grow: 1;
+            text-align: center;
         }
 
         .form-container {
@@ -21,6 +48,7 @@
             max-width: 400px;
             width: 100%;
             text-align: center;
+            margin-top: 5rem; /* Отступ для фиксации header */
         }
 
         .form-container h1 {
@@ -64,7 +92,7 @@
         }
 
         .form-container button:hover {
-            background-color: #808080;
+            background-color: #696969;
         }
 
         .form-container a {
@@ -81,24 +109,32 @@
     </style>
 </head>
 <body>
+<header>
+    <div class="container header-container">
+        <h3 class="mb-0 header-title">Электронная система подачи документов в ВУЗы</h3>
+    </div>
+</header>
+
 <div class="form-container">
     <h1>Регистрация</h1>
     <form th:action="@{/register}" th:object="${user}" method="POST" enctype="utf8">
         <label>Введите Email</label>
-        <input type="email" th:field="*{email}" />
+        <input type="email" th:field="*{email}" required />
         <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}"></p>
 
         <label>Введите пароль</label>
-        <input type="password" th:field="*{password}" />
+        <input type="password" th:field="*{password}" required />
         <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></p>
 
         <label>Введите номер</label>
-        <input type="tel" th:field="*{phone}" />
+        <input type="tel" th:field="*{phone}" required />
         <p th:if="${#fields.hasErrors('phone')}" th:errorclass="error" th:errors="*{phone}"></p>
 
-        <button type="submit" style="margin-top: 1rem; margin-bottom: 1rem">Зарегистрироваться</button>
+        <button type="submit" style="margin-top: 1rem; margin-bottom: 1rem; background-color: #007bff; border-color: #007bff;">Зарегистрироваться</button>
     </form>
-    <a th:href="@{/login}">Уже есть аккаунт? Войти</a>
+    <a th:href="@{/login}" style="color: #007bff;">Уже есть аккаунт? Войти</a>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
