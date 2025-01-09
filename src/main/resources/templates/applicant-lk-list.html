@@ -103,7 +103,7 @@
 
             <div class="tab-content">
                 <div id="lists" class="tab-pane fade show active mt-4 mb-4">
-                    <h5 class="text-center" style="margin-bottom: 2rem">Список абитуриентов на "<a th:text="${orders[0].competitionGroup.department.title}"></a>"</h5>
+                    <h5 class="text-center" style="margin-bottom: 2rem">Список абитуриентов на "<a th:text="${department.title}"></a>"</h5>
                     <table class="table table-bordered table-striped">
                         <thead class="table-light">
                         <tr>
@@ -128,7 +128,6 @@
                             <td th:text="${summScores[iterStat.index]}"></td>
                             <td style="text-align: center" th:text="${order.assent} == true ? 'ДА' : 'НЕТ'"></td>
                         </tr>
-
                         </tbody>
                     </table>
                 </div>

@@ -143,8 +143,11 @@ public String getApplicantLkPaid(Model model) {
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
 
-        if (code.isPresent()) {
-            List<Order> orders = orderRepo.findAllByCompetitionGroupDepartment(departmentRepo.findByCode(code.get()));
+if (code.isPresent()) {
+    Department department = departmentRepo.findByCode(code.get());
+    model.addAttribute("department", department);
+    List<Order> orders = orderRepo.findAllByCompetitionGroupDepartment(department);
+
 
             List<Document> snils = new ArrayList<>();
             List<List<ExamResult>> examResultsLists = new ArrayList<>();
