@@ -104,22 +104,22 @@
                         <button class="btn btn-outline-secondary" onclick="window.history.back();">Назад</button>
                     </div>
                     <h5 class="text-center" style="margin-bottom: 2rem">Списки на платное обучение</h5>
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered">
                         <thead class="table-light">
-                        <tr>
-                            <th>Направление</th>
-                            <th>Код</th>
-                            <th>Набор мест</th>
-                        </tr>
+                            <tr>
+                                <th scope="col">Наименование</th>
+                                <th scope="col">Код</th>
+                                <th scope="col">Количество мест</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="department : ${departments}">
-                            <td>
-                                <a th:href="'/applicant/lk/list?code=' + ${department.code}" th:text="${department.title}"></a>
-                            </td>
-                            <td th:text="${department.code}"></td>
-                            <td>80</td>
-                        </tr>
+                            <tr th:each="group : ${competitionGroups}">
+                                <td>
+                                    <a th:text="${group.title}" th:href="'/applicant/lk/list?code=' + ${group.department.code}"></a>
+                                </td>
+                                <td th:text="${group.department.code}"></td>
+                                <td th:text="${group.quantity}"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
