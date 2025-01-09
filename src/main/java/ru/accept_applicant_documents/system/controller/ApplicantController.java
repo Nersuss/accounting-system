@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -161,15 +162,27 @@ public class ApplicantController {
                                 .findFirst()
                                 .orElse(0));
 
-                int highestOtherScore = examResults.stream()
+                List<Integer> otherScores = examResults.stream()
                         .filter(exam -> !"Русский язык".equalsIgnoreCase(exam.getSubject().getTitle())
                                 && !"Математика (базовый уровень)".equalsIgnoreCase(exam.getSubject().getTitle())
                                 && !"Математика (профильный уровень)".equalsIgnoreCase(exam.getSubject().getTitle()))
-                        .mapToInt(ExamResult::getScore)
-                        .max()
-                        .orElse(0);
+                        .map(ExamResult::getScore)
+                        .sorted(Comparator.reverseOrder()) // Сортировка по убыванию
+                        .toList();
 
-                int totalScore = russianScore + mathScore + highestOtherScore;
+                int totalScore;
+                if (examResults.stream()
+                        .anyMatch(exam -> "Математика (базовый уровень)".equalsIgnoreCase(exam.getSubject().getTitle()))) {
+                    // Если есть базовая математика, учитываем два самых больших результата
+                    int top1 = otherScores.size() > 0 ? otherScores.get(0) : 0;
+                    int top2 = otherScores.size() > 1 ? otherScores.get(1) : 0;
+                    totalScore = russianScore + mathScore + top1 + top2;
+                } else {
+                    // Если математика не базовая, учитываем только один самый большой результат
+                    int highestOtherScore = otherScores.size() > 0 ? otherScores.get(0) : 0;
+                    totalScore = russianScore + mathScore + highestOtherScore;
+                }
+
                 summScores.add(totalScore); // Добавить итоговую сумму в список
             }
 
