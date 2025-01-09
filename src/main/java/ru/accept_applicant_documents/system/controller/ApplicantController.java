@@ -140,7 +140,8 @@ public String getApplicantLkPaid(Model model) {
 
         if (code.isPresent()) {
             Department department = departmentRepo.findByCode(code.get());
-            List<Order> orders = orderRepo.findAllByCompetitionGroupDepartment(department);
+            //List<Order> orders = orderRepo.findAllByCompetitionGroupDepartment(department);
+            List<Order> orders = orderRepo.findAllByCompetitionGroupDepartmentOrderByExamResultScoreSum(department);
 
             List<Document> snils = new ArrayList<>();
             List<List<ExamResult>> examResultsLists = new ArrayList<>();
