@@ -96,30 +96,30 @@
 
         <!-- Main Content -->
         <div class="col-9">
+            <div class="d-flex justify-content-start mb-3">
+                <button class="btn btn-outline-secondary" onclick="window.history.back();">Назад</button>
+            </div>
             <div class="tab-content">
 
                 <!-- Lists Tab -->
                 <div id="lists" class="tab-pane fade show active mt-4 mb-4">
-                    <div class="d-flex justify-content-start mb-3">
-                        <button class="btn btn-outline-secondary" onclick="window.history.back();">Назад</button>
-                    </div>
-                    <h5 class="text-center" style="margin-bottom: 2rem">Списки на платное обучение</h5>
-                    <table class="table table-bordered">
+                    <h5 class="text-center" style="margin-bottom: 2rem">Направления очного обучения</h5>
+                    <table class="table table-bordered table-striped">
                         <thead class="table-light">
-                            <tr>
-                                <th scope="col">Наименование</th>
-                                <th scope="col">Код</th>
-                                <th scope="col">Количество мест</th>
-                            </tr>
+                        <tr>
+                            <th scope="col">Наименование</th>
+                            <th scope="col">Код</th>
+                            <th scope="col">Количество мест</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="group : ${competitionGroups}">
-                                <td>
-                                    <a th:text="${group.title}" th:href="'/applicant/lk/list?code=' + ${group.department.code}"></a>
-                                </td>
-                                <td th:text="${group.department.code}"></td>
-                                <td th:text="${group.quantity}"></td>
-                            </tr>
+                        <tr th:each="group, iterStat : ${competitionGroups}" th:if="${competitionGroups[iterStat.index].formOfEducation.title.equals('Очно')}">
+                            <td>
+                                <a th:text="${group.title}" th:href="'/applicant/lk/list?code=' + ${group.department.code}"></a>
+                            </td>
+                            <td th:text="${group.department.code}"></td>
+                            <td th:text="${group.quantity}"></td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
