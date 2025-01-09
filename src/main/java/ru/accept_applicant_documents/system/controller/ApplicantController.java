@@ -101,10 +101,17 @@ public class ApplicantController {
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
 
+        // Получение всех CompetitionGroup
+        List<CompetitionGroup> competitionGroups = competitionGroupRepo.findAll();
+
+        model.addAttribute("applicant", applicant);
+        model.addAttribute("departments", departmentRepo.findAll());
+        model.addAttribute("competitionGroups", competitionGroups);
+
         return "applicant-lk-lists";
     }
 
-    @GetMapping("/applicant/lk/lists/budget")
+    @GetMapping("/applicant/lk/lists/budget") //думаю удалить
     public String getApplicantLkBudget(Model model) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Applicant applicant = applicantService.findByEmail(email).get();
@@ -115,16 +122,20 @@ public class ApplicantController {
     }
 
 
-    @GetMapping("/applicant/lk/lists/paid")
-    public String getApplicantLkPaid(Model model) {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        Applicant applicant = applicantService.findByEmail(email).get();
-        model.addAttribute("applicant", applicant);
-        model.addAttribute("departments", departmentRepo.findAll());
-        //model.addAttribute("competitionGroupBudget", competitionGroupRepo.findAllByDepartmentAnd())
+@GetMapping("/applicant/lk/lists/paid") //думаю удалить
+public String getApplicantLkPaid(Model model) {
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    Applicant applicant = applicantService.findByEmail(email).orElseThrow(() -> new RuntimeException("Applicant not found"));
 
-        return "paid";
-    }
+    // Получение всех CompetitionGroup
+    List<CompetitionGroup> competitionGroups = competitionGroupRepo.findAll();
+
+    model.addAttribute("applicant", applicant);
+    model.addAttribute("departments", departmentRepo.findAll());
+    model.addAttribute("competitionGroups", competitionGroups);
+
+    return "paid";
+}
 
     @GetMapping("/applicant/lk/list")
     public String getApplicantLkList(@RequestParam("code") Optional<String> code, Model model) {

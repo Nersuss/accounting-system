@@ -12,8 +12,10 @@ import java.util.List;
 @Repository
 public interface CompetitionGroupRepo extends JpaRepository<CompetitionGroup, Long> {
     CompetitionGroup findByTitle(String title);
+    List<CompetitionGroup> findAll();
 
     @Transactional
     @Query("SELECT o FROM Order o WHERE o.competitionGroup.department = ?1")
     List<CompetitionGroup> findAllByDepartment(Department department);
 }
+
