@@ -263,6 +263,19 @@ public String getApplicantLkPaid(Model model) {
         applicantService.addDocument(new Document("СНИЛС", destinationFileSnils.getCanonicalPath(), TypesOfDocuments.SNILS, applicant));
         applicantService.addDocument(new Document("Аттестат", destinationFileCertificate.getCanonicalPath(), TypesOfDocuments.CERTIFICATE, applicant));
 
+//        if (privilegeDocuments[0] != null)
+//        {
+//            File destinationFilePrivilegeDocuments = new File(applicantDir, privilegeDocuments[0].getOriginalFilename());
+//            privilegeDocuments[0].transferTo(destinationFilePrivilegeDocuments);
+//            applicantService.addDocument(new Document("Привелегия", destinationFilePrivilegeDocuments.getCanonicalPath(), TypesOfDocuments.INDIVIDUAL_ACHIEVEMENTS, applicant));
+//        }
+//        if (achievementDocuments[0] != null)
+//        {
+//            File destinationFileAchievementDocuments = new File(applicantDir, achievementDocuments[0].getOriginalFilename());
+//            achievementDocuments[0].transferTo(destinationFileAchievementDocuments);
+//            applicantService.addDocument(new Document("Достижение", destinationFileAchievementDocuments.getCanonicalPath(), TypesOfDocuments.REFERENCE, applicant));
+//        }
+
         applicantService.setDocStatusByEmail(StatusesOfDocuments.UNCHECKED, email);
 
         return "redirect:/applicant/lk/applications";
