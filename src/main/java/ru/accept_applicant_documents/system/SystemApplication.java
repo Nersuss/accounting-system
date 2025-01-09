@@ -311,7 +311,24 @@ public class SystemApplication implements CommandLineRunner {
                 new SubjectOfDepartment(null, 2, subjectRepo.findByTitle("Математика (профильный уровень)"), departmentRepo.findByTitle("Информатика и вычислительная техника")),
                 new SubjectOfDepartment(null, 3, subjectRepo.findByTitle("Информатика"), departmentRepo.findByTitle("Информатика и вычислительная техника")),
                 new SubjectOfDepartment(null, 3, subjectRepo.findByTitle("Физика"), departmentRepo.findByTitle("Информатика и вычислительная техника")),
-                new SubjectOfDepartment(null, 1, subjectRepo.findByTitle("Русский язык"), departmentRepo.findByTitle("Информатика и вычислительная техника"))
+                new SubjectOfDepartment(null, 1, subjectRepo.findByTitle("Русский язык"), departmentRepo.findByTitle("Информатика и вычислительная техника")),
+
+                // Новый department: "Филологии" - "Филология"
+                new SubjectOfDepartment(null, 2, subjectRepo.findByTitle("Математика (базовый уровень)"), departmentRepo.findByTitle("Филология")),
+                new SubjectOfDepartment(null, 3, subjectRepo.findByTitle("История"), departmentRepo.findByTitle("Филология")),
+                new SubjectOfDepartment(null, 3, subjectRepo.findByTitle("Литература"), departmentRepo.findByTitle("Филология")),
+                new SubjectOfDepartment(null, 1, subjectRepo.findByTitle("Русский язык"), departmentRepo.findByTitle("Филология")),
+
+                new SubjectOfDepartment(null, 3, subjectRepo.findByTitle("Обществознание"), departmentRepo.findByTitle("Журналистика")),
+                new SubjectOfDepartment(null, 2, subjectRepo.findByTitle("Математика (базовый уровень)"), departmentRepo.findByTitle("Журналистика")),
+                new SubjectOfDepartment(null, 3, subjectRepo.findByTitle("История"), departmentRepo.findByTitle("Журналистика")),
+                new SubjectOfDepartment(null, 1, subjectRepo.findByTitle("Русский язык"), departmentRepo.findByTitle("Журналистика")),
+
+                // Новый department: "Географии" - "Гидрометеорология"
+                new SubjectOfDepartment(null, 2, subjectRepo.findByTitle("Математика (профильный уровень)"), departmentRepo.findByTitle("Гидрометеорология")),
+                new SubjectOfDepartment(null, 3, subjectRepo.findByTitle("Физика"), departmentRepo.findByTitle("Гидрометеорология")),
+                new SubjectOfDepartment(null, 3, subjectRepo.findByTitle("География"), departmentRepo.findByTitle("Гидрометеорология")),
+                new SubjectOfDepartment(null, 1, subjectRepo.findByTitle("Русский язык"), departmentRepo.findByTitle("Гидрометеорология"))
         );
         SubjectOfDepartmentRepo.saveAll(SubjectsOfDepartments);
     }
