@@ -31,7 +31,7 @@ public class ApplicantService {
 
         return applicantRepo.save(new Applicant(null, applicant.getEmail(), applicant.getPassword(), null,
                 null, null, null, null, applicant.getPhone(),
-                StatusesOfDocuments.INCORRECT, Roles.APPLICANT));
+                StatusesOfDocuments.INCORRECT, Roles.APPLICANT , null));
     }
 
     public boolean ApplicantAccountAlreadyExist(String email) {

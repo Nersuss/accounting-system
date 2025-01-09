@@ -11,6 +11,7 @@ import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -50,6 +51,9 @@ public class Applicant {
     @NotNull
     @Enumerated(EnumType.STRING)
     private Roles role;
+
+    @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    List<ExamResult> examResult;
 
 }
 
