@@ -1,16 +1,11 @@
 package ru.accept_applicant_documents.system.controller;
 
-import jakarta.validation.Valid;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.accept_applicant_documents.system.dto.OrdersSnils;
-import ru.accept_applicant_documents.system.dto.ShowListOfApplicants;
 import ru.accept_applicant_documents.system.enums.StatusesOfDocuments;
 import ru.accept_applicant_documents.system.enums.TypesOfDocuments;
 import ru.accept_applicant_documents.system.model.*;
@@ -25,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 public class ApplicantController {
@@ -101,6 +95,17 @@ public class ApplicantController {
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
 
+        model.addAttribute("applicant", applicant);
+        model.addAttribute("departments", departmentRepo.findAll());
+
+        return "applicant-lk-lists";
+    }
+
+    @GetMapping("/applicant/lk/lists/fulltime") //думаю удалить
+    public String getApplicantLkBudget(Model model) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Applicant applicant = applicantService.findByEmail(email).get();
+
         // Получение всех CompetitionGroup
         List<CompetitionGroup> competitionGroups = competitionGroupRepo.findAll();
 
@@ -108,21 +113,11 @@ public class ApplicantController {
         model.addAttribute("departments", departmentRepo.findAll());
         model.addAttribute("competitionGroups", competitionGroups);
 
-        return "applicant-lk-lists";
-    }
-
-    @GetMapping("/applicant/lk/lists/budget") //думаю удалить
-    public String getApplicantLkBudget(Model model) {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        Applicant applicant = applicantService.findByEmail(email).get();
-        model.addAttribute("applicant", applicant);
-        model.addAttribute("departments", departmentRepo.findAll());
-
-        return "budget";
+        return "fulltime";
     }
 
 
-@GetMapping("/applicant/lk/lists/paid") //думаю удалить
+@GetMapping("/applicant/lk/lists/parttime") //думаю удалить
 public String getApplicantLkPaid(Model model) {
     String email = SecurityContextHolder.getContext().getAuthentication().getName();
     Applicant applicant = applicantService.findByEmail(email).orElseThrow(() -> new RuntimeException("Applicant not found"));
@@ -134,7 +129,7 @@ public String getApplicantLkPaid(Model model) {
     model.addAttribute("departments", departmentRepo.findAll());
     model.addAttribute("competitionGroups", competitionGroups);
 
-    return "paid";
+    return "parttime";
 }
 
     @GetMapping("/applicant/lk/list")
@@ -143,11 +138,9 @@ public String getApplicantLkPaid(Model model) {
         Applicant applicant = applicantService.findByEmail(email).get();
         model.addAttribute("applicant", applicant);
 
-if (code.isPresent()) {
-    Department department = departmentRepo.findByCode(code.get());
-    model.addAttribute("department", department);
-    List<Order> orders = orderRepo.findAllByCompetitionGroupDepartment(department);
-
+        if (code.isPresent()) {
+            Department department = departmentRepo.findByCode(code.get());
+            List<Order> orders = orderRepo.findAllByCompetitionGroupDepartment(department);
 
             List<Document> snils = new ArrayList<>();
             List<List<ExamResult>> examResultsLists = new ArrayList<>();

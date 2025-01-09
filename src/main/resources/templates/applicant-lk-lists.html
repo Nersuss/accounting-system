@@ -100,22 +100,14 @@
 
                 <!-- Lists Tab -->
                 <div id="lists" class="tab-pane fade show active mt-4 mb-4">
-                    <h5 class="text-center" style="margin-bottom: 2rem; margin-top: 4rem">Направления обучения</h5>
+                    <h5 class="text-center" style="margin-bottom: 2rem">Категории обучения</h5>
                     <table class="table table-bordered">
-                        <thead class="table-light">
-                        <tr>
-                            <th scope="col">Наименование</th>
-                            <th scope="col">Код</th>
-                            <th scope="col">Количество мест</th>
-                        </tr>
-                        </thead>
                         <tbody>
-                        <tr th:each="group : ${competitionGroups}">
-                            <td>
-                                <a th:text="${group.title}" th:href="'/applicant/lk/list?code=' + ${group.department.code}"></a>
-                            </td>
-                            <td th:text="${group.department.code}"></td>
-                            <td th:text="${group.quantity}"></td>
+                        <tr>
+                            <td><a href="/applicant/lk/lists/fulltime">Списки поступающих на очное</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/applicant/lk/lists/parttime">Списки поступающих на заочное</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -124,6 +116,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
