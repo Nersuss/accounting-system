@@ -64,7 +64,8 @@ public class ApplicantService {
     }
 
     public void setDocStatusByEmail(StatusesOfDocuments status, String email) {
-        applicantRepo.setDocStatus(status, email);
+        if (applicantRepo.findByEmail(email).isPresent())
+            applicantRepo.setDocStatus(status, email);
     }
 
     public List<Applicant> findAllByDocStatus(StatusesOfDocuments status) {
